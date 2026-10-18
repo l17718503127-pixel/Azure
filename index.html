@@ -1799,6 +1799,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       streak: { last: '', days: 0 },
       ach: {},
       settings: { theme: 'auto' },
+      synced: {},
     };
   }
 
@@ -1814,6 +1815,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       if (!Array.isArray(S.bank)) S.bank = [];
       if (!Array.isArray(S.notebook)) S.notebook = [];
       if (!Array.isArray(S.history)) S.history = [];
+      if (!S.synced || typeof S.synced !== 'object') S.synced = {};
       if (!S.daily || typeof S.daily !== 'object') S.daily = { date: todayKey(), correct: 0, reviewed: 0, mock: 0 };
     } catch (e) { /* 数据损坏时从空白开始 */ }
   }
@@ -2362,6 +2364,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
             '<input class="input" style="max-width:260px" placeholder="搜索题干 / 选项 / 主题" data-input="search" value="' + esc(ui.search) + '">' +
             '<select class="select" style="max-width:220px" data-input="bankChapter">' + options + '</select>' +
             '<span class="spacer"></span>' +
+            '<button class="btn sm soft" data-act="sync-bank">☁ 同步云端题库</button>' +
             '<button class="btn sm" data-act="import-file">导入 JSON</button>' +
             '<button class="btn sm" data-act="export-bank">导出题库</button>' +
             '<button class="btn sm ghost" data-act="export-csv">导出 CSV</button>' +
@@ -2944,6 +2947,67 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     toast('导入完成：新增 ' + added + ' 题，跳过 ' + (list.length - added) + ' 题');
   }
 
+  /* 云端题库：站点下的 banks/all.json（单个文件，整批替换）。
+     打开页面自动拉取；内容有 v 版本号，版本变了才重新导入。
+     云端题目标记 q.cloud = true，替换时只动这些，本地自己出的题不受影响。 */
+  let syncing = false;
+
+  function secureOrigin() {
+    return location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  }
+
+  async function syncBanks(manual) {
+    if (syncing) return;
+    if (!secureOrigin()) {
+      if (manual) toast('本地文件模式不支持云端同步，部署到 https 后可用');
+      return;
+    }
+    syncing = true;
+    try {
+      const res = await fetch('./banks/all.json?t=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) {
+        if (manual) toast('还没有云端题库（banks/all.json）');
+        return;
+      }
+      const data = await res.json();
+      const version = String(data.v || data.version || '1');
+      const raw = Array.isArray(data) ? data : (data.questions || []);
+      if (!raw.length) {
+        if (manual) toast('云端题库是空的');
+        return;
+      }
+      const incoming = raw.map(normalizeQuestion).filter(Boolean);
+      incoming.forEach((q) => { q.cloud = true; });
+
+      const prevCloud = S.bank.filter((q) => q.cloud);
+      if (!manual && S.synced.all === version && prevCloud.length === incoming.length) return;
+
+      // 整批替换云端部分：先摘掉旧的云端题（保留本地题），再重新加入
+      if (prevCloud.length) {
+        const keep = prevCloud.filter((p) => !incoming.some((n) => n.id === p.id)).map((p) => p.id);
+        S.bank = S.bank.filter((q) => !q.cloud);
+        keep.forEach((id) => {
+          S.notebook = S.notebook.filter((x) => x !== id);
+          delete S.qStats[id];
+        });
+      }
+
+      const before = prevCloud.length;
+      addQuestions(JSON.parse(JSON.stringify(incoming)));
+      S.synced.all = version;
+      save(true);
+      render();
+      const total = S.bank.filter((q) => q.cloud).length;
+      if (manual || total !== before) {
+        toast('云端题库已同步：共 ' + total + ' 题');
+      }
+    } catch (e) {
+      if (manual) toast('同步失败：' + ((e && e.message) || e));
+    } finally {
+      syncing = false;
+    }
+  }
+
   function readFileAsText(file) {
     return new Promise((resolve, reject) => {
       const r = new FileReader();
@@ -3158,6 +3222,9 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       case 'import-file':
         { const f = $('#importFile'); if (f) f.click(); }
         break;
+      case 'sync-bank':
+        syncBanks(true);
+        break;
       case 'export-bank':
         exportBank();
         break;
@@ -3337,17 +3404,30 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     const host = location.hostname;
     const secure = location.protocol === 'https:' || host === 'localhost' || host === '127.0.0.1';
     if (!secure) return;
-    try {
-      const link = document.createElement('link');
-      link.rel = 'manifest';
-      link.href = './manifest.webmanifest';
-      document.head.appendChild(link);
 
+    try {
       const icon = document.createElement('link');
       icon.rel = 'apple-touch-icon';
       icon.href = './icon-192.png';
       document.head.appendChild(icon);
     } catch (e) { /* ignore */ }
+
+    // 兼容上传时被改成全大写的文件名
+    (async () => {
+      const names = ['./manifest.webmanifest', './MANIFEST.webmanifest'];
+      for (const name of names) {
+        try {
+          const r = await fetch(name, { cache: 'no-store' });
+          if (r.ok) {
+            const link = document.createElement('link');
+            link.rel = 'manifest';
+            link.href = name;
+            document.head.appendChild(link);
+            return;
+          }
+        } catch (e) { /* 继续试下一个 */ }
+      }
+    })();
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -3384,6 +3464,8 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     if (params.get('play') === '1' && S.bank.length) {
       setTimeout(() => startQuiz('level'), 120);
     }
+
+    setTimeout(() => { syncBanks(false); }, 500);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
