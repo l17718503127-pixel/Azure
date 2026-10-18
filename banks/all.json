@@ -1,1 +1,2059 @@
-{ "v": "empty", "title": "云端题库", "questions": [] }
+{
+  "v": "bcb8a1e4e05",
+  "title": "BUS1102 Statistics for Business",
+  "intro": "BUS1102 Statistics for Business · 商业统计学 — Lingnan University 岭南大学\n\nCh1 Defining & Collecting Data（数据定义与收集）· Ch2 Organizing & Visualizing Variables（整理与可视化）\nCh3 Numerical Descriptive Measures（数值描述）· Ch4 Basic Probability（基础概率）\nCh5 Discrete Probability Distributions（离散概率分布）· Ch6 The Normal Distribution（正态分布）\n\n选择题考概念与计算，大题给完整步骤；解释中英对照。Questions are in English; explanations mix Chinese and English.",
+  "questions": [
+    {
+      "id": "c1q01",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Statistics & variables",
+      "difficulty": "记忆",
+      "stem": "Which of the following best describes what statistics is?",
+      "type": "single",
+      "options": [
+        "The process of drawing a random sample from a population",
+        "The methods that transform data into useful information for decision makers",
+        "A table that lists all possible outcomes of an experiment",
+        "The complete count of every item in a population"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Statistics = methods that help transform data into useful information for decision makers. 统计学是把数据转化为决策有用信息的方法。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1q02",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Statistics & variables",
+      "difficulty": "记忆",
+      "stem": "A characteristic of an item or an individual is called a:",
+      "type": "single",
+      "options": [
+        "Variable",
+        "Data value",
+        "Sample",
+        "Parameter"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "A variable is a characteristic of an item or individual (e.g., age of a student). 变量是个体或项目的特征；具体数值才是 data。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1q03",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Variable types & scales",
+      "difficulty": "理解",
+      "stem": "The number of cars sold by a dealer each day is:",
+      "type": "single",
+      "options": [
+        "Discrete quantitative",
+        "Qualitative",
+        "Continuous quantitative",
+        "Ordinal"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Countable whole numbers → discrete quantitative. 可数（0,1,2…）→ 离散型定量变量。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1q04",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Variable types & scales",
+      "difficulty": "理解",
+      "stem": "The time (in seconds) needed to download a file is:",
+      "type": "single",
+      "options": [
+        "Discrete quantitative",
+        "Qualitative",
+        "Continuous quantitative",
+        "Nominal"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Time can take any value in an interval → continuous. 时间可在区间内取任意值 → 连续型。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1q05",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Variable types & scales",
+      "difficulty": "理解",
+      "stem": "Which of the following is measured on a nominal scale?",
+      "type": "single",
+      "options": [
+        "Temperature in °C",
+        "Order of finish in a race",
+        "Student ID number",
+        "Age in years"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "A student ID only labels; no order or arithmetic. 学号只是标签，不能排序或运算 → 定类尺度。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1q06",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Variable types & scales",
+      "difficulty": "理解",
+      "stem": "Temperature measured in degrees Celsius is an example of which measurement scale?",
+      "type": "single",
+      "options": [
+        "Ordinal",
+        "Nominal",
+        "Interval",
+        "Ratio"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Equal intervals but an arbitrary zero (0°C is not \"no temperature\") → interval. 间隔相等但零点是人为的 → 定距尺度。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1q07",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Variable types & scales",
+      "difficulty": "理解",
+      "stem": "Which measurement scale has a true zero point so that ratios are meaningful?",
+      "type": "single",
+      "options": [
+        "Interval",
+        "Ordinal",
+        "Nominal",
+        "Ratio"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Only the ratio scale has a true zero (e.g., income, weight). 只有定比尺度有绝对零点，才能说「是两倍」。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1q08",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Population & sample",
+      "difficulty": "理解",
+      "stem": "A university has 12,000 students. A researcher surveys 300 of them. The 300 students form a:",
+      "type": "single",
+      "options": [
+        "Sample",
+        "Sampling frame",
+        "Population",
+        "Parameter"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "A subset selected for study is a sample. 被抽取研究的那部分 → 样本；全体 12,000 才是总体。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1q09",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Population & sample",
+      "difficulty": "理解",
+      "stem": "The average age of all 12,000 students (19.4 years) is a:",
+      "type": "single",
+      "options": [
+        "Parameter",
+        "Sample",
+        "Variable",
+        "Statistic"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "A measure describing the whole population is a parameter; one computed from a sample is a statistic. 描述总体的叫参数（parameter），描述样本的叫统计量（statistic）。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1q10",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Data sources",
+      "difficulty": "记忆",
+      "stem": "Data collected by someone else for a different purpose are called:",
+      "type": "single",
+      "options": [
+        "Secondary data",
+        "Primary data",
+        "Experimental data",
+        "Nominal data"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Secondary source = the analyst did not collect the data (e.g., census data). 二手资料：分析者不是收集者。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1q11",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Sampling",
+      "difficulty": "理解",
+      "stem": "A list of all the items in the population from which a sample is drawn is called a:",
+      "type": "single",
+      "options": [
+        "Sample space",
+        "Census",
+        "Sampling frame",
+        "Parameter"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "The sampling frame is the list used to select the sample. 抽样框 = 抽样的名单；如果名单漏掉某些群体，就会产生覆盖误差。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1q12",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Sampling",
+      "difficulty": "应用",
+      "stem": "A researcher divides the city into districts, randomly selects 3 districts, and surveys every household in those 3 districts. This is:",
+      "type": "single",
+      "options": [
+        "Cluster sampling",
+        "Stratified sampling",
+        "Systematic sampling",
+        "Simple random sampling"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Whole groups (clusters) are selected, then all units inside are studied → cluster sampling. 整群抽样：抽群，群内全查。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1q13",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Sampling",
+      "difficulty": "应用",
+      "stem": "An auditor selects every 50th invoice after a random starting point. This is:",
+      "type": "single",
+      "options": [
+        "Stratified sampling",
+        "Systematic sampling",
+        "Cluster sampling",
+        "Convenience sampling"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "A fixed interval (k = 50) after a random start → systematic sampling. 等距（系统）抽样。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1q14",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Survey errors",
+      "difficulty": "理解",
+      "stem": "The difference between a sample estimate and the true population value that arises simply because a sample is used is called:",
+      "type": "single",
+      "options": [
+        "Measurement error",
+        "Nonresponse error",
+        "Coverage error",
+        "Sampling error"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Sampling error is the random error inherent in using a sample. 抽样误差是抽样本身带来的随机差异；覆盖/无回答/测量误差都属于非抽样误差。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1q15",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Ethics",
+      "difficulty": "理解",
+      "stem": "Which of the following is an ethical problem in survey design?",
+      "type": "single",
+      "options": [
+        "Publishing the full questionnaire with the report",
+        "Using a random number generator to select respondents",
+        "Choosing a sample that over-represents one group so the results favour a sponsor",
+        "Reporting the margin of error together with the estimate"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Deliberately biased sampling or withholding error information is unethical. 故意让样本偏向某方、或隐瞒误差范围，都属伦理问题。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c2q01",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Tables",
+      "difficulty": "记忆",
+      "stem": "A table that shows the frequency or percentage of each category of a single categorical variable is a:",
+      "type": "single",
+      "options": [
+        "Summary table",
+        "Stem-and-leaf display",
+        "Contingency table",
+        "Frequency distribution"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Summary table = one categorical variable by category. 汇总表：一个分类变量各类别的频数/百分比。",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2q02",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Tables",
+      "difficulty": "记忆",
+      "stem": "A table that cross-tabulates two categorical variables is called a:",
+      "type": "single",
+      "options": [
+        "Summary table",
+        "Histogram",
+        "Contingency table",
+        "Pareto chart"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Contingency table = two categorical variables, rows vs columns. 列联表：两个分类变量交叉汇总。",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2q03",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Tables",
+      "difficulty": "理解",
+      "stem": "In a contingency table, the totals shown in the right-hand column and bottom row are called:",
+      "type": "single",
+      "options": [
+        "Marginal frequencies",
+        "Joint frequencies",
+        "Cell frequencies",
+        "Cumulative frequencies"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Row/column totals are marginal frequencies. 行/列的合计叫边际频数；表内每格是联合频数。",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2q04",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Ordered array",
+      "difficulty": "记忆",
+      "stem": "Arranging raw data in order from smallest to largest produces:",
+      "type": "single",
+      "options": [
+        "A frequency distribution",
+        "A stem-and-leaf display",
+        "A Pareto chart",
+        "An ordered array"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "An ordered array shows the range and helps spot outliers. 有序数组：排序后能看出范围和异常值。",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2q05",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Stem-and-leaf",
+      "difficulty": "理解",
+      "stem": "In a stem-and-leaf display of the values 23, 27 and 31, the stem \"2\" has leaves:",
+      "type": "single",
+      "options": [
+        "2 and 3",
+        "3 and 7",
+        "23 and 27",
+        "1 only"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Stem = leading digit(s), leaf = last digit: 23 → leaf 3, 27 → leaf 7. 茎是前导位，叶是末位。",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2q06",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Frequency distribution",
+      "difficulty": "记忆",
+      "stem": "What is the first step in constructing a frequency distribution?",
+      "type": "single",
+      "options": [
+        "Draw the histogram",
+        "Decide on the number of classes",
+        "Count the observations in each class",
+        "Sort the data and find the range"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "First sort the data and compute the range, then choose classes and width. 先排序求极差，再定组数和组宽。",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2q07",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Frequency distribution",
+      "difficulty": "应用",
+      "stem": "A data set has a range of 46. If you want 6 classes, the class width should be:",
+      "type": "single",
+      "options": [
+        "7",
+        "8",
+        "6",
+        "46"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Width = range ÷ classes = 46 ÷ 6 = 7.67, always round UP → 8. 组宽 = 极差 ÷ 组数，向上取整。",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2q08",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Frequency distribution",
+      "difficulty": "应用",
+      "stem": "For the class 20 to less than 30, the class midpoint is:",
+      "type": "single",
+      "options": [
+        "20",
+        "30",
+        "15",
+        "25"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Midpoint = (lower + upper) ÷ 2 = (20 + 30) ÷ 2 = 25. 组中点 =（下限+上限）÷2。",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2q09",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Frequency distribution",
+      "difficulty": "应用",
+      "stem": "In a sample of 200 observations, 40 fall in a class. The relative frequency of that class is:",
+      "type": "single",
+      "options": [
+        "4%",
+        "40%",
+        "20%",
+        "80%"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Relative frequency = f ÷ n = 40 ÷ 200 = 0.20 = 20%. 相对频数 = 频数 ÷ 样本量。",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2q10",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Charts",
+      "difficulty": "理解",
+      "stem": "A histogram with a long tail extending to the right indicates:",
+      "type": "single",
+      "options": [
+        "A left-skewed distribution",
+        "A symmetric distribution",
+        "A uniform distribution",
+        "A right-skewed (positively skewed) distribution"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "The tail points to the right → positively skewed. 尾巴向右 = 右偏（正偏）。",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2q11",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Charts",
+      "difficulty": "理解",
+      "stem": "A Pareto chart orders categories by frequency and adds:",
+      "type": "single",
+      "options": [
+        "A box plot",
+        "Control limits",
+        "A trend line",
+        "A cumulative percentage line"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Pareto = descending bars + cumulative % line, used to find the vital few. 帕累托图：降序柱 + 累计百分比折线。",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2q12",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Charts",
+      "difficulty": "理解",
+      "stem": "In a Pareto chart, the \"vital few\" are:",
+      "type": "single",
+      "options": [
+        "The categories with the smallest frequencies",
+        "The categories with the largest class width",
+        "The categories shown last on the chart",
+        "The categories that together account for most of the total"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "The vital few are the few categories behind most of the problem (often ~80%). 关键少数：占总量大部分的少数类别。",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2q13",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Charts",
+      "difficulty": "理解",
+      "stem": "Which chart is most appropriate for showing the proportion of each category of a single qualitative variable?",
+      "type": "single",
+      "options": [
+        "Pie chart",
+        "Stem-and-leaf display",
+        "Scatter plot",
+        "Histogram"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Pie/bar for categorical; histogram/stem-and-leaf for numerical. 分类变量用饼图/条形图；数值变量用直方图。",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2q14",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Graph pitfalls",
+      "difficulty": "理解",
+      "stem": "Which of the following is a poor practice in graph construction?",
+      "type": "single",
+      "options": [
+        "Starting the vertical axis at a non-zero value to exaggerate differences",
+        "Labelling both axes clearly",
+        "Using equal class widths in a histogram",
+        "Giving the chart a descriptive title"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Truncating the axis exaggerates differences; the vertical axis should start at zero. 纵轴不从 0 开始会夸大差异。",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2q15",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Charts",
+      "difficulty": "理解",
+      "stem": "To examine the relationship between two numerical variables you should use a:",
+      "type": "single",
+      "options": [
+        "Pareto chart",
+        "Scatter plot",
+        "Pie chart",
+        "Bar chart"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Scatter plot for two numerical variables. 两个数值变量的关系用散点图；时间序列用折线图。",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c3q01",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "Central tendency",
+      "difficulty": "理解",
+      "stem": "A data set contains one extremely large outlier. Which measure of central tendency best represents the typical value?",
+      "type": "single",
+      "options": [
+        "Standard deviation",
+        "Median",
+        "Mean",
+        "Range"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "The median is resistant to outliers; the mean is pulled toward the tail. 中位数不受极端值影响；均值会被拉走。",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3q02",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "Central tendency",
+      "difficulty": "应用",
+      "stem": "For a sample of n = 9 ordered values, the median is the:",
+      "type": "single",
+      "options": [
+        "Average of the 4th and 5th values",
+        "4.5th value",
+        "5th value",
+        "4th value"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Median position = (n+1)/2 = 10/2 = 5. 中位数位置 =（n+1）/2。",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3q03",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "Central tendency",
+      "difficulty": "记忆",
+      "stem": "The mode is:",
+      "type": "single",
+      "options": [
+        "The middle value when data are ordered",
+        "The 50th percentile of a grouped distribution",
+        "The arithmetic average",
+        "The most frequently occurring value"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Mode = most frequent value; a data set can have several modes. 众数 = 出现次数最多的值。",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3q04",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "Dispersion",
+      "difficulty": "记忆",
+      "stem": "The sample variance uses which denominator?",
+      "type": "single",
+      "options": [
+        "N",
+        "n − 1",
+        "n",
+        "n + 1"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Sample variance divides by n − 1 (degrees of freedom); population variance divides by N. 样本方差分母是 n−1；总体方差分母是 N。",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3q05",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "Dispersion",
+      "difficulty": "理解",
+      "stem": "Which measure of dispersion is expressed in the same units as the original data?",
+      "type": "single",
+      "options": [
+        "Variance",
+        "Coefficient of variation",
+        "Standard deviation",
+        "Z-score"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Standard deviation is the square root of variance, so it keeps the data units. 标准差与原始数据同单位；方差是平方单位。",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3q06",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "CV & z-scores",
+      "difficulty": "理解",
+      "stem": "The coefficient of variation is most useful when you want to:",
+      "type": "single",
+      "options": [
+        "Compute the range of grouped data",
+        "Find the middle value of a data set",
+        "Compare variability of data sets with different units or very different means",
+        "Detect the shape of a distribution"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "CV = S ÷ Xbar × 100%, unit-free, so it compares relative variability. 变异系数是无单位的相对离散度，用来跨单位/跨水平比较。",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3q07",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "CV & z-scores",
+      "difficulty": "理解",
+      "stem": "A z-score of +2.5 means the observation is:",
+      "type": "single",
+      "options": [
+        "2.5 units above the mean",
+        "2.5 times the mean",
+        "2.5% above the mean",
+        "2.5 standard deviations above the mean"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Z = (X − Xbar) ÷ S measures distance in standard deviations. Z 分数 = 距离均值多少个标准差。",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3q08",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "CV & z-scores",
+      "difficulty": "记忆",
+      "stem": "A z-score with |Z| > 3 is often used to flag:",
+      "type": "single",
+      "options": [
+        "An outlier",
+        "A missing value",
+        "The median",
+        "The mode"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "|Z| > 3 is a common rule of thumb for extreme values. |Z|>3 常用来识别极端值。",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3q09",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "Quartiles & IQR",
+      "difficulty": "应用",
+      "stem": "For n = 9 ordered values, Q1 is found at position (n+1)/4 = 2.5, which means Q1 is:",
+      "type": "single",
+      "options": [
+        "The 2nd value",
+        "The average of the 2nd and 3rd values",
+        "The average of the 1st and 2nd values",
+        "The 3rd value"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "When the position ends in .5, average the two neighbouring values. 位置为 .5 时取相邻两值的平均。",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3q10",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "Quartiles & IQR",
+      "difficulty": "应用",
+      "stem": "If Q1 = 16 and Q3 = 22, the interquartile range is:",
+      "type": "single",
+      "options": [
+        "3",
+        "6",
+        "16",
+        "38"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "IQR = Q3 − Q1 = 22 − 16 = 6; it contains the middle 50% of the data. IQR 覆盖中间 50% 的数据。",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3q11",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "Shape",
+      "difficulty": "理解",
+      "stem": "In a right-skewed distribution, which statement is normally true?",
+      "type": "single",
+      "options": [
+        "Median > mean",
+        "Mean > median > mode",
+        "Mean = median = mode",
+        "Mode > mean"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "The mean follows the tail: right skew → mean > median. 右偏时均值被拉向右侧，均值 > 中位数。",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3q12",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "Empirical rule",
+      "difficulty": "记忆",
+      "stem": "According to the empirical rule, about 95% of the values of a bell-shaped distribution lie within:",
+      "type": "single",
+      "options": [
+        "μ ± 0.5σ",
+        "μ ± 2σ",
+        "μ ± 1σ",
+        "μ ± 3σ"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "About 68% within ±1σ, 95% within ±2σ, 99.7% within ±3σ. 经验法则：68 / 95 / 99.7。",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3q13",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "Chebyshev",
+      "difficulty": "应用",
+      "stem": "For any distribution, Chebyshev’s theorem says the proportion within μ ± 2σ is at least:",
+      "type": "single",
+      "options": [
+        "68%",
+        "75%",
+        "95%",
+        "50%"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "1 − 1/k² with k = 2 gives 1 − 1/4 = 75%. 切比雪夫：至少 1−1/k²。",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3q14",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "Grouped data",
+      "difficulty": "理解",
+      "stem": "The mean of grouped data is computed as:",
+      "type": "single",
+      "options": [
+        "ΣfM ÷ Σf",
+        "Σf ÷ n",
+        "ΣM ÷ n",
+        "Σ(f − M) ÷ n"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Use class midpoints M weighted by frequencies: Xbar = ΣfM / Σf. 分组数据用组中点加权。",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3q15",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "Correlation",
+      "difficulty": "理解",
+      "stem": "A correlation coefficient of r = −0.85 indicates:",
+      "type": "single",
+      "options": [
+        "A weak negative relationship",
+        "No relationship at all",
+        "A strong negative linear relationship",
+        "A strong positive relationship"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "r is between −1 and 1; −0.85 is strong and negative. r 在 −1 到 1 之间；−0.85 是较强的负相关。",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c4q01",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Probability basics",
+      "difficulty": "记忆",
+      "stem": "The collection of all possible outcomes of an experiment is called the:",
+      "type": "single",
+      "options": [
+        "Event",
+        "Sample space",
+        "Complement",
+        "Probability"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Sample space = all possible outcomes. 样本空间 = 全部可能结果。",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4q02",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Probability basics",
+      "difficulty": "记忆",
+      "stem": "The probability of any event must be:",
+      "type": "single",
+      "options": [
+        "Between −1 and 1",
+        "Exactly 0.5",
+        "Greater than 1",
+        "Between 0 and 1 inclusive"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "0 ≤ P(A) ≤ 1 for every event A. 任何事件概率都在 0 与 1 之间。",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4q03",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Probability rules",
+      "difficulty": "理解",
+      "stem": "P(A) + P(A′) = 1 describes the rule of:",
+      "type": "single",
+      "options": [
+        "The complement",
+        "Joint events",
+        "Independence",
+        "Conditional probability"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "A and its complement are mutually exclusive and collectively exhaustive. 事件与其对立事件互斥且完备。",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4q04",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Probability rules",
+      "difficulty": "理解",
+      "stem": "If A and B are mutually exclusive, which statement is true?",
+      "type": "single",
+      "options": [
+        "P(A and B) = 1",
+        "A and B always occur together",
+        "P(A or B) = 0",
+        "P(A and B) = 0"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Mutually exclusive events cannot occur together, so their joint probability is 0. 互斥事件不能同时发生，联合概率为 0。",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4q05",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Probability rules",
+      "difficulty": "记忆",
+      "stem": "The general addition rule states that P(A or B) equals:",
+      "type": "single",
+      "options": [
+        "P(A|B) × P(B)",
+        "P(A) + P(B) − P(A and B)",
+        "P(A) + P(B)",
+        "P(A) × P(B)"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Subtract the overlap once to avoid double counting. 减去一次交集，避免重复计算。",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4q06",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Conditional probability",
+      "difficulty": "理解",
+      "stem": "P(A|B) is called the:",
+      "type": "single",
+      "options": [
+        "Complement of A",
+        "Joint probability of A and B",
+        "Marginal probability of A",
+        "Conditional probability of A given B"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "P(A|B) = P(A and B) ÷ P(B), the probability of A given that B occurred. 条件概率：已知 B 发生时 A 的概率。",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4q07",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Independence",
+      "difficulty": "理解",
+      "stem": "Two events A and B are independent if and only if:",
+      "type": "single",
+      "options": [
+        "P(A|B) = P(A)",
+        "P(A or B) = 1",
+        "P(A) = P(B)",
+        "P(A and B) = 0"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Independence means knowing B does not change the probability of A. 独立：知道 B 发生不改变 A 的概率。",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4q08",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Independence",
+      "difficulty": "应用",
+      "stem": "If P(A) = 0.4, P(B) = 0.5 and A and B are independent, P(A and B) =",
+      "type": "single",
+      "options": [
+        "0.1",
+        "0.45",
+        "0.2",
+        "0.9"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "For independent events multiply: 0.4 × 0.5 = 0.20. 独立事件用乘法。",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4q09",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Conditional probability",
+      "difficulty": "应用",
+      "stem": "Of 200 customers, 120 planned to buy a TV, 60 actually bought one, and 50 both planned and bought. P(bought | planned) =",
+      "type": "single",
+      "options": [
+        "120/200",
+        "50/60",
+        "50/120",
+        "50/200"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Condition on the 120 who planned: 50 ÷ 120 = 0.417. 以「计划购买」为条件，除以 120。",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4q10",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Bayes",
+      "difficulty": "理解",
+      "stem": "Bayes’ theorem is used to:",
+      "type": "single",
+      "options": [
+        "Test whether two events are mutually exclusive",
+        "Revise prior probabilities in the light of new information",
+        "Compute the mean of a probability distribution",
+        "Count the number of possible outcomes"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Bayes revises a prior probability to a posterior probability. 贝叶斯用新信息把先验概率更新为后验概率。",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4q11",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Bayes",
+      "difficulty": "应用",
+      "stem": "A drilling company has P(S) = 0.4 for a successful well. A test gives P(D|S) = 0.6 and P(D|U) = 0.2. P(S|D) is about:",
+      "type": "single",
+      "options": [
+        "0.60",
+        "0.667",
+        "0.36",
+        "0.24"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "P(S|D) = 0.24 ÷ (0.24 + 0.12) = 0.667. 后验 = 联合 ÷ 全概率。",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4q12",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Counting",
+      "difficulty": "应用",
+      "stem": "How many outcomes are possible if a fair die is rolled three times?",
+      "type": "single",
+      "options": [
+        "729",
+        "216",
+        "18",
+        "6"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Counting rule 1: 6 × 6 × 6 = 6³ = 216. 乘法法则：kⁿ。",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4q13",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Counting",
+      "difficulty": "应用",
+      "stem": "The number of ways to arrange 3 books out of 5 in order on a shelf is:",
+      "type": "single",
+      "options": [
+        "125",
+        "10",
+        "60",
+        "120"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Permutations: 5P3 = 5! ÷ (5−3)! = 120 ÷ 2 = 60. 排列：顺序重要。",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4q14",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Counting",
+      "difficulty": "应用",
+      "stem": "The number of ways to select 3 books out of 5, ignoring order, is:",
+      "type": "single",
+      "options": [
+        "120",
+        "10",
+        "15",
+        "60"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Combinations: 5C3 = 5! ÷ (3! 2!) = 10. 组合：顺序不重要。",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4q15",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Counting",
+      "difficulty": "理解",
+      "stem": "Selecting 3 students from 5 to form a committee (order does not matter) requires:",
+      "type": "single",
+      "options": [
+        "A combination, 5C3",
+        "The factorial 5!",
+        "The rule 3⁵",
+        "A permutation, 5P3"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Order irrelevant → combination. 顺序无关 → 组合。",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c5q01",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Random variables",
+      "difficulty": "记忆",
+      "stem": "A random variable is a variable that:",
+      "type": "single",
+      "options": [
+        "Is always normally distributed",
+        "Has a fixed value for each experiment",
+        "Assumes numerical values determined by the outcome of an experiment",
+        "Takes only whole-number values"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "A random variable maps outcomes to numbers. 随机变量把试验结果映射为数值。",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5q02",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Random variables",
+      "difficulty": "理解",
+      "stem": "Which of the following is a discrete random variable?",
+      "type": "single",
+      "options": [
+        "The number of defective items in a sample of 100",
+        "The temperature of a room",
+        "The weight of a parcel",
+        "The time to serve a customer"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Counts are discrete; weight, time and temperature are continuous. 计数是离散的。",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5q03",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Probability distributions",
+      "difficulty": "理解",
+      "stem": "Which set of probabilities forms a valid probability distribution?",
+      "type": "single",
+      "options": [
+        "0.2, 0.3, 0.5",
+        "0.6, 0.6, 0.6",
+        "−0.1, 0.6, 0.5",
+        "0.5, 0.6, −0.1"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Each probability must lie in [0, 1] and the total must be 1. 每个在 0–1 之间且总和为 1。",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5q04",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Expected value",
+      "difficulty": "应用",
+      "stem": "X has P(0) = 0.2, P(1) = 0.3, P(2) = 0.5. The expected value E(X) is:",
+      "type": "single",
+      "options": [
+        "1.3",
+        "1.0",
+        "1.2",
+        "1.5"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "E(X) = Σx·P(x) = 0 + 0.3 + 1.0 = 1.3. 期望值 = 加权平均。",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5q05",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Variance",
+      "difficulty": "应用",
+      "stem": "Using the same distribution (E(X) = 1.3), the variance of X is:",
+      "type": "single",
+      "options": [
+        "0.61",
+        "0.70",
+        "0.50",
+        "1.30"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "E(X²) = 0 + 0.3 + 2.0 = 2.3; Var = 2.3 − 1.69 = 0.61. 方差 = E(X²) − μ²。",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5q06",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Binomial",
+      "difficulty": "理解",
+      "stem": "Which condition is NOT required for a binomial distribution?",
+      "type": "single",
+      "options": [
+        "A constant probability of success π",
+        "A constant number of successes x",
+        "A fixed number of trials n",
+        "Two mutually exclusive and collectively exhaustive outcomes per trial"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "x varies; what stays constant is n, π and the two-outcome structure. 二项要求：n 固定、两个结果、π 不变、各次独立。",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5q07",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Binomial",
+      "difficulty": "记忆",
+      "stem": "The mean of a binomial distribution is:",
+      "type": "single",
+      "options": [
+        "√(nπ)",
+        "nπ",
+        "nπ(1 − π)",
+        "π"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Mean = nπ; variance = nπ(1 − π). 二项均值 = nπ。",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5q08",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Binomial",
+      "difficulty": "记忆",
+      "stem": "The variance of a binomial distribution is:",
+      "type": "single",
+      "options": [
+        "π(1 − π)",
+        "nπ",
+        "√(nπ)",
+        "nπ(1 − π)"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Variance = nπ(1 − π). 二项方差 = nπ(1−π)。",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5q09",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Binomial",
+      "difficulty": "应用",
+      "stem": "For n = 10 and π = 0.2, P(X = 0) is approximately:",
+      "type": "single",
+      "options": [
+        "0.800",
+        "0.026",
+        "0.200",
+        "0.107"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "P(0) = 0.8¹⁰ = 0.1074. 全部失败的概率。",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5q10",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Binomial",
+      "difficulty": "理解",
+      "stem": "A binomial distribution with π = 0.5 is:",
+      "type": "single",
+      "options": [
+        "Uniform over all x",
+        "Always right-skewed",
+        "Symmetric",
+        "Always left-skewed"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "π = 0.5 gives a symmetric shape; skewness depends on π. π=0.5 时对称。",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5q11",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Poisson",
+      "difficulty": "理解",
+      "stem": "The Poisson distribution is used when you are interested in:",
+      "type": "single",
+      "options": [
+        "The proportion of successes in n trials",
+        "The number of events in a given area of opportunity",
+        "The sum of two normal variables",
+        "The time until the first success"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Poisson counts events per unit interval/area; binomial counts successes in n trials. 泊松：单位区间/区域内的事件数。",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5q12",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Poisson",
+      "difficulty": "记忆",
+      "stem": "The Poisson probability formula is:",
+      "type": "single",
+      "options": [
+        "P(X = x) = e^(−λ) λ^x ÷ x!",
+        "P(X = x) = (x − μ) ÷ σ",
+        "P(X = x) = 1 ÷ λ",
+        "P(X = x) = nCx π^x (1−π)^(n−x)"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Poisson: P(x) = e^(−λ)λ^x / x!. 泊松公式。",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5q13",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Poisson",
+      "difficulty": "记忆",
+      "stem": "For a Poisson distribution, the mean and the variance are:",
+      "type": "single",
+      "options": [
+        "λ and λ²",
+        "Both equal to 1",
+        "λ and √λ",
+        "Both equal to λ"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Poisson mean = variance = λ. 泊松均值与方差都等于 λ。",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5q14",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Poisson",
+      "difficulty": "应用",
+      "stem": "Customers arrive at a mean rate of λ = 2 per hour. P(X = 0) in one hour is about:",
+      "type": "single",
+      "options": [
+        "0.135",
+        "0.865",
+        "0.271",
+        "0.500"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "P(0) = e⁻² = 0.1353. 没有顾客到达的概率。",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5q15",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Poisson",
+      "difficulty": "应用",
+      "stem": "The number of calls arriving at a help desk per minute is best modelled by:",
+      "type": "single",
+      "options": [
+        "A normal distribution",
+        "A uniform distribution",
+        "A Poisson distribution",
+        "A binomial distribution"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Counting arrivals in a time interval → Poisson. 单位时间内到达数 → 泊松。",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c6q01",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Continuous variables",
+      "difficulty": "理解",
+      "stem": "For a continuous random variable, probability is measured by:",
+      "type": "single",
+      "options": [
+        "The width of the interval only",
+        "The area under the curve between two values",
+        "The height of the curve at a point",
+        "The number of possible values"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Probability equals area under the density curve; the probability of one exact value is 0. 连续变量用面积表示概率。",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6q02",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Normal properties",
+      "difficulty": "记忆",
+      "stem": "The normal distribution is:",
+      "type": "single",
+      "options": [
+        "Uniform over its range",
+        "Bounded between 0 and 1",
+        "Symmetric and bell-shaped, with mean = median = mode",
+        "Skewed to the right for large σ"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Normal is symmetric, bell-shaped, mean = median = mode. 正态分布对称、钟形，三者相等。",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6q03",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Standard normal",
+      "difficulty": "记忆",
+      "stem": "The standard normal distribution has:",
+      "type": "single",
+      "options": [
+        "μ = 1 and σ = 1",
+        "μ = 0 and σ = 1",
+        "μ = 1 and σ = 0",
+        "μ = 0 and σ = 0"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Standard normal = Z distribution with mean 0 and standard deviation 1. 标准正态：均值 0，标准差 1。",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6q04",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Z transformation",
+      "difficulty": "记忆",
+      "stem": "The transformation Z = (X − μ) ÷ σ converts X into:",
+      "type": "single",
+      "options": [
+        "A standardized normal variable",
+        "A binomial variable",
+        "A sample mean",
+        "A uniform variable"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Z measures how many standard deviations X is from μ. Z 表示距离均值多少个标准差。",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6q05",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Normal probabilities",
+      "difficulty": "应用",
+      "stem": "X is normal with μ = 100 and σ = 15. P(X < 115) is about:",
+      "type": "single",
+      "options": [
+        "0.6826",
+        "0.5000",
+        "0.1587",
+        "0.8413"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Z = (115 − 100)/15 = 1; table gives 0.8413. 查标准正态表得 0.8413。",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6q06",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Normal probabilities",
+      "difficulty": "应用",
+      "stem": "For the same X ~ N(100, 15), P(X > 115) is about:",
+      "type": "single",
+      "options": [
+        "0.3174",
+        "0.1587",
+        "0.8413",
+        "0.3413"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Upper tail = 1 − 0.8413 = 0.1587. 上尾 = 1 − 累积概率。",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6q07",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Normal probabilities",
+      "difficulty": "应用",
+      "stem": "For X ~ N(100, 15), P(85 < X < 115) is about:",
+      "type": "single",
+      "options": [
+        "0.9544",
+        "0.6826",
+        "0.5000",
+        "0.3413"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Z between −1 and +1 → 0.6826. 两个标准差之内约 68%。",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6q08",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Finding X",
+      "difficulty": "理解",
+      "stem": "To find the X value corresponding to a known probability, you use:",
+      "type": "single",
+      "options": [
+        "X = μ + Zσ",
+        "X = (Z − μ) ÷ σ",
+        "X = Zσ − μ",
+        "X = Z ÷ σ + μ"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Rearrange Z = (X − μ)/σ to get X = μ + Zσ. 反解 Z 公式。",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6q09",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Finding X",
+      "difficulty": "应用",
+      "stem": "For X ~ N(100, 15), the value with 90% of observations below it is about:",
+      "type": "single",
+      "options": [
+        "128.0",
+        "100.0",
+        "115.0",
+        "119.2"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Z for 90% ≈ 1.28, so X = 100 + 1.28 × 15 = 119.2. 第 90 百分位。",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6q10",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Empirical rule",
+      "difficulty": "记忆",
+      "stem": "The empirical rule says about 99.7% of a normal distribution lies within:",
+      "type": "single",
+      "options": [
+        "μ ± 1σ",
+        "μ ± 4σ",
+        "μ ± 3σ",
+        "μ ± 2σ"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "68.26% / 95.44% / 99.73% within 1 / 2 / 3 standard deviations. 经验法则。",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6q11",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Normal properties",
+      "difficulty": "理解",
+      "stem": "Which of the following is NOT a property of the normal distribution?",
+      "type": "single",
+      "options": [
+        "The total area under the curve is 1",
+        "It is skewed to the right when σ is large",
+        "It is symmetric about its mean",
+        "Mean, median and mode are equal"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Normality is preserved for any σ; changing σ only changes spread. 改变 σ 只改变胖瘦，不会让分布偏斜。",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6q12",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Normal properties",
+      "difficulty": "理解",
+      "stem": "If μ stays the same but σ increases, the normal curve becomes:",
+      "type": "single",
+      "options": [
+        "Taller and narrower",
+        "A straight line",
+        "Skewed to the right",
+        "Flatter and wider"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Larger σ spreads the curve out and lowers the peak. σ 越大越矮越宽。",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6q13",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Normality plots",
+      "difficulty": "理解",
+      "stem": "On a normal probability plot, points that lie close to a straight line indicate:",
+      "type": "single",
+      "options": [
+        "The mean equals zero",
+        "The data are strongly skewed",
+        "The data are approximately normal",
+        "The variance is zero"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "A straight-line pattern supports normality; curvature indicates departure. 点接近直线 → 近似正态。",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6q14",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Standard normal",
+      "difficulty": "应用",
+      "stem": "For the standard normal variable Z, P(Z < 0) equals:",
+      "type": "single",
+      "options": [
+        "0.3413",
+        "1.0000",
+        "0.5000",
+        "0.0000"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "The standard normal is symmetric about 0, so half the area lies below. 对称性：一半面积在 0 左侧。",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6q15",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Continuous variables",
+      "difficulty": "记忆",
+      "stem": "The total area under any normal probability density curve is:",
+      "type": "single",
+      "options": [
+        "0.5",
+        "0",
+        "It depends on σ",
+        "1"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Every probability density integrates to 1. 概率密度曲线下总面积恒为 1。",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c1e1",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Variables & scales",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "Classify each variable below on (a) qualitative or quantitative, (b) if quantitative, discrete or continuous, and (c) the measurement scale (nominal / ordinal / interval / ratio):\ni. The brand of a smartphone\nii. The number of text messages sent today\niii. The time spent on social media today (minutes)\niv. A satisfaction rating: poor / fair / good / excellent\nv. Body weight in kilograms",
+      "options": [],
+      "answer": [],
+      "model": "i. Brand — qualitative, nominal. 品牌只是标签，不能排序。\nii. Number of messages — quantitative, discrete, ratio (a true zero exists: 0 messages). 计数，有绝对零。\niii. Time in minutes — quantitative, continuous, ratio. 时间可细分，有绝对零。\niv. Satisfaction rating — qualitative, ordinal. 有顺序，但「good」比「fair」好多少无法量化。\nv. Weight in kg — quantitative, continuous, ratio. 连续且有绝对零（0 kg 表示没有重量）。\n\nKey idea / 要点：先问定性还是定量；定量才问离散/连续；最后看是否有顺序、间隔是否相等、零点是否真实。",
+      "explain": "i. Brand — qualitative, nominal. 品牌只是标签，不能排序。\nii. Number of messages — quantitative, discrete, ratio (a true zero exists: 0 messages). 计数，有绝对零。\niii. Time in minutes — quantitative, continuous, ratio. 时间可细分，有绝对零。\niv. Satisfaction rating — qualitative, ordinal. 有顺序，但「good」比「fair」好多少无法量化。\nv. Weight in kg — quantitative, continuous, ratio. 连续且有绝对零（0 kg 表示没有重量）。\n\nKey idea / 要点：先问定性还是定量；定量才问离散/连续；最后看是否有顺序、间隔是否相等、零点是否真实。",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1e2",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Sampling & survey errors",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "A university wants to estimate the average monthly spending of its 12,000 students. It obtains the class list of all students, randomly selects 20 tutorial groups out of 300, and surveys every student in those groups. Only 68% of the selected students return the questionnaire, and some report their spending by guessing.\n(a) Name the sampling method and explain why it is not a simple random sample.\n(b) Identify the sampling frame and one coverage problem that could arise.\n(c) Name the survey error involved in the low return rate and the one involved in guessing.",
+      "options": [],
+      "answer": [],
+      "model": "(a) Cluster sampling. Groups are randomly selected and every unit inside a selected group is surveyed, so students in the same tutorial share an instructor and timetable and are not selected independently — that is why it is not a simple random sample.\n（整群抽样：抽中的群内全查，因此同一群的学生不独立。）\n\n(b) The sampling frame is the list of all 12,000 students (here, the tutorial-group rosters). Coverage problem: students who are on leave, exchange students, or who take no tutorial may not appear on any roster, so they have no chance of being selected → coverage error.\n（抽样框 = 全体学生名册；漏掉休学/交换生会造成覆盖误差。）\n\n(c) Low return rate → nonresponse error (those who respond may systematically differ from those who do not). Guessing the amounts → measurement error. Both belong to non-sampling errors.\n（无回答误差 + 测量误差，都属于非抽样误差。）",
+      "explain": "(a) Cluster sampling. Groups are randomly selected and every unit inside a selected group is surveyed, so students in the same tutorial share an instructor and timetable and are not selected independently — that is why it is not a simple random sample.\n（整群抽样：抽中的群内全查，因此同一群的学生不独立。）\n\n(b) The sampling frame is the list of all 12,000 students (here, the tutorial-group rosters). Coverage problem: students who are on leave, exchange students, or who take no tutorial may not appear on any roster, so they have no chance of being selected → coverage error.\n（抽样框 = 全体学生名册；漏掉休学/交换生会造成覆盖误差。）\n\n(c) Low return rate → nonresponse error (those who respond may systematically differ from those who do not). Guessing the amounts → measurement error. Both belong to non-sampling errors.\n（无回答误差 + 测量误差，都属于非抽样误差。）",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c1e3",
+      "chapter": "Ch1 · Defining and Collecting Data",
+      "topic": "Data sources & DCOVA",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "A manager wants to know whether a new packaging design increases sales.\n(a) Distinguish between primary and secondary data and give one example of each for this problem.\n(b) List the five steps of the DCOVA framework in order and state what happens in each.\n(c) Give one advantage and one disadvantage of using secondary data here.",
+      "options": [],
+      "answer": [],
+      "model": "(a) Primary data are collected by the analyst for this specific purpose — e.g., a controlled store test of the new package. Secondary data were collected by someone else for another purpose — e.g., the company’s past sales reports or industry sales statistics.\n（一手资料：自己为本次目的收集；二手资料：别人为别的目的收集。）\n\n(b) DCOVA: Define the variables to be studied → Collect the data → Organize the data (tables) → Visualize the data (charts) → Analyze the data (numerical measures, then conclusions).\n（定义变量 → 收集 → 整理 → 可视化 → 分析。）\n\n(c) Advantage of secondary data: fast and cheap, may cover a long history. Disadvantage: it was collected for another purpose, so definitions, time periods or coverage may not match, and the quality cannot be controlled.\n（优点：快、便宜；缺点：口径不一致、无法控制质量。）",
+      "explain": "(a) Primary data are collected by the analyst for this specific purpose — e.g., a controlled store test of the new package. Secondary data were collected by someone else for another purpose — e.g., the company’s past sales reports or industry sales statistics.\n（一手资料：自己为本次目的收集；二手资料：别人为别的目的收集。）\n\n(b) DCOVA: Define the variables to be studied → Collect the data → Organize the data (tables) → Visualize the data (charts) → Analyze the data (numerical measures, then conclusions).\n（定义变量 → 收集 → 整理 → 可视化 → 分析。）\n\n(c) Advantage of secondary data: fast and cheap, may cover a long history. Disadvantage: it was collected for another purpose, so definitions, time periods or coverage may not match, and the quality cannot be controlled.\n（优点：快、便宜；缺点：口径不一致、无法控制质量。）",
+      "source": "BUS1102 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "c2e1",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Frequency distribution",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "The daily high temperatures (°F) for 20 winter days are:\n24, 35, 17, 21, 24, 37, 26, 46, 58, 30, 32, 13, 12, 38, 41, 43, 44, 27, 53, 27\n(a) Construct a frequency distribution with 6 classes and state the class width you used.\n(b) Compute the relative frequencies.\n(c) Describe the shape of the distribution.",
+      "options": [],
+      "answer": [],
+      "model": "(a) Sorted: 12 13 17 21 24 24 26 27 27 30 32 35 37 38 41 43 44 46 53 58. Range = 58 − 12 = 46; 46 ÷ 6 = 7.67 → round up to width 8. Start at 12:\n12–<20: 12, 13, 17 → 3\n20–<28: 21, 24, 24, 26, 27, 27 → 6\n28–<36: 30, 32, 35 → 3\n36–<44: 37, 38, 41, 43 → 4\n44–<52: 44, 46 → 2\n52–<60: 53, 58 → 2\nTotal = 20. 组宽 = 极差 ÷ 组数，向上取整。\n\n(b) Relative frequencies: 3/20 = 0.15, 6/20 = 0.30, 3/20 = 0.15, 4/20 = 0.20, 2/20 = 0.10, 2/20 = 0.10; they sum to 1.00.\n\n(c) The histogram has a single peak around 20–28 and a slightly longer tail toward the high values, so the distribution is roughly bell-shaped with a mild positive (right) skew. The mean (648 ÷ 20 = 32.4) is slightly above the median (31).\n（单峰、略右偏；均值略大于中位数。）",
+      "explain": "(a) Sorted: 12 13 17 21 24 24 26 27 27 30 32 35 37 38 41 43 44 46 53 58. Range = 58 − 12 = 46; 46 ÷ 6 = 7.67 → round up to width 8. Start at 12:\n12–<20: 12, 13, 17 → 3\n20–<28: 21, 24, 24, 26, 27, 27 → 6\n28–<36: 30, 32, 35 → 3\n36–<44: 37, 38, 41, 43 → 4\n44–<52: 44, 46 → 2\n52–<60: 53, 58 → 2\nTotal = 20. 组宽 = 极差 ÷ 组数，向上取整。\n\n(b) Relative frequencies: 3/20 = 0.15, 6/20 = 0.30, 3/20 = 0.15, 4/20 = 0.20, 2/20 = 0.10, 2/20 = 0.10; they sum to 1.00.\n\n(c) The histogram has a single peak around 20–28 and a slightly longer tail toward the high values, so the distribution is roughly bell-shaped with a mild positive (right) skew. The mean (648 ÷ 20 = 32.4) is slightly above the median (31).\n（单峰、略右偏；均值略大于中位数。）",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2e2",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Contingency table",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "A sample of 400 invoices is classified by amount and by whether it contains an error:\nSmall amount, error 40; Small amount, no error 160\nLarge amount, error 20; Large amount, no error 180\n(a) Build the contingency table with marginal totals.\n(b) Compute the percentage of invoices with an error for each amount group (row percentages).\n(c) Interpret the result: is the error rate related to the invoice amount?",
+      "options": [],
+      "answer": [],
+      "model": "(a) Table:\n                 Error   No error   Total\nSmall amount      40       160       200\nLarge amount      20       180       200\nTotal             60       340       400\n\n(b) Row percentages:\nSmall: 40/200 = 20.0% have an error; 160/200 = 80.0% do not.\nLarge: 20/200 = 10.0% have an error; 180/200 = 90.0% do not.\n\n(c) The error rate for small invoices (20%) is twice that for large invoices (10%). Because the two groups have the same size, the comparison is fair; there does appear to be an association between amount and error rate. Note: overall error rate = 60/400 = 15%.\n（小额发票出错率是小额的两倍，说明两者有关联；两组样本量相同，可直接比较百分比。）",
+      "explain": "(a) Table:\n                 Error   No error   Total\nSmall amount      40       160       200\nLarge amount      20       180       200\nTotal             60       340       400\n\n(b) Row percentages:\nSmall: 40/200 = 20.0% have an error; 160/200 = 80.0% do not.\nLarge: 20/200 = 10.0% have an error; 180/200 = 90.0% do not.\n\n(c) The error rate for small invoices (20%) is twice that for large invoices (10%). Because the two groups have the same size, the comparison is fair; there does appear to be an association between amount and error rate. Note: overall error rate = 60/400 = 15%.\n（小额发票出错率是小额的两倍，说明两者有关联；两组样本量相同，可直接比较百分比。）",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c2e3",
+      "chapter": "Ch2 · Organizing and Visualizing Variables",
+      "topic": "Pareto chart",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "A factory recorded 290 defects last month: type A 120, type B 80, type C 50, type D 30, type E 10.\n(a) Construct a Pareto chart: order the categories and give the cumulative percentages.\n(b) Identify the \"vital few\".\n(c) Explain why a Pareto chart is more useful to a manager than a plain bar chart here.",
+      "options": [],
+      "answer": [],
+      "model": "(a) Order: A 120 (41.4%), B 80 (27.6%), C 50 (17.2%), D 30 (10.3%), E 10 (3.4%). Cumulative: 41.4%, 69.0%, 86.2%, 96.6%, 100%. 累计百分比依次累加。\n\n(b) The vital few are A and B: together 200 of 290 defects = 69%. Fixing these two types addresses nearly 70% of the problem.\n\n(c) A Pareto chart sorts categories by frequency and adds a cumulative line, so it immediately shows where effort pays off. A plain bar chart shows the same counts but not the cumulative contribution, so the \"80/20\" priority is harder to see.\n（帕累托图降序 + 累计线，直接看出优先改进项。）",
+      "explain": "(a) Order: A 120 (41.4%), B 80 (27.6%), C 50 (17.2%), D 30 (10.3%), E 10 (3.4%). Cumulative: 41.4%, 69.0%, 86.2%, 96.6%, 100%. 累计百分比依次累加。\n\n(b) The vital few are A and B: together 200 of 290 defects = 69%. Fixing these two types addresses nearly 70% of the problem.\n\n(c) A Pareto chart sorts categories by frequency and adds a cumulative line, so it immediately shows where effort pays off. A plain bar chart shows the same counts but not the cumulative contribution, so the \"80/20\" priority is harder to see.\n（帕累托图降序 + 累计线，直接看出优先改进项。）",
+      "source": "BUS1102 slides · Ch2",
+      "lang": "en"
+    },
+    {
+      "id": "c3e1",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "Mean, SD and CV",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "The weekly earnings (in $) of 8 part-time workers are:\n10, 12, 14, 15, 17, 18, 18, 24\n(a) Compute the mean, median and mode.\n(b) Compute the sample variance and standard deviation.\n(c) Compute the coefficient of variation and interpret it.",
+      "options": [],
+      "answer": [],
+      "model": "(a) ΣX = 128, n = 8 → mean = 16. Ordered data: median = (15 + 17)/2 = 16. Mode = 18 (appears twice).\n\n(b) Deviations: −6, −4, −2, −1, 1, 2, 2, 8; squares: 36, 16, 4, 1, 1, 4, 4, 64 → Σ(X − Xbar)² = 130.\nS² = 130 ÷ (8 − 1) = 18.571; S = √18.571 = 4.31 (dollars).\nShortcut formula: ΣX² = 2,178 and (ΣX)² ÷ n = 128² ÷ 8 = 2,048, so Σ(X − Xbar)² = 2,178 − 2,048 = 130 ✓.\n\n(c) CV = S ÷ Xbar × 100% = 4.31 ÷ 16 × 100% = 26.9%. The standard deviation is about 27% of the mean, i.e. earnings vary moderately around the average.\n（标准差约为均值的 27%，离散程度中等。）",
+      "explain": "(a) ΣX = 128, n = 8 → mean = 16. Ordered data: median = (15 + 17)/2 = 16. Mode = 18 (appears twice).\n\n(b) Deviations: −6, −4, −2, −1, 1, 2, 2, 8; squares: 36, 16, 4, 1, 1, 4, 4, 64 → Σ(X − Xbar)² = 130.\nS² = 130 ÷ (8 − 1) = 18.571; S = √18.571 = 4.31 (dollars).\nShortcut formula: ΣX² = 2,178 and (ΣX)² ÷ n = 128² ÷ 8 = 2,048, so Σ(X − Xbar)² = 2,178 − 2,048 = 130 ✓.\n\n(c) CV = S ÷ Xbar × 100% = 4.31 ÷ 16 × 100% = 26.9%. The standard deviation is about 27% of the mean, i.e. earnings vary moderately around the average.\n（标准差约为均值的 27%，离散程度中等。）",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3e2",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "Coefficient of variation",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "A factory needs metal tubes cut to a standard length of 5.00 cm. Two workers each cut 6 tubes:\nWorker A: 5.1, 4.9, 5.0, 5.2, 4.8, 5.0\nWorker B: 4.6, 5.4, 4.4, 5.6, 5.0, 5.0\n(a) Compute the mean and standard deviation for each worker.\n(b) Compute the coefficient of variation and decide who cuts more consistently.\n(c) Explain why comparing standard deviations alone would also work here, and when it would not.",
+      "options": [],
+      "answer": [],
+      "model": "(a) Worker A: ΣX = 30, mean = 5.00. Deviations: 0.1, −0.1, 0, 0.2, −0.2, 0 → Σd² = 0.10 → S² = 0.10/5 = 0.02 → S = 0.141.\nWorker B: ΣX = 30, mean = 5.00. Deviations: −0.4, 0.4, −0.6, 0.6, 0, 0 → Σd² = 1.04 → S² = 1.04/5 = 0.208 → S = 0.456.\n\n(b) CV(A) = 0.141 ÷ 5.00 × 100% = 2.8%; CV(B) = 0.456 ÷ 5.00 × 100% = 9.1%. Worker A is more consistent (smaller CV), so A should do the cutting.\n（A 的变异系数更小，切割更稳定。）\n\n(c) Here both means equal 5.00, so dividing by the same mean does not change the ranking; comparing S alone would give the same conclusion. Comparing S alone fails when the means (or units) differ — e.g., comparing variability of income in dollars with weight in kilograms — so CV is the general tool.\n（均值相同则比 S 也可；均值或单位不同时，必须用 CV。）",
+      "explain": "(a) Worker A: ΣX = 30, mean = 5.00. Deviations: 0.1, −0.1, 0, 0.2, −0.2, 0 → Σd² = 0.10 → S² = 0.10/5 = 0.02 → S = 0.141.\nWorker B: ΣX = 30, mean = 5.00. Deviations: −0.4, 0.4, −0.6, 0.6, 0, 0 → Σd² = 1.04 → S² = 1.04/5 = 0.208 → S = 0.456.\n\n(b) CV(A) = 0.141 ÷ 5.00 × 100% = 2.8%; CV(B) = 0.456 ÷ 5.00 × 100% = 9.1%. Worker A is more consistent (smaller CV), so A should do the cutting.\n（A 的变异系数更小，切割更稳定。）\n\n(c) Here both means equal 5.00, so dividing by the same mean does not change the ranking; comparing S alone would give the same conclusion. Comparing S alone fails when the means (or units) differ — e.g., comparing variability of income in dollars with weight in kilograms — so CV is the general tool.\n（均值相同则比 S 也可；均值或单位不同时，必须用 CV。）",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c3e3",
+      "chapter": "Ch3 · Numerical Descriptive Measures",
+      "topic": "Grouped data",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "A sample of 20 employees is grouped by weekly overtime hours:\n0–<10: 5 employees; 10–<20: 8; 20–<30: 6; 30–<40: 1\n(a) Compute the grouped mean.\n(b) Compute the grouped standard deviation.\n(c) Explain why the grouped mean may differ slightly from the mean of the raw data.",
+      "options": [],
+      "answer": [],
+      "model": "(a) Midpoints M: 5, 15, 25, 35. ΣfM = 5(5) + 8(15) + 6(25) + 1(35) = 25 + 120 + 150 + 35 = 330. Σf = 20 → mean = 16.5 hours.\n\n(b) ΣfM² = 5(25) + 8(225) + 6(625) + 1(1225) = 125 + 1,800 + 3,750 + 1,225 = 6,900.\nS² = [6,900 − 330²/20] ÷ (20 − 1) = [6,900 − 5,445] ÷ 19 = 1,455 ÷ 19 = 76.58 → S = 8.75 hours.\n\n(c) Grouped calculations replace every observation by its class midpoint, so individual values within a class are lost. If the data are concentrated away from the midpoint (especially in an open-ended class), the grouped mean is only an approximation of the raw-data mean.\n（分组计算用组中点代替原始值，因此只是近似。）",
+      "explain": "(a) Midpoints M: 5, 15, 25, 35. ΣfM = 5(5) + 8(15) + 6(25) + 1(35) = 25 + 120 + 150 + 35 = 330. Σf = 20 → mean = 16.5 hours.\n\n(b) ΣfM² = 5(25) + 8(225) + 6(625) + 1(1225) = 125 + 1,800 + 3,750 + 1,225 = 6,900.\nS² = [6,900 − 330²/20] ÷ (20 − 1) = [6,900 − 5,445] ÷ 19 = 1,455 ÷ 19 = 76.58 → S = 8.75 hours.\n\n(c) Grouped calculations replace every observation by its class midpoint, so individual values within a class are lost. If the data are concentrated away from the midpoint (especially in an open-ended class), the grouped mean is only an approximation of the raw-data mean.\n（分组计算用组中点代替原始值，因此只是近似。）",
+      "source": "BUS1102 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "c4e1",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Contingency & conditional probability",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "In a class of 200 students, 100 are male and 100 are female. Among males, 60 passed and 40 failed; among females, 80 passed and 20 failed.\n(a) Build the contingency table with totals.\n(b) Find P(pass), P(male and pass), and P(pass | male).\n(c) Test whether gender and passing are independent. Justify your answer.",
+      "options": [],
+      "answer": [],
+      "model": "(a) Table:\n            Pass   Fail   Total\nMale          60     40     100\nFemale        80     20     100\nTotal        140     60     200\n\n(b) P(pass) = 140/200 = 0.70. P(male and pass) = 60/200 = 0.30. P(pass | male) = 60/100 = 0.60.\n\n(c) If independent, P(pass | male) should equal P(pass): 0.60 ≠ 0.70, so the events are not independent. Equivalently, P(male and pass) = 0.30 but P(male) × P(pass) = 0.5 × 0.7 = 0.35 ≠ 0.30. Females have a higher pass rate (80%) than males (60%), so there is an association.\n（独立性检验：条件概率等于边际概率才独立；本例不等，存在关联。）",
+      "explain": "(a) Table:\n            Pass   Fail   Total\nMale          60     40     100\nFemale        80     20     100\nTotal        140     60     200\n\n(b) P(pass) = 140/200 = 0.70. P(male and pass) = 60/200 = 0.30. P(pass | male) = 60/100 = 0.60.\n\n(c) If independent, P(pass | male) should equal P(pass): 0.60 ≠ 0.70, so the events are not independent. Equivalently, P(male and pass) = 0.30 but P(male) × P(pass) = 0.5 × 0.7 = 0.35 ≠ 0.30. Females have a higher pass rate (80%) than males (60%), so there is an association.\n（独立性检验：条件概率等于边际概率才独立；本例不等，存在关联。）",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4e2",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Bayes theorem",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "An oil company estimates a 40% chance of striking oil on a new well. A detailed test can be run: if the well is successful, the test is positive 60% of the time; if unsuccessful, the test is positive 20% of the time.\n(a) Draw/describe the probability tree with prior and conditional probabilities.\n(b) Find P(test positive).\n(c) Find P(successful | test positive) and interpret the change from the prior.",
+      "options": [],
+      "answer": [],
+      "model": "(a) Branches: S (0.4) → D (0.6), U (0.4); U (0.6) → D (0.2), U (0.8).\n\n(b) P(D) = P(D|S)P(S) + P(D|U)P(U) = 0.6(0.4) + 0.2(0.6) = 0.24 + 0.12 = 0.36.\n\n(c) P(S|D) = P(S and D) ÷ P(D) = 0.24 ÷ 0.36 = 0.667. The prior probability of success (40%) rises to about 66.7% after a positive test — the test has real information value, but a positive result is still not a certainty.\n（贝叶斯把先验 0.4 更新为后验 0.667。）",
+      "explain": "(a) Branches: S (0.4) → D (0.6), U (0.4); U (0.6) → D (0.2), U (0.8).\n\n(b) P(D) = P(D|S)P(S) + P(D|U)P(U) = 0.6(0.4) + 0.2(0.6) = 0.24 + 0.12 = 0.36.\n\n(c) P(S|D) = P(S and D) ÷ P(D) = 0.24 ÷ 0.36 = 0.667. The prior probability of success (40%) rises to about 66.7% after a positive test — the test has real information value, but a positive result is still not a certainty.\n（贝叶斯把先验 0.4 更新为后验 0.667。）",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c4e3",
+      "chapter": "Ch4 · Basic Probability",
+      "topic": "Counting rules",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "A bookshelf has 5 different books: A, B, C, D, E.\n(a) How many ways can 3 of them be arranged on a shelf in order?\n(b) How many ways can 3 of them be chosen to read, if order does not matter?\n(c) A password consists of 3 different letters chosen from these 5, then a digit 0–9. How many passwords are possible? Explain which counting rules you use.",
+      "options": [],
+      "answer": [],
+      "model": "(a) Permutations: 5P3 = 5! ÷ (5 − 3)! = 120 ÷ 2 = 60.\n\n(b) Combinations: 5C3 = 5! ÷ (3! × 2!) = 120 ÷ 12 = 10.\n\n(c) Choose and order 3 letters from 5 (5P3 = 60 ways), then choose 1 of 10 digits (10 ways). By counting rule 1 (multiplication), 60 × 10 = 600 passwords.\n（先排列 3 个字母，再乘 10 种数字。）",
+      "explain": "(a) Permutations: 5P3 = 5! ÷ (5 − 3)! = 120 ÷ 2 = 60.\n\n(b) Combinations: 5C3 = 5! ÷ (3! × 2!) = 120 ÷ 12 = 10.\n\n(c) Choose and order 3 letters from 5 (5P3 = 60 ways), then choose 1 of 10 digits (10 ways). By counting rule 1 (multiplication), 60 × 10 = 600 passwords.\n（先排列 3 个字母，再乘 10 种数字。）",
+      "source": "BUS1102 slides · Ch4",
+      "lang": "en"
+    },
+    {
+      "id": "c5e1",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Binomial",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "A supplier ships computers in batches of 10. Historically 2% of computers are defective. Assume the defect status of each computer is independent.\n(a) What is the probability that a batch contains no defective computer?\n(b) What is the probability that a batch contains at least 2 defective computers?\n(c) State the mean and standard deviation of the number of defectives per batch.",
+      "options": [],
+      "answer": [],
+      "model": "(a) Binomial with n = 10, π = 0.02: P(X = 0) = 0.98¹⁰ = 0.8171.\n\n(b) P(X ≥ 2) = 1 − P(0) − P(1). P(1) = 10 × 0.02 × 0.98⁹ = 0.2 × 0.8337 = 0.1667. So P(X ≥ 2) = 1 − 0.8171 − 0.1667 = 0.0162 (about 1.6%).\n\n(c) Mean = nπ = 10 × 0.02 = 0.2 defectives; variance = nπ(1 − π) = 10 × 0.02 × 0.98 = 0.196; SD = √0.196 = 0.443.\n（先用补事件，再套二项均值与方差公式。）",
+      "explain": "(a) Binomial with n = 10, π = 0.02: P(X = 0) = 0.98¹⁰ = 0.8171.\n\n(b) P(X ≥ 2) = 1 − P(0) − P(1). P(1) = 10 × 0.02 × 0.98⁹ = 0.2 × 0.8337 = 0.1667. So P(X ≥ 2) = 1 − 0.8171 − 0.1667 = 0.0162 (about 1.6%).\n\n(c) Mean = nπ = 10 × 0.02 = 0.2 defectives; variance = nπ(1 − π) = 10 × 0.02 × 0.98 = 0.196; SD = √0.196 = 0.443.\n（先用补事件，再套二项均值与方差公式。）",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5e2",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Poisson",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "Customers arrive at a bank at an average rate of λ = 3 per minute. Assume arrivals follow a Poisson distribution.\n(a) Find the probability that exactly 5 customers arrive in a minute.\n(b) Find the probability that at least 1 customer arrives in a minute.\n(c) State the mean and variance of the number of arrivals per minute, and explain why the Poisson model is appropriate.",
+      "options": [],
+      "answer": [],
+      "model": "(a) P(X = 5) = e⁻³ × 3⁵ ÷ 5! = 0.04979 × 243 ÷ 120 = 0.1008.\n\n(b) P(X ≥ 1) = 1 − P(0) = 1 − e⁻³ = 1 − 0.0498 = 0.9502.\n\n(c) Mean = variance = λ = 3 (SD = √3 = 1.73). The Poisson model fits because we count the number of events in a fixed interval of time, events occur independently, and the average rate is constant.\n（泊松：单位时间计数、独立、速率恒定；均值=方差=λ。）",
+      "explain": "(a) P(X = 5) = e⁻³ × 3⁵ ÷ 5! = 0.04979 × 243 ÷ 120 = 0.1008.\n\n(b) P(X ≥ 1) = 1 − P(0) = 1 − e⁻³ = 1 − 0.0498 = 0.9502.\n\n(c) Mean = variance = λ = 3 (SD = √3 = 1.73). The Poisson model fits because we count the number of events in a fixed interval of time, events occur independently, and the average rate is constant.\n（泊松：单位时间计数、独立、速率恒定；均值=方差=λ。）",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c5e3",
+      "chapter": "Ch5 · Discrete Probability Distributions",
+      "topic": "Expected value & variance",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "A small business’s daily profit X (in $100s) has the distribution:\nx = 0 with P = 0.2; x = 1 with P = 0.3; x = 2 with P = 0.3; x = 3 with P = 0.2\n(a) Verify that this is a valid probability distribution.\n(b) Compute E(X) and interpret it.\n(c) Compute Var(X) and the standard deviation.",
+      "options": [],
+      "answer": [],
+      "model": "(a) All probabilities are between 0 and 1, and 0.2 + 0.3 + 0.3 + 0.2 = 1.0 → valid.\n\n(b) E(X) = 0(0.2) + 1(0.3) + 2(0.3) + 3(0.2) = 0 + 0.3 + 0.6 + 0.6 = 1.5. On average the business earns $150 per day in the long run.\n\n(c) E(X²) = 0 + 0.3 + 4(0.3) + 9(0.2) = 0.3 + 1.2 + 1.8 = 3.3. Var(X) = 3.3 − 1.5² = 3.3 − 2.25 = 1.05; SD = √1.05 = 1.025 (i.e. about $102.5).\n（期望是长期平均；方差 = E(X²) − μ²。）",
+      "explain": "(a) All probabilities are between 0 and 1, and 0.2 + 0.3 + 0.3 + 0.2 = 1.0 → valid.\n\n(b) E(X) = 0(0.2) + 1(0.3) + 2(0.3) + 3(0.2) = 0 + 0.3 + 0.6 + 0.6 = 1.5. On average the business earns $150 per day in the long run.\n\n(c) E(X²) = 0 + 0.3 + 4(0.3) + 9(0.2) = 0.3 + 1.2 + 1.8 = 3.3. Var(X) = 3.3 − 1.5² = 3.3 − 2.25 = 1.05; SD = √1.05 = 1.025 (i.e. about $102.5).\n（期望是长期平均；方差 = E(X²) − μ²。）",
+      "source": "BUS1102 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "c6e1",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Normal probabilities",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "The time X to download a file is normally distributed with μ = 100 seconds and σ = 15 seconds.\n(a) Find P(X < 115).\n(b) Find P(X > 120).\n(c) Find P(85 < X < 115) and interpret it with the empirical rule.",
+      "options": [],
+      "answer": [],
+      "model": "(a) Z = (115 − 100)/15 = 1.00 → P(Z < 1) = 0.8413.\n\n(b) Z = (120 − 100)/15 = 1.333 → P(Z < 1.333) = 0.9088, so P(X > 120) = 1 − 0.9088 = 0.0912 (about 9%).\n\n(c) Z = (85 − 100)/15 = −1 and Z = +1 → P(−1 < Z < 1) = 0.8413 − 0.1587 = 0.6826. About 68% of downloads take between 85 and 115 seconds, which matches the empirical rule for μ ± 1σ.\n（先标准化，再查表；上尾用 1 减。）",
+      "explain": "(a) Z = (115 − 100)/15 = 1.00 → P(Z < 1) = 0.8413.\n\n(b) Z = (120 − 100)/15 = 1.333 → P(Z < 1.333) = 0.9088, so P(X > 120) = 1 − 0.9088 = 0.0912 (about 9%).\n\n(c) Z = (85 − 100)/15 = −1 and Z = +1 → P(−1 < Z < 1) = 0.8413 − 0.1587 = 0.6826. About 68% of downloads take between 85 and 115 seconds, which matches the empirical rule for μ ± 1σ.\n（先标准化，再查表；上尾用 1 减。）",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6e2",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Finding X from a probability",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "Scores on a test are normally distributed with μ = 100 and σ = 15.\n(a) Find the score that is higher than 90% of all scores.\n(b) Find the two scores that bound the middle 95% of scores.\n(c) A student scores 130. Is this unusual? Justify with a z-score.",
+      "options": [],
+      "answer": [],
+      "model": "(a) The 90th percentile has Z ≈ 1.28, so X = μ + Zσ = 100 + 1.28(15) = 119.2. About 90% of students score below 119.\n\n(b) The middle 95% is bounded by Z = ±1.96: X = 100 ± 1.96(15) → 100 ± 29.4 → (70.6, 129.4).\n（中间 95% 对应 Z = ±1.96；若用经验法则的 ±2σ 则为 70 到 130。）\n\n(c) Z = (130 − 100)/15 = 2.00. The score is 2 standard deviations above the mean; about 2.3% of students score higher, so it is unusual but not extreme (|Z| < 3).\n（Z=2 属于少见但不算极端；|Z|>3 才是极端值经验线。）",
+      "explain": "(a) The 90th percentile has Z ≈ 1.28, so X = μ + Zσ = 100 + 1.28(15) = 119.2. About 90% of students score below 119.\n\n(b) The middle 95% is bounded by Z = ±1.96: X = 100 ± 1.96(15) → 100 ± 29.4 → (70.6, 129.4).\n（中间 95% 对应 Z = ±1.96；若用经验法则的 ±2σ 则为 70 到 130。）\n\n(c) Z = (130 − 100)/15 = 2.00. The score is 2 standard deviations above the mean; about 2.3% of students score higher, so it is unusual but not extreme (|Z| < 3).\n（Z=2 属于少见但不算极端；|Z|>3 才是极端值经验线。）",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "c6e3",
+      "chapter": "Ch6 · The Normal Distribution",
+      "topic": "Empirical rule vs Chebyshev",
+      "difficulty": "应用",
+      "type": "essay",
+      "stem": "A data set of monthly returns has mean 8% and standard deviation 2%.\n(a) If returns are normally distributed, what percentage of months fall between 4% and 12%?\n(b) If the distribution is not normal, what can Chebyshev’s theorem guarantee for the same interval?\n(c) Explain in one or two sentences why the two answers differ.",
+      "options": [],
+      "answer": [],
+      "model": "(a) 4% and 12% are μ ± 2σ. For a normal distribution, about 95.4% of months lie in this interval (empirical rule: 68.3 / 95.4 / 99.7).\n\n(b) With k = 2, Chebyshev guarantees at least 1 − 1/k² = 1 − 0.25 = 75% of observations, whatever the shape of the distribution.\n\n(c) The empirical rule uses the specific shape of the normal curve, so it can give a precise percentage; Chebyshev makes no assumption about shape and therefore gives only a conservative lower bound.\n（经验法则依赖正态形状，给出精确比例；切比雪夫对任何分布都成立，但只是下界。）",
+      "explain": "(a) 4% and 12% are μ ± 2σ. For a normal distribution, about 95.4% of months lie in this interval (empirical rule: 68.3 / 95.4 / 99.7).\n\n(b) With k = 2, Chebyshev guarantees at least 1 − 1/k² = 1 − 0.25 = 75% of observations, whatever the shape of the distribution.\n\n(c) The empirical rule uses the specific shape of the normal curve, so it can give a precise percentage; Chebyshev makes no assumption about shape and therefore gives only a conservative lower bound.\n（经验法则依赖正态形状，给出精确比例；切比雪夫对任何分布都成立，但只是下界。）",
+      "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    }
+  ]
+}

@@ -390,6 +390,7 @@ button{font-family:inherit}
 .q-explain .hd{display:flex;align-items:center;gap:6px;font-weight:750;margin-bottom:5px;font-size:12px}
 .q-explain.good .hd{color:var(--ok)}
 .q-explain.bad .hd{color:var(--bad)}
+.essay-model{white-space:pre-line;font-size:12.8px;line-height:1.8}
 .q-source{font-size:11px;color:var(--muted);margin-top:8px;border-top:1px dashed var(--line);padding-top:7px}
 .quiz-actions{padding:2px 0 6px}
 .combo-fly{
@@ -1800,6 +1801,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       ach: {},
       settings: { theme: 'auto' },
       synced: {},
+      intro: '',
     };
   }
 
@@ -1868,7 +1870,8 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     const ids = new Set(S.bank.map((q) => q.id));
     const stems = new Set(S.bank.map((q) => normStem(q)));
     list.forEach((q) => {
-      if (!q || !q.stem || !Array.isArray(q.options) || q.options.length < 2) return;
+      if (!q || !q.stem) return;
+      if (q.type !== 'essay' && (!Array.isArray(q.options) || q.options.length < 2)) return;
       const key = normStem(q);
       if (ids.has(q.id) || stems.has(key)) return;
       ids.add(q.id);
@@ -2141,6 +2144,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
           '<div class="stat"><div class="stat-val">' + S.notebook.length + '</div><div class="stat-lbl">错题待复习</div></div>' +
         '</div>' +
       '</section>' +
+      (S.intro ? '<details class="card" style="margin-top:14px"><summary style="cursor:pointer;font-weight:700;font-size:13.5px">课程简介 · Course overview</summary><div class="tiny" style="white-space:pre-line;line-height:1.85;margin-top:10px;color:var(--text-soft)">' + esc(S.intro) + '</div></details>' : '') +
       '<div class="cols">' +
         '<div class="col-main">' +
           (S.bank.length ? '' :
@@ -2482,7 +2486,8 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       const set = new Set(ids);
       return shuffle(S.bank.filter((q) => set.has(q.id)));
     }
-    const pool = poolFor(mode);
+    let pool = poolFor(mode);
+    if (mode === 'mock') pool = pool.filter((q) => q.type !== 'essay');
     const want = modeCount(mode);
     if (!pool.length) return [];
     return shuffle(pool).slice(0, Math.min(want, pool.length));
@@ -2500,8 +2505,10 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       questions: qs,
       idx: 0,
       answers: qs.map(() => null),
+      written: qs.map(() => ''),
       picked: [],
       revealed: false,
+      graded: false,
       correct: 0,
       combo: 0,
       maxCombo: 0,
@@ -2535,8 +2542,9 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     const total = quiz.questions.length;
     const pct = Math.round(((quiz.idx + (quiz.revealed ? 1 : 0)) / total) * 100);
     const letters = 'ABCDEF';
+    const isEssay = q.type === 'essay';
 
-    const options = q.options.map((o, i) => {
+    const options = isEssay ? '' : q.options.map((o, i) => {
       let cls = 'opt';
       if (quiz.revealed) {
         if (q.answer.indexOf(i) >= 0) cls += ' ok';
@@ -2549,8 +2557,8 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       '</button>';
     }).join('');
 
-    const ok = quiz.revealed && sameSet(quiz.picked, q.answer);
-    const explain = quiz.revealed
+    const ok = quiz.revealed && !isEssay && sameSet(quiz.picked, q.answer);
+    const explain = quiz.revealed && !isEssay
       ? '<div class="q-explain ' + (ok ? 'good' : 'bad') + '">' +
           '<div class="hd">' + (ok ? '✓ 答对了' : '✕ 答错了') + '</div>' +
           '<div>' + rich(q.explain || '') + '</div>' +
@@ -2558,17 +2566,50 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
         '</div>'
       : '';
 
+    let essayBox = '';
+    if (isEssay) {
+      const written = quiz.written[quiz.idx] || '';
+      if (!quiz.revealed) {
+        essayBox = '<div class="field" style="margin-top:16px">' +
+          '<label class="label">你的解答 / Your answer（写计算步骤也可以只写要点）</label>' +
+          '<textarea class="textarea" id="essayBox" data-input="essay" style="min-height:170px" placeholder="Write your working here…">' + esc(written) + '</textarea>' +
+          '<div class="tiny muted" style="margin-top:6px">大题不自动判分：写完点「查看参考答案」，自己对照给分。</div>' +
+        '</div>';
+      } else {
+        essayBox =
+          (written ? '<div class="q-explain"><div class="hd">你的解答 / Your answer</div><div class="essay-model muted">' + esc(written) + '</div></div>' : '') +
+          '<div class="q-explain good"><div class="hd">参考答案 / Model answer</div>' +
+            '<div class="essay-model">' + esc(q.model || q.explain || '') + '</div>' +
+            (q.source ? '<div class="q-source">📎 ' + esc(q.source) + '</div>' : '') +
+          '</div>';
+      }
+    }
+
     const needSubmit = q.type === 'multiple' && !quiz.revealed && !quiz.timed;
     const nextLabel = quiz.idx === total - 1 ? (quiz.timed ? '交卷' : '查看结果') : '下一题';
 
-    const action = quiz.revealed
-      ? '<button class="btn primary lg block" data-act="next">' + nextLabel + ' <span class="kbd">Enter</span></button>'
-      : quiz.timed
-        ? '<div><button class="btn primary lg block" data-act="next"' + (quiz.picked.length ? '' : ' disabled') + '>' + nextLabel + '</button>' +
-          '<div class="tiny muted" style="text-align:center;margin-top:8px">模拟考不即时判题，交卷后统一看答案</div></div>'
-        : needSubmit
-          ? '<button class="btn primary lg block" data-act="submit"' + (quiz.picked.length ? '' : ' disabled') + '>提交答案</button>'
-          : '<div class="row" style="justify-content:center"><span class="tiny muted">选择选项作答</span></div>';
+    let action;
+    if (isEssay) {
+      if (!quiz.revealed) {
+        action = '<button class="btn primary lg block" data-act="show-model">查看参考答案</button>';
+      } else if (!quiz.graded) {
+        action = '<div class="row" style="gap:10px">' +
+          '<button class="btn lg" style="flex:1" data-act="grade" data-arg="0">答错了</button>' +
+          '<button class="btn primary lg" style="flex:1" data-act="grade" data-arg="1">答对了</button>' +
+        '</div>';
+      } else {
+        action = '<button class="btn primary lg block" data-act="next">' + nextLabel + '</button>';
+      }
+    } else if (quiz.revealed) {
+      action = '<button class="btn primary lg block" data-act="next">' + nextLabel + ' <span class="kbd">Enter</span></button>';
+    } else if (quiz.timed) {
+      action = '<div><button class="btn primary lg block" data-act="next"' + (quiz.picked.length ? '' : ' disabled') + '>' + nextLabel + '</button>' +
+        '<div class="tiny muted" style="text-align:center;margin-top:8px">模拟考不即时判题，交卷后统一看答案</div></div>';
+    } else if (needSubmit) {
+      action = '<button class="btn primary lg block" data-act="submit"' + (quiz.picked.length ? '' : ' disabled') + '>提交答案</button>';
+    } else {
+      action = '<div class="row" style="justify-content:center"><span class="tiny muted">选择选项作答</span></div>';
+    }
 
     layer.innerHTML =
       '<div class="quiz"><div class="quiz-inner">' +
@@ -2582,16 +2623,15 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
         '</div>' +
         '<div class="quiz-body card">' +
           '<div class="q-meta">' +
-            '<span class="badge brand">' + (q.type === 'multiple' ? '多选 / Multiple' : '单选 / Single') + '</span>' +
+            '<span class="badge brand">' + (isEssay ? '大题 / Open-ended' : q.type === 'multiple' ? '多选 / Multiple' : '单选 / Single') + '</span>' +
             (q.chapter ? '<span class="badge">' + esc(q.chapter) + '</span>' : '') +
             (q.topic ? '<span class="badge">' + esc(q.topic) + '</span>' : '') +
             (q.difficulty ? '<span class="badge warn">' + esc(q.difficulty) + '</span>' : '') +
             '<span class="spacer"></span>' +
-            (quiz.combo >= 3 ? '<span class="badge ok">🔥 ' + quiz.combo + ' 连击</span>' : '') +
+            (quiz.combo >= 3 && !isEssay ? '<span class="badge ok">🔥 ' + quiz.combo + ' 连击</span>' : '') +
           '</div>' +
           '<div class="q-stem">' + rich(q.stem) + '</div>' +
-          '<div class="q-options">' + options + '</div>' +
-          explain +
+          (isEssay ? essayBox : '<div class="q-options">' + options + '</div>' + explain) +
         '</div>' +
         '<div class="quiz-actions">' + action + '</div>' +
       '</div></div>';
@@ -2661,6 +2701,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       quiz.idx++;
       quiz.picked = [];
       quiz.revealed = false;
+      quiz.graded = false;
       renderQuiz();
       window.scrollTo({ top: 0 });
     } else {
@@ -2728,13 +2769,32 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     }).join('');
 
     const wrong = quiz.questions.map((q, i) => ({ q: q, a: quiz.answers[i] })).filter((x) => x.a && !x.a.ok);
-    const wrongRows = wrong.map((x) => '<div class="review-row bad">' +
-      '<span class="k">✕</span>' +
-      '<div><div>' + rich(truncate(x.q.stem, 100)) + '</div>' +
-        '<div class="tiny" style="margin-top:3px">你的答案：' + (x.a.picked.length ? esc(x.a.picked.map((i) => x.q.options[i]).join(' / ')) : '未作答') + '</div>' +
-        '<div class="tiny" style="color:var(--ok)">正确答案：' + esc(x.q.answer.map((i) => x.q.options[i]).join(' / ')) + '</div>' +
-        (x.q.explain ? '<div class="tiny muted" style="margin-top:3px">' + rich(x.q.explain) + '</div>' : '') +
-      '</div></div>').join('');
+    const wrongRows = wrong.map((x) => {
+      const isEssay = x.q.type === 'essay';
+      const yours = isEssay
+        ? (x.a.written ? esc(truncate(x.a.written, 120)) : '未作答')
+        : (x.a.picked.length ? esc(x.a.picked.map((i) => x.q.options[i]).join(' / ')) : '未作答');
+      const right = isEssay
+        ? '<div class="tiny" style="color:var(--ok);white-space:pre-line">参考答案：' + esc(truncate(x.q.model || x.q.explain || '', 260)) + '</div>'
+        : '<div class="tiny" style="color:var(--ok)">正确答案：' + esc(x.q.answer.map((i) => x.q.options[i]).join(' / ')) + '</div>';
+      return '<div class="review-row bad">' +
+        '<span class="k">✕</span>' +
+        '<div><div>' + rich(truncate(x.q.stem, 100)) + '</div>' +
+          '<div class="tiny" style="margin-top:3px">你的答案：' + yours + '</div>' +
+          right +
+          (!isEssay && x.q.explain ? '<div class="tiny muted" style="margin-top:3px">' + rich(x.q.explain) + '</div>' : '') +
+        '</div></div>';
+    }).join('');
+
+    const essays = quiz.questions.map((q, i) => ({ q: q, a: quiz.answers[i] })).filter((x) => x.q.type === 'essay');
+    const essayCard = essays.length
+      ? '<div class="card"><div class="card-head"><h2>大题参考答案</h2><span class="en">Open-ended</span>' +
+          '<span class="spacer"></span><span class="tiny muted">' + essays.length + ' 题</span></div>' +
+          essays.map((x, i) => '<details class="review-row" style="margin-bottom:8px"><summary style="cursor:pointer;font-size:12.5px">' +
+            (i + 1) + '. ' + rich(truncate(x.q.stem, 90)) + (x.a && x.a.ok ? ' <span class="badge ok">对</span>' : '') +
+            '</summary><div class="essay-model" style="margin-top:8px">' + esc(x.q.model || x.q.explain || '') + '</div></details>').join('') +
+        '</div>'
+      : '';
 
     layer.hidden = false;
     layer.innerHTML = '<div class="quiz"><div class="quiz-inner">' +
@@ -2755,6 +2815,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       (auto ? '<div class="notice"><span>⏰</span><div>时间到，已自动交卷。</div></div>' : '') +
       '<div class="card"><div class="card-head"><h2>各章节表现</h2><span class="en">By chapter</span></div>' + chRows + '</div>' +
       (wrong.length ? '<div class="card"><div class="card-head"><h2>错题回顾</h2><span class="en">Mistakes</span><span class="spacer"></span><span class="tiny muted">' + wrong.length + ' 题</span></div><div class="review-list">' + wrongRows + '</div></div>' : '<div class="card"><div class="empty"><span class="empty-ico">💯</span>全部答对，没有错题。</div></div>') +
+      essayCard +
       '<div class="btn-row">' +
         '<button class="btn primary lg" data-act="again">再来一组</button>' +
         (wrong.length ? '<button class="btn soft lg" data-act="again-wrong">复习这些错题</button>' : '') +
@@ -2896,6 +2957,27 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
 
   function normalizeQuestion(raw) {
     if (!raw || typeof raw !== 'object') return null;
+
+    // 大题 / 简答题：没有选项，靠参考答案自评
+    if (raw.type === 'essay' || raw.type === 'text' || raw.type === 'short') {
+      const stem = String(raw.stem || raw.question || '').trim();
+      if (!stem) return null;
+      return {
+        id: raw.id || uid(),
+        type: 'essay',
+        chapter: String(raw.chapter || '导入题库'),
+        topic: String(raw.topic || ''),
+        difficulty: String(raw.difficulty || '应用'),
+        stem: stem,
+        options: [],
+        answer: [],
+        model: String(raw.answer || raw.model || raw.explain || ''),
+        explain: String(raw.explain || ''),
+        source: String(raw.source || ''),
+        auto: !!raw.auto,
+      };
+    }
+
     let options = Array.isArray(raw.options) ? raw.options.map((o) => String(o)).filter((o) => o && o.trim()) : [];
     if (options.length < 2) return null;
     let ans = raw.answer;
@@ -2971,6 +3053,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       }
       const data = await res.json();
       const version = String(data.v || data.version || '1');
+      if (data.intro) S.intro = String(data.intro);
       const raw = Array.isArray(data) ? data : (data.questions || []);
       if (!raw.length) {
         if (manual) toast('云端题库是空的');
@@ -3130,6 +3213,35 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
           }
         }
         break;
+      case 'show-model': {
+        if (!quiz) return;
+        const box = $('#essayBox');
+        if (box) quiz.written[quiz.idx] = box.value;
+        quiz.revealed = true;
+        renderQuiz();
+        break;
+      }
+      case 'grade': {
+        if (!quiz || !quiz.revealed) return;
+        if (quiz.answers[quiz.idx]) { quiz.graded = true; renderQuiz(); return; }
+        const okGrade = arg === '1';
+        const q = quiz.questions[quiz.idx];
+        quiz.answers[quiz.idx] = { picked: [], ok: okGrade, written: quiz.written[quiz.idx] || '' };
+        applyAnswer(q, okGrade, quiz.mode);
+        if (okGrade) {
+          quiz.correct++;
+          quiz.combo++;
+          quiz.maxCombo = Math.max(quiz.maxCombo, quiz.combo);
+          S.bestCombo = Math.max(S.bestCombo, quiz.combo);
+          addXp(10);
+        } else {
+          quiz.combo = 0;
+        }
+        quiz.graded = true;
+        save();
+        renderQuiz();
+        break;
+      }
       case 'submit':
         if (!quiz) return;
         if (!quiz.picked.length) { toast('先选择答案'); return; }
@@ -3293,6 +3405,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     if (!el.dataset || !el.dataset.input) return;
     const key = el.dataset.input;
     if (key === 'search') { applySearch(el.value); return; }
+    if (key === 'essay') { if (quiz) quiz.written[quiz.idx] = el.value; return; }
     if (key === 'material') {
       S.material = el.value;
       save();
