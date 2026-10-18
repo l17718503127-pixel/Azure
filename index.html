@@ -469,6 +469,21 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
   *,*::before,*::after{animation-duration:.001s !important;transition-duration:.001s !important}
 }
 
+/* ---------- vocabulary ---------- */
+.vocab-word{font-size:clamp(30px,6vw,44px);font-weight:800;letter-spacing:-.02em;margin-top:14px;line-height:1.15;word-break:break-word}
+.ipa-btn{border:1px solid var(--line);background:var(--surface-2);color:var(--text-soft);border-radius:10px;padding:6px 10px;font-size:12.5px;cursor:pointer;font-family:inherit;transition:.15s}
+.ipa-btn:hover{border-color:var(--brand);color:var(--brand)}
+.vocab-zh{font-size:18px;font-weight:650;margin-top:14px;line-height:1.6}
+.vocab-root{font-size:12.5px;color:var(--brand);background:var(--brand-soft);border-radius:8px;padding:6px 10px;margin-top:10px;display:inline-block}
+.vocab-ph{font-size:12.5px;color:var(--text-soft);margin-top:10px;line-height:1.6}
+.vocab-ex{font-size:13px;line-height:1.75;margin-top:12px;padding:10px 12px;background:var(--surface-2);border-left:3px solid var(--line-2);border-radius:0 8px 8px 0}
+.chip-row{display:flex;gap:6px;flex-wrap:wrap}
+.vlist{display:flex;flex-direction:column}
+.vrow{display:flex;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px dashed var(--line)}
+.vrow:last-child{border-bottom:0}
+.vrow-main{flex:1;min-width:0}
+.vrow-main b{font-size:14.5px}
+.ipa-sm{font-size:11.5px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -2007,6 +2022,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
   /* ============================ 顶部与路由 ============================ */
 
   const NAV = [
+    ['vocab', '单词', 'Vocab'],
     ['practice', '练习', 'Practice'],
     ['create', '出题', 'Create'],
     ['bank', '题库', 'Bank'],
@@ -2042,7 +2058,8 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     const view = $('#view');
     if (!view) return;
     let html = '';
-    if (ui.view === 'practice') html = viewPractice();
+    if (ui.view === 'vocab') html = viewVocab();
+    else if (ui.view === 'practice') html = viewPractice();
     else if (ui.view === 'create') html = viewCreate();
     else if (ui.view === 'bank') html = viewBank();
     else if (ui.view === 'notebook') html = viewNotebook();
@@ -2096,6 +2113,8 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
 
   function viewPractice() {
     const li = levelInfo();
+    const wLearned = learnedCount();
+    const wDue = dueCount();
     const answered = Object.values(S.qStats).reduce((a, s) => a + (s.seen || 0), 0);
     const right = Object.values(S.qStats).reduce((a, s) => a + (s.correct || 0), 0);
     const acc = answered ? Math.round((right / answered) * 100) : 0;
@@ -2189,6 +2208,12 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
           '<div class="stat"><div class="stat-val">' + S.notebook.length + '</div><div class="stat-lbl">错题待复习</div></div>' +
         '</div>' +
       '</section>' +
+      '<div class="card" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px">' +
+        '<div style="font-size:24px">🧠</div>' +
+        '<div style="flex:1;min-width:200px"><div style="font-weight:750;font-size:14px">雅思词汇 · 3574 词</div>' +
+          '<div class="tiny muted">已学 ' + wLearned + ' · 待复习 ' + wDue + ' · 词根记忆 + 英美发音</div></div>' +
+        '<button class="btn primary" data-act="nav" data-arg="vocab">去背单词</button>' +
+      '</div>' +
       (activeIntro() ? '<details class="card" style="margin-top:14px"><summary style="cursor:pointer;font-weight:700;font-size:13.5px">课程简介 · Course overview</summary><div class="tiny" style="white-space:pre-line;line-height:1.85;margin-top:10px;color:var(--text-soft)">' + esc(activeIntro()) + '</div></details>' : '') +
       '<div class="cols">' +
         '<div class="col-main">' +
@@ -3221,6 +3246,246 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     m.innerHTML = '';
   }
 
+  /* ============================ 单词 ============================ */
+
+  const WKEY = 'qf:words';
+  const WSTATS_KEY = 'qf:wordstats';
+  const W_INTERVAL = [0, 1, 2, 4, 7, 15, 30]; // 天，按等级
+
+  let WB = null;              // 词库 { v, count, words, roots, prefixes, suffixes }
+  let WBSTATS = { v: '', count: 0, s: {} };
+  let vocabSession = null;    // { list: [], idx: 0 }
+  let vocabQuery = '';
+  let vocabRoot = '';
+  let vocabLimit = 60;
+  let wordsState = 'idle';
+
+  function loadWordStats() {
+    try {
+      const raw = localStorage.getItem(WSTATS_KEY);
+      if (raw) WBSTATS = Object.assign({ v: '', count: 0, s: {} }, JSON.parse(raw));
+    } catch (e) { /* ignore */ }
+    if (!WBSTATS.s || typeof WBSTATS.s !== 'object') WBSTATS.s = {};
+  }
+
+  function saveWordStats() {
+    try { localStorage.setItem(WSTATS_KEY, JSON.stringify(WBSTATS)); } catch (e) { /* ignore */ }
+  }
+
+  function loadCachedWords() {
+    if (WB) return WB;
+    try {
+      const raw = localStorage.getItem(WKEY);
+      if (raw) WB = JSON.parse(raw);
+    } catch (e) { WB = null; }
+    return WB;
+  }
+
+  // idle | loading | ready | error —— 防止渲染时反复触发请求
+  function ensureWords() {
+    loadWordStats();
+    loadCachedWords();
+    if (WB) { wordsState = 'ready'; return null; }
+    if (wordsState === 'loading' || wordsState === 'error') return null;
+    if (!secureOrigin()) { wordsState = 'error'; return null; }
+    wordsState = 'loading';
+    return fetch('./banks/words.json?t=' + Date.now(), { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (data && Array.isArray(data.words) && data.words.length) {
+          WB = data;
+          wordsState = 'ready';
+          try { localStorage.setItem(WKEY, JSON.stringify(data)); } catch (e) { /* 容量不足就只在内存里用 */ }
+        } else {
+          wordsState = 'error';
+        }
+      })
+      .catch(() => { wordsState = 'error'; });
+  }
+
+  function speak(text, accent) {
+    if (!text) return;
+    if (!('speechSynthesis' in window)) { toast('这个浏览器不支持朗读'); return; }
+    try {
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = accent === 'uk' ? 'en-GB' : 'en-US';
+      u.rate = 0.92;
+      const voices = window.speechSynthesis.getVoices() || [];
+      const v = voices.find((x) => x.lang === u.lang) || voices.find((x) => (x.lang || '').indexOf('en') === 0);
+      if (v) u.voice = v;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    } catch (e) { /* ignore */ }
+  }
+
+  function wordLevel(w) {
+    const s = WBSTATS.s[w];
+    return s ? s.l : 0;
+  }
+
+  function dueCount() {
+    const now = Date.now();
+    let n = 0;
+    Object.keys(WBSTATS.s).forEach((k) => {
+      const s = WBSTATS.s[k];
+      if (s && s.l > 0 && s.d <= now) n++;
+    });
+    return n;
+  }
+
+  function learnedCount() {
+    return Object.keys(WBSTATS.s).filter((k) => (WBSTATS.s[k].l || 0) > 0).length;
+  }
+
+  function startVocab() {
+    if (!WB) return;
+    const now = Date.now();
+    const due = [];
+    const fresh = [];
+    WB.words.forEach((x) => {
+      const s = WBSTATS.s[x.w];
+      if (!s || !s.l) { fresh.push(x); return; }
+      if (s.d <= now) due.push(x);
+    });
+    const dueList = shuffle(due).slice(0, 12);
+    const list = dueList.concat(shuffle(fresh).slice(0, 20 - dueList.length));
+    if (!list.length) { toast('今天的词都背完了，明天再来 🎉'); return; }
+    vocabSession = { list: list, idx: 0 };
+    render();
+    window.scrollTo({ top: 0 });
+  }
+
+  function answerWord(known) {
+    if (!vocabSession) return;
+    const x = vocabSession.list[vocabSession.idx];
+    const st = WBSTATS.s[x.w] || (WBSTATS.s[x.w] = { l: 0, d: 0, n: 0 });
+    st.n = (st.n || 0) + 1;
+    if (known) {
+      st.l = Math.min(6, (st.l || 0) + 1);
+      st.d = Date.now() + W_INTERVAL[st.l] * 86400000;
+    } else {
+      st.l = 1;
+      st.d = Date.now() + 10 * 60000;
+    }
+    saveWordStats();
+    vocabSession.idx++;
+    if (vocabSession.idx >= vocabSession.list.length) {
+      vocabSession = null;
+      toast('这一组背完了 👍 待会再来复习');
+    }
+    render();
+  }
+
+  function rootMeta(k) {
+    return (WB.roots || []).find((x) => x.k === k) || null;
+  }
+
+  function viewVocab() {
+    if (!WB) {
+      const p = ensureWords();
+      if (p) p.then(() => { if (ui.view === 'vocab') render(); });
+      return '<div class="card"><div class="empty"><span class="empty-ico">' + (wordsState === 'error' ? '⚠️' : '📥') + '</span>' +
+        (wordsState === 'error'
+          ? '词库加载失败：请确认已经上传 banks/words.json，或检查网络。<br><br><button class="btn sm" data-act="vocab-retry">重试</button>'
+          : '正在加载词库…（首次约 1 MB）') + '</div></div>';
+    }
+
+    const total = WB.count || WB.words.length;
+    const learned = learnedCount();
+    const due = dueCount();
+
+    let study = '';
+    if (vocabSession) {
+      const x = vocabSession.list[vocabSession.idx];
+      const st = WBSTATS.s[x.w] || { l: 0, n: 0 };
+      const rm = x.r ? rootMeta(x.r) : null;
+      const pm = x.pre ? (WB.prefixes || []).find((p) => p.k === x.pre) : null;
+      const sm = x.suf ? (WB.suffixes || []).find((s) => s.k === x.suf) : null;
+      const hint = [];
+      if (rm) hint.push('词根 ' + rm.k + ' = ' + rm.zh);
+      if (pm) hint.push('前缀 ' + pm.k + '- = ' + pm.zh);
+      if (sm) hint.push('后缀 -' + sm.k + ' = ' + sm.zh);
+      study = '<div class="card vcard">' +
+        '<div class="row"><span class="badge brand">第 ' + (vocabSession.idx + 1) + ' / ' + vocabSession.list.length + ' 个</span>' +
+          '<span class="spacer"></span>' +
+          '<button class="btn ghost sm" data-act="vocab-quit">结束</button></div>' +
+        '<div class="vocab-word">' + esc(x.w) + '</div>' +
+        '<div class="row-wrap" style="gap:8px;margin-top:6px">' +
+          (x.us ? '<button class="ipa-btn" data-act="vocab-speak" data-arg="us" data-word="' + esc(x.w) + '">🇺🇸 ' + esc(x.us) + ' 🔊</button>' : '') +
+          (x.uk ? '<button class="ipa-btn" data-act="vocab-speak" data-arg="uk" data-word="' + esc(x.w) + '">🇬🇧 ' + esc(x.uk) + ' 🔊</button>' : '') +
+        '</div>' +
+        '<div class="vocab-zh">' + (x.p ? '<span class="badge">' + esc(x.p) + '</span> ' : '') + esc(x.zh) + '</div>' +
+        (hint.length ? '<div class="vocab-root">🏷 ' + esc(hint.join(' · ')) + '</div>' : '') +
+        (x.ph ? '<div class="vocab-ph">📎 ' + esc(x.ph) + '</div>' : '') +
+        (x.ex ? '<div class="vocab-ex">' + esc(x.ex) + (x.exZh ? '<br><span class="muted">' + esc(x.exZh) + '</span>' : '') + '</div>' : '') +
+        '<div class="row" style="gap:10px;margin-top:18px">' +
+          '<button class="btn lg" style="flex:1" data-act="vocab-answer" data-arg="0">不认识</button>' +
+          '<button class="btn primary lg" style="flex:1" data-act="vocab-answer" data-arg="1">认识</button>' +
+        '</div>' +
+        '<div class="tiny muted center" style="margin-top:8px">认识 → 隔 1/2/4/7/15/30 天再出现；不认识 → 10 分钟后重来（当前等级 ' + (st.l || 0) + '）</div>' +
+      '</div>';
+    }
+
+    const rootCounts = {};
+    WB.words.forEach((x) => { if (x.r) rootCounts[x.r] = (rootCounts[x.r] || 0) + 1; });
+    const rootChips = '<div class="chip-row">' +
+      '<button class="chip' + (vocabRoot === '' ? ' on' : '') + '" data-act="vocab-root" data-arg="">全部</button>' +
+      Object.keys(rootCounts).sort((a, b) => rootCounts[b] - rootCounts[a]).slice(0, 18).map((k) => {
+        const m = rootMeta(k);
+        return '<button class="chip' + (vocabRoot === k ? ' on' : '') + '" data-act="vocab-root" data-arg="' + esc(k) + '">' +
+          esc(k) + (m ? ' ' + esc(m.zh) : '') + ' <b>' + rootCounts[k] + '</b></button>';
+      }).join('') + '</div>';
+
+    const q = vocabQuery.trim().toLowerCase();
+    const filtered = WB.words.filter((x) => {
+      if (vocabRoot && x.r !== vocabRoot) return false;
+      if (!q) return true;
+      return x.w.indexOf(q) >= 0 || x.zh.indexOf(q) >= 0;
+    });
+    const rows = filtered.slice(0, vocabLimit).map((x) => {
+      const lv = wordLevel(x.w);
+      const tag = lv === 0 ? '<span class="badge">未学</span>' : lv >= 4 ? '<span class="badge ok">已掌握</span>' : '<span class="badge warn">L' + lv + '</span>';
+      return '<div class="vrow">' +
+        '<div class="vrow-main"><b>' + esc(x.w) + '</b>' +
+          (x.us ? ' <span class="ipa-sm">/' + esc(x.us) + '/</span>' : '') +
+          '<div class="tiny muted">' + (x.p ? esc(x.p) + '. ' : '') + esc(truncate(x.zh, 40)) + '</div>' +
+        '</div>' + tag +
+        '<button class="icon-btn" data-act="vocab-speak" data-arg="us" data-word="' + esc(x.w) + '" title="朗读">🔊</button>' +
+      '</div>';
+    }).join('');
+
+    return '<div class="stack">' +
+      '<div class="card hero">' +
+        '<div class="hero-left">' +
+          '<div class="ring" style="--p:' + Math.round(learned / Math.max(1, total) * 100) + '">' +
+            '<div class="ring-inner"><div class="ring-val">' + Math.round(learned / Math.max(1, total) * 100) + '%</div><div class="ring-lbl">Learned</div></div>' +
+          '</div>' +
+          '<div><div class="hero-title">雅思词汇 · 3574 词</div>' +
+            '<div class="hero-sub">新东方《雅思词汇 词根+联想记忆法》· 音标 / 发音 / 例句</div>' +
+            '<div class="row-wrap" style="margin-top:9px;gap:6px">' +
+              '<span class="chip">📖 已学 <b>' + learned + '</b></span>' +
+              '<span class="chip">⏰ 待复习 <b>' + due + '</b></span>' +
+              '<span class="chip">🗂 总词数 <b>' + total + '</b></span>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="row-wrap"><button class="btn primary lg" data-act="vocab-start">' + (vocabSession ? '换一组' : '开始背单词') + '</button></div>' +
+      '</div>' +
+
+      (study || '<div class="card"><div class="empty"><span class="empty-ico">🧠</span>点「开始背单词」：优先复习到期的词，再补新词，一次 20 个。</div></div>') +
+
+      '<div class="card"><div class="card-head"><h2>词根速查</h2><span class="en">Roots</span><span class="spacer"></span>' +
+        '<span class="tiny muted">点一个词根，下面只看这一族</span></div>' + rootChips + '</div>' +
+
+      '<div class="card"><div class="card-head"><h2>词表</h2><span class="en">All words</span><span class="spacer"></span>' +
+        '<span class="tiny muted">' + filtered.length + ' 个</span></div>' +
+        '<input class="input" placeholder="搜单词或中文释义…" data-input="vocab-search" value="' + esc(vocabQuery) + '">' +
+        '<div class="vlist" style="margin-top:12px">' + (rows || '<div class="empty">没有匹配的词</div>') + '</div>' +
+        (filtered.length > vocabLimit ? '<div class="center" style="margin-top:12px"><button class="btn sm" data-act="vocab-more">加载更多（还有 ' + (filtered.length - vocabLimit) + '）</button></div>' : '') +
+      '</div>' +
+    '</div>';
+  }
+
   /* ============================ 事件 ============================ */
 
   function onClick(e) {
@@ -3233,6 +3498,33 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       case 'nav':
         if (quiz) { if (!confirm('正在答题，确定离开吗？')) return; exitQuiz(); }
         go(arg);
+        break;
+      case 'vocab-retry':
+        wordsState = 'idle';
+        render();
+        break;
+      case 'vocab-start':
+        startVocab();
+        break;
+      case 'vocab-answer':
+        answerWord(arg === '1');
+        break;
+      case 'vocab-speak':
+        speak(el.dataset.word, arg);
+        break;
+      case 'vocab-root':
+        vocabRoot = arg || '';
+        vocabQuery = '';
+        vocabLimit = 60;
+        render();
+        break;
+      case 'vocab-more':
+        vocabLimit += 60;
+        render();
+        break;
+      case 'vocab-quit':
+        vocabSession = null;
+        render();
         break;
       case 'course':
         S.course = arg;
@@ -3475,10 +3767,24 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     const key = el.dataset.input;
     if (key === 'search') { applySearch(el.value); return; }
     if (key === 'essay') { if (quiz) quiz.written[quiz.idx] = el.value; return; }
+    if (key === 'vocab-search') { applyVocabSearch(el.value); return; }
     if (key === 'material') {
       S.material = el.value;
       save();
     }
+  }
+
+  let vocabSearchTimer = 0;
+
+  function applyVocabSearch(v) {
+    vocabQuery = v;
+    vocabLimit = 60;
+    clearTimeout(vocabSearchTimer);
+    vocabSearchTimer = setTimeout(() => {
+      render();
+      const el = document.querySelector('[data-input="vocab-search"]');
+      if (el) { el.focus(); try { el.setSelectionRange(v.length, v.length); } catch (e) { /* ignore */ } }
+    }, 220);
   }
 
   function applySearch(v) {
@@ -3620,6 +3926,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
 
   function init() {
     load();
+    loadWordStats();
     applyTheme();
     ensureDaily();
     setupPwa();
