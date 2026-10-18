@@ -1,10 +1,24 @@
 {
-  "v": "bcb8a1e4e05",
-  "title": "BUS1102 Statistics for Business",
-  "intro": "BUS1102 Statistics for Business · 商业统计学 — Lingnan University 岭南大学\n\nCh1 Defining & Collecting Data（数据定义与收集）· Ch2 Organizing & Visualizing Variables（整理与可视化）\nCh3 Numerical Descriptive Measures（数值描述）· Ch4 Basic Probability（基础概率）\nCh5 Discrete Probability Distributions（离散概率分布）· Ch6 The Normal Distribution（正态分布）\n\n选择题考概念与计算，大题给完整步骤；解释中英对照。Questions are in English; explanations mix Chinese and English.",
+  "v": "bf080885734",
+  "title": "QuizForge course bank",
+  "courses": [
+    {
+      "code": "BUS1102",
+      "title": "Statistics for Business",
+      "zh": "商业统计学",
+      "intro": "BUS1102 Statistics for Business · 商业统计学 — Lingnan University 岭南大学\n\nCh1 Defining & Collecting Data（数据定义与收集）· Ch2 Organizing & Visualizing Variables（整理与可视化）\nCh3 Numerical Descriptive Measures（数值描述）· Ch4 Basic Probability（基础概率）\nCh5 Discrete Probability Distributions（离散概率分布）· Ch6 The Normal Distribution（正态分布）\n\n选择题考概念与计算，大题给完整步骤；解释中英对照。Questions are in English; explanations mix Chinese and English."
+    },
+    {
+      "code": "BUS2105",
+      "title": "Principles of Economics",
+      "zh": "经济学原理",
+      "intro": "BUS2105 Principles of Economics · 经济学原理 — Lingnan University 岭南大学\n\nCh1 What is Economics?（稀缺、机会成本、PPF）· Ch3 Demand and Supply（需求与供给）\nCh5 Efficiency and Equity（效率与公平）· Ch6 Government Actions in Markets（政府干预）\nCh8 Utility and Demand（效用与需求）· Ch9 Possibilities, Preferences and Choices（预算线与无差异曲线）\n\n题目全英文，解析中英对照；覆盖 Parkin 教材的概念题与图形推理题。"
+    }
+  ],
   "questions": [
     {
       "id": "c1q01",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Statistics & variables",
       "difficulty": "记忆",
@@ -25,6 +39,7 @@
     },
     {
       "id": "c1q02",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Statistics & variables",
       "difficulty": "记忆",
@@ -45,6 +60,7 @@
     },
     {
       "id": "c1q03",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Variable types & scales",
       "difficulty": "理解",
@@ -65,6 +81,7 @@
     },
     {
       "id": "c1q04",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Variable types & scales",
       "difficulty": "理解",
@@ -85,6 +102,7 @@
     },
     {
       "id": "c1q05",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Variable types & scales",
       "difficulty": "理解",
@@ -105,6 +123,7 @@
     },
     {
       "id": "c1q06",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Variable types & scales",
       "difficulty": "理解",
@@ -125,6 +144,7 @@
     },
     {
       "id": "c1q07",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Variable types & scales",
       "difficulty": "理解",
@@ -145,6 +165,7 @@
     },
     {
       "id": "c1q08",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Population & sample",
       "difficulty": "理解",
@@ -165,6 +186,7 @@
     },
     {
       "id": "c1q09",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Population & sample",
       "difficulty": "理解",
@@ -185,6 +207,7 @@
     },
     {
       "id": "c1q10",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Data sources",
       "difficulty": "记忆",
@@ -205,6 +228,7 @@
     },
     {
       "id": "c1q11",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Sampling",
       "difficulty": "理解",
@@ -225,6 +249,7 @@
     },
     {
       "id": "c1q12",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Sampling",
       "difficulty": "应用",
@@ -245,6 +270,7 @@
     },
     {
       "id": "c1q13",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Sampling",
       "difficulty": "应用",
@@ -265,6 +291,7 @@
     },
     {
       "id": "c1q14",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Survey errors",
       "difficulty": "理解",
@@ -285,6 +312,7 @@
     },
     {
       "id": "c1q15",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Ethics",
       "difficulty": "理解",
@@ -305,6 +333,7 @@
     },
     {
       "id": "c2q01",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Tables",
       "difficulty": "记忆",
@@ -325,6 +354,7 @@
     },
     {
       "id": "c2q02",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Tables",
       "difficulty": "记忆",
@@ -345,6 +375,7 @@
     },
     {
       "id": "c2q03",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Tables",
       "difficulty": "理解",
@@ -365,6 +396,7 @@
     },
     {
       "id": "c2q04",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Ordered array",
       "difficulty": "记忆",
@@ -385,6 +417,7 @@
     },
     {
       "id": "c2q05",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Stem-and-leaf",
       "difficulty": "理解",
@@ -405,6 +438,7 @@
     },
     {
       "id": "c2q06",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Frequency distribution",
       "difficulty": "记忆",
@@ -425,6 +459,7 @@
     },
     {
       "id": "c2q07",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Frequency distribution",
       "difficulty": "应用",
@@ -445,6 +480,7 @@
     },
     {
       "id": "c2q08",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Frequency distribution",
       "difficulty": "应用",
@@ -465,6 +501,7 @@
     },
     {
       "id": "c2q09",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Frequency distribution",
       "difficulty": "应用",
@@ -485,6 +522,7 @@
     },
     {
       "id": "c2q10",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Charts",
       "difficulty": "理解",
@@ -505,6 +543,7 @@
     },
     {
       "id": "c2q11",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Charts",
       "difficulty": "理解",
@@ -525,6 +564,7 @@
     },
     {
       "id": "c2q12",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Charts",
       "difficulty": "理解",
@@ -545,6 +585,7 @@
     },
     {
       "id": "c2q13",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Charts",
       "difficulty": "理解",
@@ -565,6 +606,7 @@
     },
     {
       "id": "c2q14",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Graph pitfalls",
       "difficulty": "理解",
@@ -585,6 +627,7 @@
     },
     {
       "id": "c2q15",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Charts",
       "difficulty": "理解",
@@ -605,6 +648,7 @@
     },
     {
       "id": "c3q01",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "Central tendency",
       "difficulty": "理解",
@@ -625,6 +669,7 @@
     },
     {
       "id": "c3q02",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "Central tendency",
       "difficulty": "应用",
@@ -645,6 +690,7 @@
     },
     {
       "id": "c3q03",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "Central tendency",
       "difficulty": "记忆",
@@ -665,6 +711,7 @@
     },
     {
       "id": "c3q04",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "Dispersion",
       "difficulty": "记忆",
@@ -685,6 +732,7 @@
     },
     {
       "id": "c3q05",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "Dispersion",
       "difficulty": "理解",
@@ -705,6 +753,7 @@
     },
     {
       "id": "c3q06",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "CV & z-scores",
       "difficulty": "理解",
@@ -725,6 +774,7 @@
     },
     {
       "id": "c3q07",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "CV & z-scores",
       "difficulty": "理解",
@@ -745,6 +795,7 @@
     },
     {
       "id": "c3q08",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "CV & z-scores",
       "difficulty": "记忆",
@@ -765,6 +816,7 @@
     },
     {
       "id": "c3q09",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "Quartiles & IQR",
       "difficulty": "应用",
@@ -785,6 +837,7 @@
     },
     {
       "id": "c3q10",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "Quartiles & IQR",
       "difficulty": "应用",
@@ -805,6 +858,7 @@
     },
     {
       "id": "c3q11",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "Shape",
       "difficulty": "理解",
@@ -825,6 +879,7 @@
     },
     {
       "id": "c3q12",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "Empirical rule",
       "difficulty": "记忆",
@@ -845,6 +900,7 @@
     },
     {
       "id": "c3q13",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "Chebyshev",
       "difficulty": "应用",
@@ -865,6 +921,7 @@
     },
     {
       "id": "c3q14",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "Grouped data",
       "difficulty": "理解",
@@ -885,6 +942,7 @@
     },
     {
       "id": "c3q15",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "Correlation",
       "difficulty": "理解",
@@ -905,6 +963,7 @@
     },
     {
       "id": "c4q01",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Probability basics",
       "difficulty": "记忆",
@@ -925,6 +984,7 @@
     },
     {
       "id": "c4q02",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Probability basics",
       "difficulty": "记忆",
@@ -945,6 +1005,7 @@
     },
     {
       "id": "c4q03",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Probability rules",
       "difficulty": "理解",
@@ -965,6 +1026,7 @@
     },
     {
       "id": "c4q04",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Probability rules",
       "difficulty": "理解",
@@ -985,6 +1047,7 @@
     },
     {
       "id": "c4q05",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Probability rules",
       "difficulty": "记忆",
@@ -1005,6 +1068,7 @@
     },
     {
       "id": "c4q06",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Conditional probability",
       "difficulty": "理解",
@@ -1025,6 +1089,7 @@
     },
     {
       "id": "c4q07",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Independence",
       "difficulty": "理解",
@@ -1045,6 +1110,7 @@
     },
     {
       "id": "c4q08",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Independence",
       "difficulty": "应用",
@@ -1065,6 +1131,7 @@
     },
     {
       "id": "c4q09",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Conditional probability",
       "difficulty": "应用",
@@ -1085,6 +1152,7 @@
     },
     {
       "id": "c4q10",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Bayes",
       "difficulty": "理解",
@@ -1105,6 +1173,7 @@
     },
     {
       "id": "c4q11",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Bayes",
       "difficulty": "应用",
@@ -1125,6 +1194,7 @@
     },
     {
       "id": "c4q12",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Counting",
       "difficulty": "应用",
@@ -1145,6 +1215,7 @@
     },
     {
       "id": "c4q13",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Counting",
       "difficulty": "应用",
@@ -1165,6 +1236,7 @@
     },
     {
       "id": "c4q14",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Counting",
       "difficulty": "应用",
@@ -1185,6 +1257,7 @@
     },
     {
       "id": "c4q15",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Counting",
       "difficulty": "理解",
@@ -1205,6 +1278,7 @@
     },
     {
       "id": "c5q01",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Random variables",
       "difficulty": "记忆",
@@ -1225,6 +1299,7 @@
     },
     {
       "id": "c5q02",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Random variables",
       "difficulty": "理解",
@@ -1245,6 +1320,7 @@
     },
     {
       "id": "c5q03",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Probability distributions",
       "difficulty": "理解",
@@ -1265,6 +1341,7 @@
     },
     {
       "id": "c5q04",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Expected value",
       "difficulty": "应用",
@@ -1285,6 +1362,7 @@
     },
     {
       "id": "c5q05",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Variance",
       "difficulty": "应用",
@@ -1305,6 +1383,7 @@
     },
     {
       "id": "c5q06",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Binomial",
       "difficulty": "理解",
@@ -1325,6 +1404,7 @@
     },
     {
       "id": "c5q07",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Binomial",
       "difficulty": "记忆",
@@ -1345,6 +1425,7 @@
     },
     {
       "id": "c5q08",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Binomial",
       "difficulty": "记忆",
@@ -1365,6 +1446,7 @@
     },
     {
       "id": "c5q09",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Binomial",
       "difficulty": "应用",
@@ -1385,6 +1467,7 @@
     },
     {
       "id": "c5q10",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Binomial",
       "difficulty": "理解",
@@ -1405,6 +1488,7 @@
     },
     {
       "id": "c5q11",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Poisson",
       "difficulty": "理解",
@@ -1425,6 +1509,7 @@
     },
     {
       "id": "c5q12",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Poisson",
       "difficulty": "记忆",
@@ -1445,6 +1530,7 @@
     },
     {
       "id": "c5q13",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Poisson",
       "difficulty": "记忆",
@@ -1465,6 +1551,7 @@
     },
     {
       "id": "c5q14",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Poisson",
       "difficulty": "应用",
@@ -1485,6 +1572,7 @@
     },
     {
       "id": "c5q15",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Poisson",
       "difficulty": "应用",
@@ -1505,6 +1593,7 @@
     },
     {
       "id": "c6q01",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Continuous variables",
       "difficulty": "理解",
@@ -1525,6 +1614,7 @@
     },
     {
       "id": "c6q02",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Normal properties",
       "difficulty": "记忆",
@@ -1545,6 +1635,7 @@
     },
     {
       "id": "c6q03",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Standard normal",
       "difficulty": "记忆",
@@ -1565,6 +1656,7 @@
     },
     {
       "id": "c6q04",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Z transformation",
       "difficulty": "记忆",
@@ -1585,6 +1677,7 @@
     },
     {
       "id": "c6q05",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Normal probabilities",
       "difficulty": "应用",
@@ -1605,6 +1698,7 @@
     },
     {
       "id": "c6q06",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Normal probabilities",
       "difficulty": "应用",
@@ -1625,6 +1719,7 @@
     },
     {
       "id": "c6q07",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Normal probabilities",
       "difficulty": "应用",
@@ -1645,6 +1740,7 @@
     },
     {
       "id": "c6q08",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Finding X",
       "difficulty": "理解",
@@ -1665,6 +1761,7 @@
     },
     {
       "id": "c6q09",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Finding X",
       "difficulty": "应用",
@@ -1685,6 +1782,7 @@
     },
     {
       "id": "c6q10",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Empirical rule",
       "difficulty": "记忆",
@@ -1705,6 +1803,7 @@
     },
     {
       "id": "c6q11",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Normal properties",
       "difficulty": "理解",
@@ -1725,6 +1824,7 @@
     },
     {
       "id": "c6q12",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Normal properties",
       "difficulty": "理解",
@@ -1745,6 +1845,7 @@
     },
     {
       "id": "c6q13",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Normality plots",
       "difficulty": "理解",
@@ -1765,6 +1866,7 @@
     },
     {
       "id": "c6q14",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Standard normal",
       "difficulty": "应用",
@@ -1785,6 +1887,7 @@
     },
     {
       "id": "c6q15",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Continuous variables",
       "difficulty": "记忆",
@@ -1805,6 +1908,7 @@
     },
     {
       "id": "c1e1",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Variables & scales",
       "difficulty": "应用",
@@ -1819,6 +1923,7 @@
     },
     {
       "id": "c1e2",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Sampling & survey errors",
       "difficulty": "应用",
@@ -1833,6 +1938,7 @@
     },
     {
       "id": "c1e3",
+      "course": "BUS1102",
       "chapter": "Ch1 · Defining and Collecting Data",
       "topic": "Data sources & DCOVA",
       "difficulty": "应用",
@@ -1847,6 +1953,7 @@
     },
     {
       "id": "c2e1",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Frequency distribution",
       "difficulty": "应用",
@@ -1861,6 +1968,7 @@
     },
     {
       "id": "c2e2",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Contingency table",
       "difficulty": "应用",
@@ -1875,6 +1983,7 @@
     },
     {
       "id": "c2e3",
+      "course": "BUS1102",
       "chapter": "Ch2 · Organizing and Visualizing Variables",
       "topic": "Pareto chart",
       "difficulty": "应用",
@@ -1889,6 +1998,7 @@
     },
     {
       "id": "c3e1",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "Mean, SD and CV",
       "difficulty": "应用",
@@ -1903,6 +2013,7 @@
     },
     {
       "id": "c3e2",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "Coefficient of variation",
       "difficulty": "应用",
@@ -1917,6 +2028,7 @@
     },
     {
       "id": "c3e3",
+      "course": "BUS1102",
       "chapter": "Ch3 · Numerical Descriptive Measures",
       "topic": "Grouped data",
       "difficulty": "应用",
@@ -1931,6 +2043,7 @@
     },
     {
       "id": "c4e1",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Contingency & conditional probability",
       "difficulty": "应用",
@@ -1945,6 +2058,7 @@
     },
     {
       "id": "c4e2",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Bayes theorem",
       "difficulty": "应用",
@@ -1959,6 +2073,7 @@
     },
     {
       "id": "c4e3",
+      "course": "BUS1102",
       "chapter": "Ch4 · Basic Probability",
       "topic": "Counting rules",
       "difficulty": "应用",
@@ -1973,6 +2088,7 @@
     },
     {
       "id": "c5e1",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Binomial",
       "difficulty": "应用",
@@ -1987,6 +2103,7 @@
     },
     {
       "id": "c5e2",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Poisson",
       "difficulty": "应用",
@@ -2001,6 +2118,7 @@
     },
     {
       "id": "c5e3",
+      "course": "BUS1102",
       "chapter": "Ch5 · Discrete Probability Distributions",
       "topic": "Expected value & variance",
       "difficulty": "应用",
@@ -2015,6 +2133,7 @@
     },
     {
       "id": "c6e1",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Normal probabilities",
       "difficulty": "应用",
@@ -2029,6 +2148,7 @@
     },
     {
       "id": "c6e2",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Finding X from a probability",
       "difficulty": "应用",
@@ -2043,6 +2163,7 @@
     },
     {
       "id": "c6e3",
+      "course": "BUS1102",
       "chapter": "Ch6 · The Normal Distribution",
       "topic": "Empirical rule vs Chebyshev",
       "difficulty": "应用",
@@ -2053,6 +2174,2274 @@
       "model": "(a) 4% and 12% are μ ± 2σ. For a normal distribution, about 95.4% of months lie in this interval (empirical rule: 68.3 / 95.4 / 99.7).\n\n(b) With k = 2, Chebyshev guarantees at least 1 − 1/k² = 1 − 0.25 = 75% of observations, whatever the shape of the distribution.\n\n(c) The empirical rule uses the specific shape of the normal curve, so it can give a precise percentage; Chebyshev makes no assumption about shape and therefore gives only a conservative lower bound.\n（经验法则依赖正态形状，给出精确比例；切比雪夫对任何分布都成立，但只是下界。）",
       "explain": "(a) 4% and 12% are μ ± 2σ. For a normal distribution, about 95.4% of months lie in this interval (empirical rule: 68.3 / 95.4 / 99.7).\n\n(b) With k = 2, Chebyshev guarantees at least 1 − 1/k² = 1 − 0.25 = 75% of observations, whatever the shape of the distribution.\n\n(c) The empirical rule uses the specific shape of the normal curve, so it can give a precise percentage; Chebyshev makes no assumption about shape and therefore gives only a conservative lower bound.\n（经验法则依赖正态形状，给出精确比例；切比雪夫对任何分布都成立，但只是下界。）",
       "source": "BUS1102 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e1q01",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "Scarcity",
+      "difficulty": "记忆",
+      "stem": "Scarcity means that:",
+      "type": "single",
+      "options": [
+        "Governments must allocate all resources",
+        "Some people are poor while others are rich",
+        "Our wants exceed the resources available to satisfy them",
+        "Resources are free and unlimited"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Scarcity: wants exceed what we can get with limited resources → we must choose. 稀缺＝欲望超过可用资源，因此必须选择。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q02",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "Definition of economics",
+      "difficulty": "记忆",
+      "stem": "Economics is best defined as the social science that studies:",
+      "type": "single",
+      "options": [
+        "The accounting records of firms",
+        "How to make money in financial markets",
+        "The choices individuals, businesses, governments and societies make to cope with scarcity",
+        "How to eliminate scarcity permanently"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Economics studies the choices made to cope with scarcity, and the incentives that influence those choices. 经济学研究在稀缺下的选择与激励。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q03",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "Micro vs macro",
+      "difficulty": "理解",
+      "stem": "Which of the following is a microeconomic question?",
+      "type": "single",
+      "options": [
+        "How does a tax on sugary drinks change the quantity of soft drinks sold?",
+        "What determines a country’s unemployment rate?",
+        "Why does the average price level rise this year?",
+        "Why does national output grow faster in some years?"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Microeconomics studies individual choices and single markets; macro studies economy-wide variables. 微观＝个体与单个市场；宏观＝整体变量。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q04",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "Opportunity cost",
+      "difficulty": "理解",
+      "stem": "The opportunity cost of going to university is:",
+      "type": "single",
+      "options": [
+        "Zero, because education is an investment",
+        "The value of the best alternative you give up, including the income you could have earned",
+        "The total amount you spend on books",
+        "The tuition fee only"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Opportunity cost = the highest-valued alternative forgone, including forgone earnings. 机会成本＝放弃的最高价值选项（含放弃的工资）。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q05",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "Factors of production",
+      "difficulty": "记忆",
+      "stem": "Which of the following is NOT one of the four factors of production?",
+      "type": "single",
+      "options": [
+        "Labour",
+        "Land",
+        "Money",
+        "Entrepreneurship"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "The factors are land, labour, capital and entrepreneurship; money is a medium of exchange, not a factor. 生产要素：土地、劳动、资本、企业家才能；货币不是生产要素。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q06",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "Human capital",
+      "difficulty": "理解",
+      "stem": "Human capital refers to:",
+      "type": "single",
+      "options": [
+        "The wages paid to workers",
+        "The machines workers use",
+        "The knowledge and skills people acquire from education and training",
+        "The number of hours workers supply"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Human capital = the quality of labour, built through education, training and experience. 人力资本＝教育训练获得的知识与技能。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q07",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "PPF",
+      "difficulty": "理解",
+      "stem": "A point inside the production possibilities frontier is:",
+      "type": "single",
+      "options": [
+        "Unattainable",
+        "Attainable but inefficient",
+        "Attainable and efficient",
+        "The maximum possible output"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Inside the PPF resources are underused, so the point is attainable but inefficient. PPF 内部＝可达到但无效率。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q08",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "PPF",
+      "difficulty": "理解",
+      "stem": "A point outside the production possibilities frontier is:",
+      "type": "single",
+      "options": [
+        "A point of zero opportunity cost",
+        "Always the efficient point",
+        "Unattainable with current resources and technology",
+        "Attainable if we use resources efficiently"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Beyond the frontier cannot be produced with current resources and technology. 超过边界＝现有资源与技术下无法达到。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q09",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "PPF",
+      "difficulty": "应用",
+      "stem": "The PPF bows outward (is concave) mainly because:",
+      "type": "single",
+      "options": [
+        "Technology is improving",
+        "Opportunity cost increases as more of a good is produced",
+        "Resources are identical in all uses",
+        "Some resources are unemployed"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Increasing opportunity cost gives the outward-bowed shape. 机会成本递增导致 PPF 向外凸。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q10",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "Marginal analysis",
+      "difficulty": "理解",
+      "stem": "A rational choice compares:",
+      "type": "single",
+      "options": [
+        "Average benefit with average cost",
+        "Price with quantity",
+        "Marginal benefit with marginal cost",
+        "Total benefit with total cost only"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Choose more if marginal benefit exceeds marginal cost. 理性选择比较边际收益与边际成本。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q11",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "Economic growth",
+      "difficulty": "理解",
+      "stem": "Economic growth is represented by:",
+      "type": "single",
+      "options": [
+        "An outward shift of the PPF",
+        "A movement along the PPF",
+        "A point inside the PPF",
+        "A downward shift of the PPF"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Growth expands production possibilities, shifting the PPF outward. 经济增长＝PPF 外移。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q12",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "Gains from trade",
+      "difficulty": "理解",
+      "stem": "Gains from trade arise mainly because:",
+      "type": "single",
+      "options": [
+        "One party can exploit the other",
+        "Resources are unlimited",
+        "People specialise in activities where they have a comparative advantage",
+        "Governments set prices"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Specialisation according to comparative advantage raises total output, so both sides gain. 按比较优势专业化，双方都能获益。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q13",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "Institutions",
+      "difficulty": "理解",
+      "stem": "Private property rights encourage efficiency because they:",
+      "type": "single",
+      "options": [
+        "Give owners an incentive to use and maintain resources well",
+        "Eliminate all market failures",
+        "Guarantee equal incomes",
+        "Prevent voluntary exchange"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Secure property rights create incentives to invest, maintain and trade. 产权带来投资与维护的激励。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q14",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "Positive vs normative",
+      "difficulty": "理解",
+      "stem": "Which statement is normative?",
+      "type": "single",
+      "options": [
+        "The unemployment rate rose last year",
+        "The government should raise the minimum wage to reduce poverty",
+        "A minimum wage above equilibrium creates unemployment",
+        "Raising the minimum wage reduces employment by 2%"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Normative statements are value judgements (\"should\"); positive statements are testable facts. 规范陈述含「应该」，是价值判断。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q15",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "Ceteris paribus",
+      "difficulty": "记忆",
+      "stem": "\"Other things remaining the same\" is the assumption used to:",
+      "type": "single",
+      "options": [
+        "Eliminate scarcity",
+        "Isolate the effect of one variable at a time",
+        "Measure total output",
+        "Compare different countries"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Ceteris paribus lets us isolate one influence at a time. 其他条件不变，用于分离单一变量的影响。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q16",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "Self-interest",
+      "difficulty": "理解",
+      "stem": "Self-interested choices:",
+      "type": "single",
+      "options": [
+        "Are made by people pursuing their own goals",
+        "Always harm the social interest",
+        "Are illegal in market economies",
+        "Ignore costs and benefits"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Self-interest is about pursuing your own goals; it may or may not promote the social interest. 自利≠自私，也未必损害社会利益。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q17",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "What, how, for whom",
+      "difficulty": "记忆",
+      "stem": "The question \"For whom are goods and services produced?\" is about:",
+      "type": "single",
+      "options": [
+        "Who gets to consume them",
+        "When to produce them",
+        "How to produce them",
+        "Which goods to produce"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "What = which goods; how = method of production; for whom = distribution. 为谁生产＝分配问题。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e1q18",
+      "course": "BUS2105",
+      "chapter": "Ch1 · What is Economics?",
+      "topic": "Incentives",
+      "difficulty": "应用",
+      "stem": "A rise in the price of petrol leads many drivers to buy smaller cars. This is best described as:",
+      "type": "single",
+      "options": [
+        "A change in preferences only",
+        "A response to incentives",
+        "A normative statement",
+        "An increase in scarcity of cars"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Prices are incentives; people adjust choices as costs change. 价格是激励，人们随成本调整选择。",
+      "source": "BUS2105 slides · Ch1",
+      "lang": "en"
+    },
+    {
+      "id": "e3q01",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Markets",
+      "difficulty": "记忆",
+      "stem": "A market is:",
+      "type": "single",
+      "options": [
+        "A group of firms that agree on output",
+        "A government agency that sets prices",
+        "A physical building where goods are sold",
+        "Any arrangement that brings buyers and sellers together to exchange"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "A market is any arrangement enabling buyers and sellers to get information and trade. 市场是买卖双方交易的安排，不一定是实体场所。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q02",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Law of demand",
+      "difficulty": "记忆",
+      "stem": "The law of demand states that, other things remaining the same:",
+      "type": "single",
+      "options": [
+        "As price rises, quantity demanded rises",
+        "As income rises, quantity demanded falls",
+        "As price rises, quantity demanded falls",
+        "As price falls, supply falls"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Price up → quantity demanded down (inverse relationship). 价格上升，需求量下降。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q03",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Substitution effect",
+      "difficulty": "理解",
+      "stem": "When the price of a good rises, the substitution effect causes consumers to:",
+      "type": "single",
+      "options": [
+        "Increase their income",
+        "Buy less of it and more of substitutes",
+        "Buy the same quantity",
+        "Buy more of that good"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "The good is now relatively more expensive, so consumers substitute other goods. 替代效应：相对变贵，转向替代品。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q04",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Income effect",
+      "difficulty": "理解",
+      "stem": "For a normal good, a fall in price raises the quantity demanded partly because:",
+      "type": "single",
+      "options": [
+        "Consumers’ nominal income falls",
+        "Suppliers produce less",
+        "The good becomes an inferior good",
+        "Consumers’ real income rises"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "A lower price raises real income, so consumers buy more of a normal good. 价格下降提高实际收入，正常品需求增加。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q05",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Demand curve",
+      "difficulty": "理解",
+      "stem": "A demand curve shows:",
+      "type": "single",
+      "options": [
+        "The relationship between income and quantity demanded",
+        "The quantity supplied at each price",
+        "The relationship between price and quantity demanded, other things constant",
+        "The cost of producing each unit"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Demand curve: price vs quantity demanded, ceteris paribus. 需求曲线：价格与需求量的关系。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q06",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Demand shift",
+      "difficulty": "理解",
+      "stem": "A movement along the demand curve is caused by a change in:",
+      "type": "single",
+      "options": [
+        "Preferences",
+        "Income",
+        "The price of a substitute",
+        "The price of the good itself"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Only the good’s own price moves you along the curve; other factors shift it. 自身价格→沿曲线移动；其他因素→整条曲线移动。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q07",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Demand shifters",
+      "difficulty": "理解",
+      "stem": "Which of the following shifts the demand curve for coffee to the right?",
+      "type": "single",
+      "options": [
+        "A fall in the price of coffee",
+        "A rise in the price of tea (a substitute)",
+        "A fall in consumers’ income (coffee is normal)",
+        "A rise in the price of coffee beans"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Higher price of a substitute raises demand for coffee. 替代品涨价→本商品需求增加（右移）。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q08",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Normal goods",
+      "difficulty": "理解",
+      "stem": "An inferior good is one for which:",
+      "type": "single",
+      "options": [
+        "Demand falls when income rises",
+        "Demand is unrelated to price",
+        "Demand rises when income rises",
+        "Quantity supplied falls when price rises"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Inferior good: income up → demand down (e.g., instant noodles). 低档品：收入增加，需求减少。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q09",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Substitutes",
+      "difficulty": "理解",
+      "stem": "Two goods are substitutes if:",
+      "type": "single",
+      "options": [
+        "They are always consumed together",
+        "They have the same price",
+        "A rise in the price of one decreases the demand for the other",
+        "A rise in the price of one increases the demand for the other"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Substitutes are alternatives; complements are consumed together. 替代品：一涨价，另一个需求上升。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q10",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Law of supply",
+      "difficulty": "记忆",
+      "stem": "The law of supply states that, other things remaining the same:",
+      "type": "single",
+      "options": [
+        "As price rises, quantity supplied rises",
+        "Supply is fixed in the short run",
+        "As price rises, quantity supplied falls",
+        "As costs rise, supply rises"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Higher price → higher quantity supplied. 价格上升，供给量上升。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q11",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Supply shifters",
+      "difficulty": "理解",
+      "stem": "Which of the following shifts the supply curve for bread to the left?",
+      "type": "single",
+      "options": [
+        "A fall in the price of flour",
+        "An increase in the number of bakeries",
+        "A rise in the price of bread",
+        "A rise in the wage of bakers"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Higher input costs reduce supply (shift left). 投入成本上升→供给减少（左移）。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q12",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Minimum supply price",
+      "difficulty": "理解",
+      "stem": "The minimum supply price is:",
+      "type": "single",
+      "options": [
+        "The price set by the government",
+        "The lowest price at which a producer is willing to sell an additional unit",
+        "The average cost of production",
+        "The price at which quantity demanded equals zero"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "It equals marginal cost — the lowest price for which the unit will be supplied. 最低供给价格＝边际成本。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q13",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Equilibrium",
+      "difficulty": "理解",
+      "stem": "A market is in equilibrium when:",
+      "type": "single",
+      "options": [
+        "There is no government intervention",
+        "Quantity demanded equals quantity supplied",
+        "Price equals average cost",
+        "Supply equals demand at every price"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Equilibrium: Qd = Qs, so the price has no tendency to change. 均衡：需求量＝供给量。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q14",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Surplus",
+      "difficulty": "应用",
+      "stem": "If the price is above the equilibrium price, there is a:",
+      "type": "single",
+      "options": [
+        "Shortage and price will rise",
+        "Surplus and price will fall",
+        "Surplus and price will rise",
+        "Shortage and price will fall"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Above equilibrium Qs > Qd → surplus → sellers cut price. 价格高于均衡→过剩→降价。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q15",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Shortage",
+      "difficulty": "应用",
+      "stem": "If the price is below the equilibrium price, there is a:",
+      "type": "single",
+      "options": [
+        "Surplus and price will rise",
+        "Shortage and price will rise",
+        "Shortage and price will fall",
+        "Surplus and price will fall"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Below equilibrium Qd > Qs → shortage → buyers bid the price up. 价格低于均衡→短缺→涨价。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q16",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Demand increase",
+      "difficulty": "应用",
+      "stem": "If demand increases and supply does not change, the equilibrium price ___ and the equilibrium quantity ___.",
+      "type": "single",
+      "options": [
+        "rises; falls",
+        "rises; rises",
+        "falls; rises",
+        "falls; falls"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Demand shifts right → price and quantity both rise. 需求右移→价格与数量同时上升。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q17",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Supply increase",
+      "difficulty": "应用",
+      "stem": "If supply increases and demand does not change, the equilibrium price ___ and the equilibrium quantity ___.",
+      "type": "single",
+      "options": [
+        "rises; rises",
+        "rises; falls",
+        "falls; falls",
+        "falls; rises"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Supply shifts right → price falls, quantity rises. 供给右移→价格下降、数量上升。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e3q18",
+      "course": "BUS2105",
+      "chapter": "Ch3 · Demand and Supply",
+      "topic": "Simultaneous shifts",
+      "difficulty": "应用",
+      "stem": "If both demand and supply increase, which outcome is certain?",
+      "type": "single",
+      "options": [
+        "Quantity increases",
+        "Price falls",
+        "Price rises",
+        "Quantity decreases"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Quantity definitely rises; the price change is ambiguous. 数量必增，价格方向不确定。",
+      "source": "BUS2105 slides · Ch3",
+      "lang": "en"
+    },
+    {
+      "id": "e5q01",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Allocation methods",
+      "difficulty": "记忆",
+      "stem": "Which of the following is NOT a resource allocation method discussed in the chapter?",
+      "type": "single",
+      "options": [
+        "Lottery",
+        "Marginal cost pricing",
+        "Market price",
+        "Personal characteristics"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Methods include market price, command, majority rule, contest, first-come, lottery, personal characteristics, force. 配置方式不含「边际成本定价」。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q02",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Market price",
+      "difficulty": "理解",
+      "stem": "When a market allocates a scarce resource, the people who get it are:",
+      "type": "single",
+      "options": [
+        "Those chosen by the government",
+        "Those who are willing and able to pay the price",
+        "Those who need it most",
+        "Those who arrive first"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Market price allocates to those willing and able to pay. 市场按支付意愿与能力分配。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q03",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Command",
+      "difficulty": "理解",
+      "stem": "A command system allocates resources by:",
+      "type": "single",
+      "options": [
+        "The majority vote",
+        "Random draw",
+        "Willingness to pay",
+        "The order of someone in authority"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Command = allocation by order of an authority. 命令制＝按权威者的指令分配。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q04",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Majority rule",
+      "difficulty": "理解",
+      "stem": "Majority rule allocates resources:",
+      "type": "single",
+      "options": [
+        "By personal characteristics",
+        "In the way the majority of voters choose",
+        "To the first person in line",
+        "To the highest bidder"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Majority rule reflects the choice of more than half the voters. 多数票决。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q05",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Contest",
+      "difficulty": "理解",
+      "stem": "Allocating a prize to the winner of a race is an example of allocation by:",
+      "type": "single",
+      "options": [
+        "Command",
+        "Personal characteristics",
+        "Lottery",
+        "Contest"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Contest allocates to the winner. 竞赛。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q06",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "First-come",
+      "difficulty": "理解",
+      "stem": "Queuing for concert tickets is allocation by:",
+      "type": "single",
+      "options": [
+        "Market price",
+        "First-come, first-served",
+        "Lottery",
+        "Majority rule"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "First-come, first-served allocates by time of arrival. 先到先得。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q07",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Lottery",
+      "difficulty": "理解",
+      "stem": "Allocating dormitory rooms by random draw is:",
+      "type": "single",
+      "options": [
+        "A command system",
+        "A lottery",
+        "A contest",
+        "Market price allocation"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Lottery allocates by chance. 抽签。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q08",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Value and willingness to pay",
+      "difficulty": "理解",
+      "stem": "The value of a good to a buyer is:",
+      "type": "single",
+      "options": [
+        "The average price in the market",
+        "The cost of producing it",
+        "The maximum amount the buyer is willing to pay",
+        "The price actually paid"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Value = willingness to pay (marginal benefit). 价值＝支付意愿（边际收益）。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q09",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Consumer surplus",
+      "difficulty": "应用",
+      "stem": "Consumer surplus for one unit is:",
+      "type": "single",
+      "options": [
+        "Price minus marginal cost",
+        "Willingness to pay minus price",
+        "Price minus willingness to pay",
+        "Total utility minus total cost"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "CS = WTP − price paid. 消费者剩余＝愿意支付−实际支付。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q10",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Consumer surplus area",
+      "difficulty": "理解",
+      "stem": "On a demand and supply diagram, consumer surplus is the area:",
+      "type": "single",
+      "options": [
+        "Below the supply curve",
+        "Below the price and above the supply curve",
+        "Above the price and below the demand curve",
+        "Between the demand and supply curves"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "CS is the area under the demand curve above the price. 消费者剩余＝需求曲线下、价格上方的面积。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q11",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Marginal cost",
+      "difficulty": "理解",
+      "stem": "The supply curve is also the:",
+      "type": "single",
+      "options": [
+        "Average cost curve",
+        "Marginal benefit curve",
+        "Marginal cost curve",
+        "Total cost curve"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Supply = marginal cost (minimum supply price). 供给曲线＝边际成本曲线。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q12",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Producer surplus",
+      "difficulty": "应用",
+      "stem": "Producer surplus for one unit is:",
+      "type": "single",
+      "options": [
+        "Willingness to pay minus price",
+        "Price minus average cost",
+        "Price minus marginal cost",
+        "Total revenue minus total cost"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "PS = price − marginal cost. 生产者剩余＝价格−边际成本。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q13",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Total surplus",
+      "difficulty": "理解",
+      "stem": "Total surplus equals:",
+      "type": "single",
+      "options": [
+        "Total revenue minus total cost",
+        "Consumer surplus minus producer surplus",
+        "Marginal benefit minus price",
+        "Consumer surplus plus producer surplus"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Total surplus = CS + PS, maximised at the efficient quantity. 总剩余＝CS＋PS。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q14",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Efficiency",
+      "difficulty": "理解",
+      "stem": "Allocative efficiency occurs when:",
+      "type": "single",
+      "options": [
+        "Quantity is as large as possible",
+        "Consumer surplus is zero",
+        "Marginal social benefit equals marginal social cost",
+        "Price equals average cost"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Efficient when MSB = MSC. 有效率的条件是边际社会收益＝边际社会成本。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q15",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Deadweight loss",
+      "difficulty": "理解",
+      "stem": "Deadweight loss is:",
+      "type": "single",
+      "options": [
+        "The difference between price and average cost",
+        "The cost of producing goods",
+        "A loss of surplus caused by inefficient under- or over-production",
+        "A tax paid by consumers"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "DWL = lost total surplus from inefficient quantity. 无谓损失＝数量无效率造成的剩余损失。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q16",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Market failure",
+      "difficulty": "理解",
+      "stem": "Which of the following is a source of market failure?",
+      "type": "single",
+      "options": [
+        "A price equal to marginal cost",
+        "Perfect competition",
+        "An externality",
+        "Voluntary exchange"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Externalities, public goods, monopoly, taxes and price regulation cause market failure. 外部性是市场失灵来源之一。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q17",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Big tradeoff",
+      "difficulty": "理解",
+      "stem": "The \"big tradeoff\" refers to the conflict between:",
+      "type": "single",
+      "options": [
+        "Demand and supply",
+        "Imports and exports",
+        "Price and quantity",
+        "Efficiency and equity"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Redistributing income to achieve fairness can reduce efficiency. 效率与公平的权衡。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e5q18",
+      "course": "BUS2105",
+      "chapter": "Ch5 · Efficiency and Equity",
+      "topic": "Fairness",
+      "difficulty": "理解",
+      "stem": "The \"fair rules\" view of fairness emphasises:",
+      "type": "single",
+      "options": [
+        "Equal outcomes for everyone",
+        "Equality of opportunity and private property rights",
+        "Equality of income",
+        "Government ownership of all resources"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Fair rules = equality of opportunity, not equality of income. 规则公平＝机会平等，而非结果平等。",
+      "source": "BUS2105 slides · Ch5",
+      "lang": "en"
+    },
+    {
+      "id": "e6q01",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Price ceiling",
+      "difficulty": "记忆",
+      "stem": "A price ceiling is a regulation that makes it illegal to:",
+      "type": "single",
+      "options": [
+        "Import a good",
+        "Charge a price lower than a specified level",
+        "Sell a good without a licence",
+        "Charge a price higher than a specified level"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "A price ceiling (cap) sets a legal maximum price. 价格上限＝法定最高价。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q02",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Rent ceiling",
+      "difficulty": "应用",
+      "stem": "A rent ceiling set below the equilibrium rent creates:",
+      "type": "single",
+      "options": [
+        "An increase in housing supply",
+        "A shortage of housing",
+        "A surplus of housing",
+        "No change in the market"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Below equilibrium, quantity demanded exceeds quantity supplied → shortage. 低于均衡→需求>供给→短缺。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q03",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Search activity",
+      "difficulty": "理解",
+      "stem": "When a rent ceiling creates a shortage, one consequence is:",
+      "type": "single",
+      "options": [
+        "A rise in the quantity supplied",
+        "Increased search activity",
+        "Decreased search activity",
+        "A fall in the quantity demanded"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Tenants spend more time searching because the price cannot allocate the units. 价格不能出清，找房时间增加。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q04",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Black market",
+      "difficulty": "理解",
+      "stem": "A black market is:",
+      "type": "single",
+      "options": [
+        "A market where illegal goods are always sold",
+        "An illegal market in which the price exceeds the legal price ceiling",
+        "A market with no buyers",
+        "A government-run market"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Black market = illegal trading at prices above the ceiling. 黑市＝高于上限的非法交易。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q05",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Inefficiency",
+      "difficulty": "理解",
+      "stem": "An effective rent ceiling is inefficient because it:",
+      "type": "single",
+      "options": [
+        "Increases the quantity of housing",
+        "Decreases the quantity supplied below the efficient level",
+        "Has no effect on surplus",
+        "Raises the total surplus"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "The quantity traded falls below the efficient level → deadweight loss. 数量低于有效水平→无谓损失。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q06",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Price floor",
+      "difficulty": "记忆",
+      "stem": "A price floor is a regulation that makes it illegal to:",
+      "type": "single",
+      "options": [
+        "Charge a price above a specified level",
+        "Trade at a price below a specified level",
+        "Sell imported goods",
+        "Produce more than a quota"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "A price floor sets a legal minimum price. 价格下限＝法定最低价。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q07",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Minimum wage",
+      "difficulty": "应用",
+      "stem": "A minimum wage set above the equilibrium wage creates:",
+      "type": "single",
+      "options": [
+        "A shortage of labour",
+        "An increase in employment",
+        "Unemployment (a surplus of labour)",
+        "No effect on the labour market"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Above equilibrium, quantity of labour supplied exceeds quantity demanded → unemployment. 高于均衡→劳动供给>需求→失业。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q08",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Minimum wage efficiency",
+      "difficulty": "理解",
+      "stem": "An effective minimum wage is inefficient because:",
+      "type": "single",
+      "options": [
+        "It decreases employment below the efficient level",
+        "It lowers wages for all workers",
+        "It increases the quantity of labour employed",
+        "It increases total surplus"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Fewer workers are employed than the efficient quantity → lost surplus. 就业量低于有效水平。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q09",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Tax incidence",
+      "difficulty": "记忆",
+      "stem": "Tax incidence refers to:",
+      "type": "single",
+      "options": [
+        "The division of the tax burden between buyers and sellers",
+        "The amount of tax revenue collected",
+        "The cost of collecting taxes",
+        "The tax rate set by government"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Incidence = who bears the burden (who pays more/gets less). 税负归宿＝买卖双方分担。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q10",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Tax equivalence",
+      "difficulty": "理解",
+      "stem": "A tax of $3 per unit on sellers has the same effect on price and quantity as:",
+      "type": "single",
+      "options": [
+        "A $3 tax on buyers",
+        "A price ceiling of $3",
+        "A $3 subsidy to buyers",
+        "A quota of 3 units"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "A tax on sellers and an equal tax on buyers are equivalent. 对卖方征税与对买方征同额税等价。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q11",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Tax wedge",
+      "difficulty": "理解",
+      "stem": "With a tax, the price paid by buyers ___ the price received by sellers by the amount of the tax.",
+      "type": "single",
+      "options": [
+        "equals",
+        "is less than",
+        "exceeds",
+        "is unrelated to"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "The tax drives a wedge: buyer price = seller price + tax. 税楔：买方价＝卖方价＋税。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q12",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Tax and quantity",
+      "difficulty": "应用",
+      "stem": "A tax on a good:",
+      "type": "single",
+      "options": [
+        "Raises the quantity traded",
+        "Lowers the quantity traded",
+        "Has no effect on quantity",
+        "Raises both price and quantity"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Tax raises the price to buyers and lowers the price to sellers → smaller quantity. 税使交易量减少。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q13",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Elasticity and incidence",
+      "difficulty": "理解",
+      "stem": "The burden of a tax falls more heavily on:",
+      "type": "single",
+      "options": [
+        "The side of the market that is more elastic",
+        "Always the sellers",
+        "The side of the market that is less elastic",
+        "Always the buyers"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "The less elastic side bears more of the tax. 弹性小的一方承担更多税负。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q14",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Perfectly inelastic demand",
+      "difficulty": "应用",
+      "stem": "If demand is perfectly inelastic, a tax is paid:",
+      "type": "single",
+      "options": [
+        "Entirely by buyers",
+        "Equally by both",
+        "By neither",
+        "Entirely by sellers"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Buyers cannot change quantity, so the price rises by the full tax. 需求完全无弹性→买方承担全部税。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q15",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Perfectly elastic demand",
+      "difficulty": "应用",
+      "stem": "If demand is perfectly elastic, a tax is paid:",
+      "type": "single",
+      "options": [
+        "Entirely by buyers",
+        "Entirely by sellers",
+        "By the government",
+        "Equally by both"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Any price rise loses all buyers, so sellers absorb the tax. 需求完全有弹性→卖方承担。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q16",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Production quota",
+      "difficulty": "应用",
+      "stem": "A production quota set below the equilibrium quantity:",
+      "type": "single",
+      "options": [
+        "Raises the price and lowers the quantity",
+        "Has no effect",
+        "Lowers the price and raises the quantity",
+        "Raises both price and quantity"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Restricting supply raises price and reduces quantity. 配额限制供给→价格上升、数量下降。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q17",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Subsidy",
+      "difficulty": "应用",
+      "stem": "A subsidy paid to producers:",
+      "type": "single",
+      "options": [
+        "Reduces the quantity produced",
+        "Increases tax revenue",
+        "Lowers the price paid by consumers and raises quantity",
+        "Raises the price paid by consumers"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "A subsidy shifts supply right → lower price, larger quantity (overproduction). 补贴→价格下降、产量增加。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e6q18",
+      "course": "BUS2105",
+      "chapter": "Ch6 · Government Actions in Markets",
+      "topic": "Fairness in taxes",
+      "difficulty": "理解",
+      "stem": "The benefits principle of taxation says that people should pay taxes:",
+      "type": "single",
+      "options": [
+        "In proportion to their income",
+        "Equally regardless of income",
+        "Only if they own property",
+        "According to the benefits they receive from public services"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Benefits principle: pay in line with benefits received. 受益原则。",
+      "source": "BUS2105 slides · Ch6",
+      "lang": "en"
+    },
+    {
+      "id": "e8q01",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Budget line",
+      "difficulty": "理解",
+      "stem": "A consumer’s budget line shows:",
+      "type": "single",
+      "options": [
+        "The combinations that give equal utility",
+        "The maximum utility achievable",
+        "The quantities supplied at each price",
+        "The combinations of goods the consumer can afford given income and prices"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Budget line = affordable combinations. 预算线＝可负担的组合。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q02",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Budget line slope",
+      "difficulty": "应用",
+      "stem": "Lisa has $40, a movie costs $8 and a case of soda costs $4. The maximum number of movies she can buy is:",
+      "type": "single",
+      "options": [
+        "10",
+        "8",
+        "5",
+        "40"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "40 ÷ 8 = 5 movies. 全部收入买电影：40/8=5。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q03",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Budget line slope",
+      "difficulty": "应用",
+      "stem": "With the same $40, $8 per movie and $4 per case of soda, the opportunity cost of one movie is:",
+      "type": "single",
+      "options": [
+        "0.5 case of soda",
+        "2 cases of soda",
+        "$8",
+        "$4"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "One movie costs $8 = 2 cases of soda. 一部电影的机会成本＝2 箱汽水。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q04",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Income change",
+      "difficulty": "理解",
+      "stem": "If a consumer’s income rises while prices stay constant, the budget line:",
+      "type": "single",
+      "options": [
+        "Shifts outward parallel to the original line",
+        "Rotates inward",
+        "Becomes steeper",
+        "Does not change"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Higher income shifts the budget line outward in parallel. 收入增加→预算线平行外移。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q05",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Price change",
+      "difficulty": "理解",
+      "stem": "If the price of the good on the x-axis falls, the budget line:",
+      "type": "single",
+      "options": [
+        "Becomes vertical",
+        "Rotates inward around the x-intercept",
+        "Rotates outward around the y-intercept",
+        "Shifts outward in parallel"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "The x-intercept increases; the y-intercept is unchanged → rotation. 横轴商品降价→绕纵轴截距外旋。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q06",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Total utility",
+      "difficulty": "记忆",
+      "stem": "Total utility is:",
+      "type": "single",
+      "options": [
+        "The price of the good",
+        "The total satisfaction from consuming a given quantity",
+        "Utility per dollar spent",
+        "The extra utility from one more unit"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "TU = total satisfaction from the quantity consumed. 总效用＝消费某数量的总满足。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q07",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Marginal utility",
+      "difficulty": "应用",
+      "stem": "If total utility rises from 30 to 42 when consumption increases from 3 to 4 units, marginal utility is:",
+      "type": "single",
+      "options": [
+        "12",
+        "42",
+        "4",
+        "3"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "MU = ΔTU/ΔQ = 12/1 = 12. 边际效用＝总效用增量。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q08",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Diminishing MU",
+      "difficulty": "理解",
+      "stem": "The principle of diminishing marginal utility says that as consumption of a good increases:",
+      "type": "single",
+      "options": [
+        "Marginal utility falls",
+        "Marginal utility rises",
+        "Total utility becomes negative",
+        "Total utility falls"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Each extra unit adds less satisfaction. 边际效用递减。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q09",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Utility maximisation",
+      "difficulty": "理解",
+      "stem": "A consumer maximises total utility when:",
+      "type": "single",
+      "options": [
+        "Total utility is zero",
+        "Marginal utility is zero for all goods",
+        "Spending is equal on all goods",
+        "Marginal utility per dollar is equal for all goods"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "MUx/Px = MUy/Py at the best affordable combination. 每元钱边际效用相等。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q10",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Utility maximisation",
+      "difficulty": "应用",
+      "stem": "If MU of soda per dollar is 10 and MU of movies per dollar is 6, the consumer should:",
+      "type": "single",
+      "options": [
+        "Buy more soda and fewer movies",
+        "Keep the same combination",
+        "Buy more movies and less soda",
+        "Spend nothing"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Shift spending toward the good with higher MU per dollar. 增加每元边际效用更高的商品。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q11",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Demand curve",
+      "difficulty": "理解",
+      "stem": "Marginal utility theory predicts a downward-sloping demand curve because:",
+      "type": "single",
+      "options": [
+        "Marginal utility rises with quantity",
+        "A higher price requires a higher marginal utility per dollar to justify buying the good",
+        "Consumers ignore prices",
+        "Higher prices reduce income"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "At a higher price, the good must deliver more MU per dollar to stay in the optimal bundle → less bought. 价格越高，需更高 MU/$ 才值得买，故需求量减少。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q12",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Price change effects",
+      "difficulty": "理解",
+      "stem": "When the price of a good falls, the quantity demanded increases because of:",
+      "type": "single",
+      "options": [
+        "Only the income effect",
+        "Neither effect",
+        "The substitution effect and the income effect",
+        "Only the substitution effect"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Both effects reinforce each other for a normal good. 替代效应＋收入效应。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q13",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Paradox of value",
+      "difficulty": "理解",
+      "stem": "The paradox of value (water is cheap, diamonds are expensive) is resolved by:",
+      "type": "single",
+      "options": [
+        "Marginal utility determines price",
+        "Diamonds have no utility",
+        "Total utility determines price",
+        "Water has no utility"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Price reflects marginal utility, not total utility; water has high TU but low MU. 价格由边际效用决定。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q14",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Consumer surplus",
+      "difficulty": "理解",
+      "stem": "Consumer surplus equals:",
+      "type": "single",
+      "options": [
+        "Total utility plus price",
+        "Marginal utility minus price",
+        "Total utility minus total expenditure",
+        "Price minus marginal cost"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "CS = total value (TU) − amount paid. 消费者剩余＝总价值−总支出。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q15",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Behavioural economics",
+      "difficulty": "记忆",
+      "stem": "Bounded rationality means that people:",
+      "type": "single",
+      "options": [
+        "Make choices that are rational within the limits of their information and ability",
+        "Always calculate the optimal choice",
+        "Have unlimited willpower",
+        "Never respond to incentives"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Bounded rationality: rational but limited by information, time and cognitive ability. 有限理性。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q16",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Behavioural economics",
+      "difficulty": "理解",
+      "stem": "Bounded willpower refers to:",
+      "type": "single",
+      "options": [
+        "The tendency to give in to short-term temptations at the expense of long-term goals",
+        "The habit of saving too much",
+        "The failure to compare marginal utilities",
+        "The inability to understand prices"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Bounded willpower: we lack self-control and may regret later. 意志力有限。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q17",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Neuroeconomics",
+      "difficulty": "记忆",
+      "stem": "Neuroeconomics studies:",
+      "type": "single",
+      "options": [
+        "How firms set prices",
+        "How governments collect taxes",
+        "How the brain makes economic choices",
+        "How central banks set interest rates"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Neuroeconomics uses brain activity to understand choice. 神经经济学研究决策的脑机制。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e8q18",
+      "course": "BUS2105",
+      "chapter": "Ch8 · Utility and Demand",
+      "topic": "Endowment effect",
+      "difficulty": "理解",
+      "stem": "The endowment effect is the tendency for people to:",
+      "type": "single",
+      "options": [
+        "Undervalue goods they own",
+        "Value a good more highly once they own it",
+        "Ignore sunk costs",
+        "Prefer immediate rewards"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Owners demand more to give up a good than they would pay to acquire it. 禀赋效应：拥有后估值更高。",
+      "source": "BUS2105 slides · Ch8",
+      "lang": "en"
+    },
+    {
+      "id": "e9q01",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Budget equation",
+      "difficulty": "理解",
+      "stem": "The budget equation PSQS + PMQM = Y states that:",
+      "type": "single",
+      "options": [
+        "Prices are fixed by the government",
+        "Income equals the sum of prices",
+        "Utility equals income",
+        "Expenditure on soda plus expenditure on movies equals income"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Total spending on the two goods equals income. 两种商品支出之和＝收入。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q02",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Real income",
+      "difficulty": "理解",
+      "stem": "Real income is:",
+      "type": "single",
+      "options": [
+        "Income measured in dollars",
+        "Income expressed as the quantity of goods it can buy",
+        "The income earned in the current year",
+        "Income after tax"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Real income = purchasing power in goods. 实际收入＝能买到的商品数量。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q03",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Indifference curve",
+      "difficulty": "理解",
+      "stem": "An indifference curve shows:",
+      "type": "single",
+      "options": [
+        "The quantities supplied at each price",
+        "The combinations the consumer can afford",
+        "The maximum utility possible",
+        "Combinations of goods among which the consumer is indifferent"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "All points on an indifference curve give the same utility. 无差异曲线上效用相同。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q04",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Preference map",
+      "difficulty": "理解",
+      "stem": "A preference map is:",
+      "type": "single",
+      "options": [
+        "A series of indifference curves",
+        "A production possibilities frontier",
+        "A demand curve",
+        "A budget line"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "A map of indifference curves, each giving a different utility level. 一组无差异曲线。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q05",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Indifference curves",
+      "difficulty": "理解",
+      "stem": "A consumer prefers any point on a higher indifference curve because:",
+      "type": "single",
+      "options": [
+        "It lies on the budget line",
+        "It is cheaper",
+        "It brings more total utility",
+        "It has a lower marginal rate of substitution"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Higher indifference curves represent higher utility. 越高的无差异曲线效用越大。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q06",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Indifference curves",
+      "difficulty": "理解",
+      "stem": "Indifference curves cannot cross because:",
+      "type": "single",
+      "options": [
+        "They would have different slopes",
+        "A point could not have two different utility levels",
+        "The budget line would shift",
+        "Utility would be negative"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Crossing would violate the assumption that preferences are consistent. 相交会导致同一组合两种效用水平。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q07",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "MRS",
+      "difficulty": "记忆",
+      "stem": "The marginal rate of substitution (MRS) measures:",
+      "type": "single",
+      "options": [
+        "The total utility of a bundle",
+        "The price ratio of the two goods",
+        "The slope of the budget line",
+        "The rate at which a consumer will give up one good for another while staying indifferent"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "MRS = slope of the indifference curve (magnitude): the trade-off keeping utility constant. 边际替代率＝无差异曲线斜率的绝对值。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q08",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Diminishing MRS",
+      "difficulty": "理解",
+      "stem": "A diminishing marginal rate of substitution means that indifference curves are:",
+      "type": "single",
+      "options": [
+        "Parallel to the budget line",
+        "Bowed toward the origin (convex)",
+        "Upward sloping",
+        "Straight lines"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Diminishing MRS → convex indifference curves. 边际替代率递减→无差异曲线凸向原点。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q09",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Perfect substitutes",
+      "difficulty": "理解",
+      "stem": "If two goods are perfect substitutes, the indifference curves are:",
+      "type": "single",
+      "options": [
+        "Right-angled",
+        "Straight lines",
+        "Convex to the origin",
+        "Vertical"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "Constant MRS → straight-line indifference curves. 完全替代→直线。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q10",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Perfect complements",
+      "difficulty": "理解",
+      "stem": "If two goods are perfect complements, the indifference curves are:",
+      "type": "single",
+      "options": [
+        "Upward sloping",
+        "Convex",
+        "Straight lines",
+        "Right-angled (L-shaped)"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "They are consumed together in fixed proportions → L-shaped. 完全互补→L 形。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q11",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Best affordable choice",
+      "difficulty": "理解",
+      "stem": "The best affordable point is where:",
+      "type": "single",
+      "options": [
+        "Marginal utility is zero",
+        "Two indifference curves cross",
+        "The budget line cuts the indifference curve",
+        "The indifference curve is tangent to the budget line"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "Tangency: MRS = relative price and the point is on the budget line. 相切点：MRS＝价格比。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q12",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Price change",
+      "difficulty": "应用",
+      "stem": "When the price of a good falls, the total change in quantity demanded is the sum of:",
+      "type": "single",
+      "options": [
+        "The substitution effect and the income effect",
+        "The price effect and the budget effect",
+        "Only the income effect",
+        "Only the substitution effect"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Price effect = substitution effect + income effect. 价格效应＝替代效应＋收入效应。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q13",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Substitution effect",
+      "difficulty": "理解",
+      "stem": "The substitution effect of a price rise is always:",
+      "type": "single",
+      "options": [
+        "To increase the quantity demanded",
+        "Equal to the income effect",
+        "Zero",
+        "To decrease the quantity demanded"
+      ],
+      "answer": [
+        3
+      ],
+      "explain": "The direction never varies: higher price → less of that good substituted toward others. 替代效应方向恒为负。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q14",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Income effect",
+      "difficulty": "理解",
+      "stem": "For a normal good, the income effect of a price rise:",
+      "type": "single",
+      "options": [
+        "Decreases quantity demanded",
+        "Is zero",
+        "Offsets the substitution effect",
+        "Increases quantity demanded"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Higher price lowers real income → buy less of a normal good. 正常品：价格上升→实际收入下降→需求减少。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q15",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Inferior goods",
+      "difficulty": "理解",
+      "stem": "For an inferior good, the income effect of a price rise:",
+      "type": "single",
+      "options": [
+        "Opposes the substitution effect",
+        "Is always zero",
+        "Is larger in the same direction",
+        "Reinforces the substitution effect"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Higher price lowers real income, and for an inferior good that raises quantity demanded. 低档品的收入效应与替代效应方向相反。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q16",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Giffen good",
+      "difficulty": "理解",
+      "stem": "A Giffen good is one for which:",
+      "type": "single",
+      "options": [
+        "The substitution effect is zero",
+        "Demand rises when price rises",
+        "The good has no substitutes",
+        "Demand rises when income rises"
+      ],
+      "answer": [
+        1
+      ],
+      "explain": "For a Giffen good the negative income effect dominates the substitution effect. 吉芬商品：收入效应压过替代效应，价格上升需求反而增加。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q17",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Demand curve derivation",
+      "difficulty": "理解",
+      "stem": "The demand curve is derived from:",
+      "type": "single",
+      "options": [
+        "The production possibilities frontier",
+        "The supply curve",
+        "The best affordable points as the price changes",
+        "The budget line alone"
+      ],
+      "answer": [
+        2
+      ],
+      "explain": "Plotting the best affordable quantity at each price gives the demand curve. 由不同价格下的最优消费量推导需求曲线。",
+      "source": "BUS2105 slides · Ch9",
+      "lang": "en"
+    },
+    {
+      "id": "e9q18",
+      "course": "BUS2105",
+      "chapter": "Ch9 · Possibilities, Preferences, and Choices",
+      "topic": "Income change",
+      "difficulty": "应用",
+      "stem": "If income rises and both goods are normal, the consumer:",
+      "type": "single",
+      "options": [
+        "Moves to a higher indifference curve",
+        "Faces a steeper budget line",
+        "Stays at the same point",
+        "Moves along the same indifference curve"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Higher income shifts the budget line out → tangency on a higher indifference curve. 收入增加→预算线外移→更高无差异曲线。",
+      "source": "BUS2105 slides · Ch9",
       "lang": "en"
     }
   ]

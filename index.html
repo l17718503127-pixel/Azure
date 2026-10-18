@@ -128,6 +128,8 @@ button{font-family:inherit}
   white-space:nowrap;
 }
 .chip b{font-weight:750;color:var(--text)}
+.chip.on{background:var(--brand-soft);border-color:color-mix(in srgb, var(--brand) 45%, var(--line));color:var(--brand)}
+.chip.on b{color:var(--brand)}
 .icon-btn{
   width:32px;height:32px;border-radius:9px;border:1px solid var(--line);background:var(--surface);
   color:var(--text-soft);cursor:pointer;display:grid;place-items:center;font-size:15px;transition:.18s;
@@ -1802,6 +1804,8 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       settings: { theme: 'auto' },
       synced: {},
       intro: '',
+      course: '',
+      courses: [],
     };
   }
 
@@ -1818,6 +1822,8 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       if (!Array.isArray(S.notebook)) S.notebook = [];
       if (!Array.isArray(S.history)) S.history = [];
       if (!S.synced || typeof S.synced !== 'object') S.synced = {};
+      if (!Array.isArray(S.courses)) S.courses = [];
+      if (typeof S.course !== 'string') S.course = '';
       if (!S.daily || typeof S.daily !== 'object') S.daily = { date: todayKey(), correct: 0, reviewed: 0, mock: 0 };
     } catch (e) { /* 数据损坏时从空白开始 */ }
   }
@@ -1838,11 +1844,32 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
 
   /* ============================ 题库 ============================ */
 
-  function chapterList() {
+  function activeCourse() {
+    if (S.course) return S.course;
+    return (S.courses[0] && S.courses[0].code) || '';
+  }
+
+  function activeIntro() {
+    const c = (S.courses || []).find((x) => x.code === activeCourse());
+    return (c && c.intro) || S.intro || '';
+  }
+
+  function courseMeta(code) {
+    return (S.courses || []).find((c) => c.code === code) || { code: code, title: code, zh: '' };
+  }
+
+  function chapterKeyOf(q) {
+    return (q.course || '') + '||' + (q.chapter || '未分类');
+  }
+
+  function chapterList(course) {
+    const want = course === undefined ? activeCourse() : course;
     const map = new Map();
     S.bank.forEach((q) => {
-      const key = q.chapter || '未分类';
-      if (!map.has(key)) map.set(key, { title: key, count: 0, topics: new Set() });
+      const c = q.course || '';
+      if (want && c !== want) return;
+      const key = chapterKeyOf(q);
+      if (!map.has(key)) map.set(key, { key: key, course: c, title: q.chapter || '未分类', count: 0, topics: new Set() });
       const m = map.get(key);
       m.count++;
       if (q.topic) m.topics.add(q.topic);
@@ -1850,10 +1877,12 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     return Array.from(map.values());
   }
 
-  function topicList(chapter) {
+  function topicList(chapterKey) {
     const set = new Set();
+    const course = activeCourse();
     S.bank.forEach((q) => {
-      if (chapter !== 'all' && q.chapter !== chapter) return;
+      if (course && (q.course || '') !== course) return;
+      if (chapterKey !== 'all' && chapterKeyOf(q) !== chapterKey) return;
       if (q.topic) set.add(q.topic);
     });
     return Array.from(set);
@@ -1917,12 +1946,12 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
   const ACH = [
     { id: 'first', ico: '🌱', name: '初出茅庐', desc: '完成第一次测试', test: () => S.history.length >= 1 },
     { id: 'combo10', ico: '⚡', name: '连击达人', desc: '达成 10 连击', test: () => S.bestCombo >= 10 },
-    { id: 'chapter90', ico: '🎯', name: '章节大师', desc: '任一章节掌握度达到 90%', test: () => chapterList().some((c) => masteryOf(c.title) >= 90 && (S.chapterStats[c.title] || {}).seen >= 5) },
+    { id: 'chapter90', ico: '🎯', name: '章节大师', desc: '任一章节掌握度达到 90%', test: () => chapterList().some((c) => masteryOf(c.key) >= 90 && (S.chapterStats[c.key] || {}).seen >= 5) },
     { id: 'cleaner', ico: '🧹', name: '错题清道夫', desc: '掌握 20 道错题', test: () => S.masteredCount >= 20 },
     { id: 'exam90', ico: '👑', name: '模拟考王者', desc: '模拟考正确率超过 90%', test: () => S.history.some((h) => h.mode === 'mock' && h.total >= 10 && h.correct / h.total > 0.9) },
     { id: 'streak3', ico: '📅', name: '每日坚持', desc: '连续 3 天学习', test: () => S.streak.days >= 3 },
     { id: 'perfect', ico: '💯', name: '满分王者', desc: '一次测试全部答对', test: () => S.history.some((h) => h.total >= 5 && h.correct === h.total) },
-    { id: 'bookworm', ico: '📚', name: '博览群书', desc: '每个章节都练过至少 5 题', test: () => { const cs = chapterList(); return cs.length > 0 && cs.every((c) => ((S.chapterStats[c.title] || {}).seen || 0) >= 5); } },
+    { id: 'bookworm', ico: '📚', name: '博览群书', desc: '每个章节都练过至少 5 题', test: () => { const cs = chapterList(); return cs.length > 0 && cs.every((c) => ((S.chapterStats[c.key] || {}).seen || 0) >= 5); } },
     { id: 'speed', ico: '🚀', name: '闪电答题', desc: '限时内完成且正确率超过 80%', test: () => S.history.some((h) => h.mode === 'mock' && h.limit && h.ms < h.limit * 0.6 && h.correct / h.total > 0.8) },
     { id: 'collector', ico: '🗂️', name: '藏书家', desc: '题库达到 100 题', test: () => S.bank.length >= 100 },
   ];
@@ -1961,6 +1990,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     mockCount: 20,
     search: '',
     bankChapter: 'all',
+    bankCourse: 'all',
     preview: [],
     picked: new Set(),
     warnings: [],
@@ -2045,9 +2075,13 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
   }
 
   function poolFor(mode) {
-    if (mode === 'review') return S.bank.filter((q) => S.notebook.indexOf(q.id) >= 0);
+    const course = activeCourse();
+    if (mode === 'review') {
+      return S.bank.filter((q) => S.notebook.indexOf(q.id) >= 0 && (!course || (q.course || '') === course));
+    }
     let pool = S.bank.slice();
-    if (ui.chapter !== 'all') pool = pool.filter((q) => q.chapter === ui.chapter);
+    if (course) pool = pool.filter((q) => (q.course || '') === course);
+    if (ui.chapter !== 'all') pool = pool.filter((q) => chapterKeyOf(q) === ui.chapter);
     if (ui.topic !== 'all') pool = pool.filter((q) => q.topic === ui.topic);
     if (ui.type !== 'all') pool = pool.filter((q) => q.type === ui.type);
     if (ui.diff !== 'all') pool = pool.filter((q) => q.difficulty === ui.diff);
@@ -2082,12 +2116,22 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
 
     const chapters = chapterList();
     const chOptions = ['<option value="all">全部章节 / All</option>']
-      .concat(chapters.map((c) => '<option value="' + esc(c.title) + '"' + (ui.chapter === c.title ? ' selected' : '') + '>' + esc(c.title) + '（' + c.count + '）</option>'))
+      .concat(chapters.map((c) => '<option value="' + esc(c.key) + '"' + (ui.chapter === c.key ? ' selected' : '') + '>' + esc(c.title) + '（' + c.count + '）</option>'))
       .join('');
     const topics = topicList(ui.chapter);
     const tpOptions = ['<option value="all">全部主题 / All</option>']
       .concat(topics.map((t) => '<option value="' + esc(t) + '"' + (ui.topic === t ? ' selected' : '') + '>' + esc(t) + '</option>'))
       .join('');
+
+    const courses = (S.courses || []).filter((c) => S.bank.some((q) => (q.course || '') === c.code));
+    const active = activeCourse();
+    const cm = courseMeta(active);
+    const courseCount = active ? S.bank.filter((q) => (q.course || '') === active).length : S.bank.length;
+    const coursePills = courses.length > 1
+      ? '<div class="row-wrap" style="margin-top:10px;gap:6px">' + courses.map((c) =>
+        '<button class="chip' + (active === c.code ? ' on' : '') + '" data-act="course" data-arg="' + esc(c.code) + '">' +
+        esc(c.code) + ' · ' + esc(c.zh || c.title) + '</button>').join('') + '</div>'
+      : '';
 
     const counts = ui.mode === 'mock' ? [20, 40, 60] : [5, 10, 15, 20];
     const current = ui.mode === 'mock' ? ui.mockCount : ui.count;
@@ -2095,8 +2139,8 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
 
     const mastery = chapters.length
       ? chapters.map((c) => {
-        const m = masteryOf(c.title);
-        const seen = (S.chapterStats[c.title] || {}).seen || 0;
+        const m = masteryOf(c.key);
+        const seen = (S.chapterStats[c.key] || {}).seen || 0;
         return '<div class="mastery-item">' +
           '<div class="mastery-top"><span class="mastery-name">' + esc(c.title) + '</span>' +
             '<span class="tag">' + seen + ' 次</span>' +
@@ -2129,22 +2173,23 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
           '</div>' +
           '<div>' +
             '<div class="hero-title">' + greeting() + '，今天练哪一章？</div>' +
-            '<div class="hero-sub">再答 ' + li.next + ' 道题升级 · 题库共 ' + S.bank.length + ' 题</div>' +
+            '<div class="hero-sub">' + (courses.length <= 1 && active ? esc(cm.code + ' · ' + (cm.zh || cm.title)) + ' · ' : '') + '再答 ' + li.next + ' 道题升级 · 共 ' + courseCount + ' 题</div>' +
             '<div class="row-wrap" style="margin-top:9px;gap:6px">' +
               '<span class="chip">🔥 连续 <b>' + (S.streak.days || 0) + '</b> 天</span>' +
               '<span class="chip">⚡ 最高连击 <b>' + S.bestCombo + '</b></span>' +
               '<span class="chip">✍️ 累计 <b>' + answered + '</b> 题</span>' +
             '</div>' +
+            coursePills +
           '</div>' +
         '</div>' +
         '<div class="hero-stats">' +
-          '<div class="stat"><div class="stat-val">' + S.bank.length + '</div><div class="stat-lbl">题库题量</div></div>' +
+          '<div class="stat"><div class="stat-val">' + courseCount + '</div><div class="stat-lbl">本课题量</div></div>' +
           '<div class="stat"><div class="stat-val">' + acc + '<small>%</small></div><div class="stat-lbl">总正确率</div></div>' +
           '<div class="stat"><div class="stat-val">' + S.daily.correct + '<small>/20</small></div><div class="stat-lbl">今日答对</div></div>' +
           '<div class="stat"><div class="stat-val">' + S.notebook.length + '</div><div class="stat-lbl">错题待复习</div></div>' +
         '</div>' +
       '</section>' +
-      (S.intro ? '<details class="card" style="margin-top:14px"><summary style="cursor:pointer;font-weight:700;font-size:13.5px">课程简介 · Course overview</summary><div class="tiny" style="white-space:pre-line;line-height:1.85;margin-top:10px;color:var(--text-soft)">' + esc(S.intro) + '</div></details>' : '') +
+      (activeIntro() ? '<details class="card" style="margin-top:14px"><summary style="cursor:pointer;font-weight:700;font-size:13.5px">课程简介 · Course overview</summary><div class="tiny" style="white-space:pre-line;line-height:1.85;margin-top:10px;color:var(--text-soft)">' + esc(activeIntro()) + '</div></details>' : '') +
       '<div class="cols">' +
         '<div class="col-main">' +
           (S.bank.length ? '' :
@@ -2326,17 +2371,24 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
   /* ============================ 视图：题库 ============================ */
 
   function viewBank() {
-    const chapters = chapterList();
+    const coursesInBank = (S.courses || []).filter((c) => S.bank.some((q) => (q.course || '') === c.code));
+    const courseOpts = ['<option value="all">全部学科 / All</option>']
+      .concat(coursesInBank.map((c) => '<option value="' + esc(c.code) + '"' + (ui.bankCourse === c.code ? ' selected' : '') + '>' + esc(c.code + ' · ' + (c.zh || c.title)) + '</option>'))
+      .join('');
+
+    const chapters = chapterList(ui.bankCourse === 'all' ? null : ui.bankCourse);
     const options = ['<option value="all">全部章节 / All</option>']
-      .concat(chapters.map((c) => '<option value="' + esc(c.title) + '"' + (ui.bankChapter === c.title ? ' selected' : '') + '>' + esc(c.title) + '（' + c.count + '）</option>'))
+      .concat(chapters.map((c) => '<option value="' + esc(c.key) + '"' + (ui.bankChapter === c.key ? ' selected' : '') + '>' + esc(c.title) + '（' + c.count + '）</option>'))
       .join('');
 
     const kw = ui.search.trim().toLowerCase();
     const list = S.bank.filter((q) => {
-      if (ui.bankChapter !== 'all' && q.chapter !== ui.bankChapter) return false;
+      if (ui.bankCourse !== 'all' && (q.course || '') !== ui.bankCourse) return false;
+      if (ui.bankChapter !== 'all' && chapterKeyOf(q) !== ui.bankChapter) return false;
       if (!kw) return true;
       return (q.stem + ' ' + q.options.join(' ') + ' ' + (q.topic || '')).toLowerCase().indexOf(kw) >= 0;
     });
+    const multiCourse = new Set(S.bank.map((q) => q.course || '')).size > 1;
 
     const rows = list.length
       ? list.map((q) => '<div class="item">' +
@@ -2345,6 +2397,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
             '<div class="item-sub">' + q.options.map((o, j) => (q.answer.indexOf(j) >= 0 ? '<b style="color:var(--ok)">' + esc(truncate(o, 30)) + '</b>' : esc(truncate(o, 30)))).join(' · ') + '</div>' +
             '<div class="gen-meta">' +
               '<span class="badge brand">' + (q.type === 'multiple' ? '多选' : '单选') + '</span>' +
+              (multiCourse && q.course ? '<span class="badge">' + esc(q.course) + '</span>' : '') +
               '<span class="badge">' + esc(q.chapter || '未分类') + '</span>' +
               (q.topic ? '<span class="tag">' + esc(q.topic) + '</span>' : '') +
               '<span class="badge warn">' + esc(q.difficulty || '理解') + '</span>' +
@@ -2366,6 +2419,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
             '<span class="chip">共 <b>' + S.bank.length + '</b> 题 · 自动 <b>' + S.bank.filter((q) => q.auto).length + '</b></span></div>' +
           '<div class="row-wrap">' +
             '<input class="input" style="max-width:260px" placeholder="搜索题干 / 选项 / 主题" data-input="search" value="' + esc(ui.search) + '">' +
+            '<select class="select" style="max-width:200px" data-input="bankCourse">' + courseOpts + '</select>' +
             '<select class="select" style="max-width:220px" data-input="bankChapter">' + options + '</select>' +
             '<span class="spacer"></span>' +
             '<button class="btn sm soft" data-act="sync-bank">☁ 同步云端题库</button>' +
@@ -2423,14 +2477,16 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
   /* ============================ 视图：数据 ============================ */
 
   function viewStats() {
-    const chapters = chapterList();
+    const chapters = chapterList(null);
+    const multi = new Set(chapters.map((c) => c.course)).size > 1;
     const rows = chapters.length
       ? chapters.map((c) => {
-        const m = masteryOf(c.title);
-        const cs = S.chapterStats[c.title] || { seen: 0, correct: 0 };
+        const m = masteryOf(c.key);
+        const cs = S.chapterStats[c.key] || { seen: 0, correct: 0 };
         const acc = cs.seen ? Math.round((cs.correct / cs.seen) * 100) : 0;
+        const label = multi && c.course ? c.course + ' · ' + c.title : c.title;
         return '<div class="mastery-item">' +
-          '<div class="mastery-top"><span class="mastery-name">' + esc(c.title) + '</span>' +
+          '<div class="mastery-top"><span class="mastery-name">' + esc(label) + '</span>' +
             '<span class="tag">' + cs.seen + ' 题 · 正确率 ' + acc + '%</span>' +
             '<span class="mastery-val' + (m ? '' : ' zero') + '">' + m + '%</span></div>' +
           '<div class="bar' + (m >= 80 ? ' ok' : m >= 50 ? '' : ' warn') + '"><i style="width:' + m + '%"></i></div>' +
@@ -2643,7 +2699,8 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     st.last = Date.now();
     if (ok) st.correct++; else st.wrong++;
 
-    const cs = S.chapterStats[q.chapter || '未分类'] || (S.chapterStats[q.chapter || '未分类'] = { seen: 0, correct: 0 });
+    const ck = chapterKeyOf(q);
+    const cs = S.chapterStats[ck] || (S.chapterStats[ck] = { seen: 0, correct: 0 });
     cs.seen++;
     if (ok) cs.correct++;
 
@@ -2966,6 +3023,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
         id: raw.id || uid(),
         type: 'essay',
         chapter: String(raw.chapter || '导入题库'),
+      course: String(raw.course || ''),
         topic: String(raw.topic || ''),
         difficulty: String(raw.difficulty || '应用'),
         stem: stem,
@@ -2999,6 +3057,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       id: raw.id || uid(),
       type: type,
       chapter: String(raw.chapter || '导入题库'),
+      course: String(raw.course || ''),
       topic: String(raw.topic || ''),
       difficulty: String(raw.difficulty || '理解'),
       stem: String(raw.stem || raw.question || '').trim(),
@@ -3054,6 +3113,8 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       const data = await res.json();
       const version = String(data.v || data.version || '1');
       if (data.intro) S.intro = String(data.intro);
+      if (Array.isArray(data.courses) && data.courses.length) S.courses = data.courses;
+      if (!S.course || !S.courses.some((c) => c.code === S.course)) S.course = (S.courses[0] && S.courses[0].code) || '';
       const raw = Array.isArray(data) ? data : (data.questions || []);
       if (!raw.length) {
         if (manual) toast('云端题库是空的');
@@ -3172,6 +3233,13 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       case 'nav':
         if (quiz) { if (!confirm('正在答题，确定离开吗？')) return; exitQuiz(); }
         go(arg);
+        break;
+      case 'course':
+        S.course = arg;
+        ui.chapter = 'all';
+        ui.topic = 'all';
+        save(true);
+        render();
         break;
       case 'mode':
         ui.mode = arg;
@@ -3387,6 +3455,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     else if (key === 'topic') { ui.topic = v; render(); }
     else if (key === 'type') { ui.type = v; render(); }
     else if (key === 'diff') { ui.diff = v; render(); }
+    else if (key === 'bankCourse') { ui.bankCourse = v; ui.bankChapter = 'all'; render(); }
     else if (key === 'bankChapter') { ui.bankChapter = v; render(); }
     else if (key === 'genCount') { ui.genCount = Number(v); }
     else if (key === 'genType') { ui.genType = v; }
