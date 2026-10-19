@@ -484,6 +484,12 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
 .vrow-main{flex:1;min-width:0}
 .vrow-main b{font-size:14.5px}
 .ipa-sm{font-size:11.5px;color:var(--muted)}
+/* ---------- vocab: quiz / chart ---------- */
+.confuse{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.vchart{display:flex;align-items:flex-end;gap:8px;height:110px;margin-top:14px;padding:0 4px}
+.vbar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:6px}
+.vbar i{display:block;width:100%;max-width:38px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,var(--brand),var(--brand-3));min-height:3px}
+.vbar span{font-size:10px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -3246,30 +3252,75 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     m.innerHTML = '';
   }
 
-  /* ============================ 单词 ============================ */
+  /* ============================ 单词（雅思词汇） ============================ */
 
   const WKEY = 'qf:words';
-  const WSTATS_KEY = 'qf:wordstats';
-  const W_INTERVAL = [0, 1, 2, 4, 7, 15, 30]; // 天，按等级
+  const VKEY = 'qf:vocab';
+  const LEVEL_DAYS = [0, 1, 2, 4, 7, 15, 30, 60];
 
   let WB = null;              // 词库 { v, count, words, roots, prefixes, suffixes }
-  let WBSTATS = { v: '', count: 0, s: {} };
-  let vocabSession = null;    // { list: [], idx: 0 }
-  let vocabQuery = '';
-  let vocabRoot = '';
-  let vocabLimit = 60;
-  let wordsState = 'idle';
+  let wordsState = 'idle';    // idle | loading | ready | error
+  let V = null;               // 单词学习进度
+  let vTab = 'today';         // today | list | quiz | wrong | trans | stats
+  let vQuery = '';
+  let vRoot = '';
+  let vLimit = 60;
+  let quizRun = null;         // { list, idx, score, answers, scope }
+  let transRun = null;        // { idx, draft, revealed, ok }
+  let vSearchTimer = 0;
+  let vbMap = new Map();      // word -> entry
+
+  function defaultV() {
+    return {
+      v: 2,
+      settings: { dailyNew: 15, dailyReview: 30 },
+      words: {},      // w -> { seen, correct, wrong, level, due, last, first }
+      daily: {},      // date -> { n:[], r:[], doneN:[], doneR:[] }
+      stats: { byDate: {}, totals: { words: 0, correct: 0, wrong: 0, quiz: 0, trans: 0 } },
+      wrong: {},      // w -> { prompt, correct, your, at, mastered }
+      trans: {},      // w -> { seen, ok, last }
+    };
+  }
 
   function loadWordStats() {
     try {
-      const raw = localStorage.getItem(WSTATS_KEY);
-      if (raw) WBSTATS = Object.assign({ v: '', count: 0, s: {} }, JSON.parse(raw));
-    } catch (e) { /* ignore */ }
-    if (!WBSTATS.s || typeof WBSTATS.s !== 'object') WBSTATS.s = {};
+      const raw = localStorage.getItem(VKEY);
+      if (raw) {
+        const obj = JSON.parse(raw);
+        V = Object.assign(defaultV(), obj);
+        V.settings = Object.assign(defaultV().settings, obj.settings || {});
+        V.stats = Object.assign(defaultV().stats, obj.stats || {});
+        V.stats.totals = Object.assign(defaultV().stats.totals, (obj.stats || {}).totals || {});
+        V.stats.byDate = (obj.stats || {}).byDate || {};
+      }
+    } catch (e) { V = null; }
+    if (!V) V = defaultV();
+    if (!V.words || typeof V.words !== 'object') V.words = {};
+    if (!V.daily || typeof V.daily !== 'object') V.daily = {};
+    if (!V.wrong || typeof V.wrong !== 'object') V.wrong = {};
+    if (!V.trans || typeof V.trans !== 'object') V.trans = {};
+
+    // 从旧版（qf:wordstats）迁移
+    if (!Object.keys(V.words).length) {
+      try {
+        const old = JSON.parse(localStorage.getItem('qf:wordstats') || 'null');
+        if (old && old.s) {
+          Object.keys(old.s).forEach((w) => {
+            const s = old.s[w];
+            V.words[w] = { seen: s.n || 0, correct: s.n || 0, wrong: 0, level: s.l || 0, due: s.d || 0, last: 0, first: todayKey() };
+          });
+        }
+      } catch (e) { /* ignore */ }
+    }
   }
 
-  function saveWordStats() {
-    try { localStorage.setItem(WSTATS_KEY, JSON.stringify(WBSTATS)); } catch (e) { /* ignore */ }
+  let vocabSaveTimer = 0;
+  function saveVocab(now) {
+    clearTimeout(vocabSaveTimer);
+    const write = () => {
+      try { localStorage.setItem(VKEY, JSON.stringify(V)); } catch (e) { /* ignore */ }
+    };
+    if (now) write(); else vocabSaveTimer = setTimeout(write, 200);
   }
 
   function loadCachedWords() {
@@ -3278,12 +3329,11 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       const raw = localStorage.getItem(WKEY);
       if (raw) WB = JSON.parse(raw);
     } catch (e) { WB = null; }
+    if (WB && Array.isArray(WB.words)) vbMap = new Map(WB.words.map((x) => [x.w, x]));
     return WB;
   }
 
-  // idle | loading | ready | error —— 防止渲染时反复触发请求
   function ensureWords() {
-    loadWordStats();
     loadCachedWords();
     if (WB) { wordsState = 'ready'; return null; }
     if (wordsState === 'loading' || wordsState === 'error') return null;
@@ -3294,6 +3344,7 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       .then((data) => {
         if (data && Array.isArray(data.words) && data.words.length) {
           WB = data;
+          vbMap = new Map(WB.words.map((x) => [x.w, x]));
           wordsState = 'ready';
           try { localStorage.setItem(WKEY, JSON.stringify(data)); } catch (e) { /* 容量不足就只在内存里用 */ }
         } else {
@@ -3318,66 +3369,597 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     } catch (e) { /* ignore */ }
   }
 
-  function wordLevel(w) {
-    const s = WBSTATS.s[w];
-    return s ? s.l : 0;
-  }
-
-  function dueCount() {
-    const now = Date.now();
-    let n = 0;
-    Object.keys(WBSTATS.s).forEach((k) => {
-      const s = WBSTATS.s[k];
-      if (s && s.l > 0 && s.d <= now) n++;
-    });
-    return n;
-  }
+  const endOfToday = () => {
+    const d = new Date();
+    d.setHours(23, 59, 59, 999);
+    return d.getTime();
+  };
 
   function learnedCount() {
-    return Object.keys(WBSTATS.s).filter((k) => (WBSTATS.s[k].l || 0) > 0).length;
+    return Object.keys(V.words).filter((w) => (V.words[w].seen || 0) > 0).length;
+  }
+  function masteredCount() {
+    return Object.keys(V.words).filter((w) => (V.words[w].level || 0) >= 5).length;
+  }
+  function dueCount() {
+    const now = Date.now();
+    return Object.keys(V.words).filter((w) => {
+      const s = V.words[w];
+      return s && s.level > 0 && s.due <= now;
+    }).length;
+  }
+  function dayStat(key) {
+    const k = key || todayKey();
+    if (!V.stats.byDate[k]) V.stats.byDate[k] = {};
+    return V.stats.byDate[k];
+  }
+  function bump(kind, n) {
+    const d = dayStat();
+    d[kind] = (d[kind] || 0) + (n || 1);
+    V.stats.totals[kind] = (V.stats.totals[kind] || 0) + (n || 1);
+  }
+  function streakDays() {
+    let key = todayKey();
+    const active = (k) => {
+      const s = V.stats.byDate[k];
+      return !!(s && (s.words || s.quiz || s.trans));
+    };
+    if (!active(key)) key = dayOffsetKey(-1);
+    let n = 0;
+    for (let i = 0; i < 2000; i++) {
+      if (!active(key)) break;
+      n++;
+      key = dayOffsetKey(-1, key);
+    }
+    return n;
+  }
+  function dayOffsetKey(delta, fromKey) {
+    const base = fromKey ? new Date(fromKey + 'T12:00:00') : new Date();
+    base.setDate(base.getDate() + delta);
+    const y = base.getFullYear();
+    const m = String(base.getMonth() + 1).padStart(2, '0');
+    const d = String(base.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
   }
 
-  function startVocab() {
-    if (!WB) return;
+  /* ---------- 每日计划 ---------- */
+  function fillPlan(d) {
+    const unseen = WB.words.filter((x) => !V.words[x.w]).slice(0, Math.max(0, V.settings.dailyNew)).map((x) => x.w);
+    const limit = endOfToday();
+    const due = WB.words
+      .filter((x) => { const s = V.words[x.w]; return s && s.level > 0 && s.due <= limit; })
+      .sort((a, b) => (V.words[a.w].due || 0) - (V.words[b.w].due || 0))
+      .slice(0, Math.max(0, V.settings.dailyReview))
+      .map((x) => x.w);
+    d.n = unseen;
+    d.r = due;
+  }
+
+  function todayPlan() {
+    const key = todayKey();
+    if (!V.daily[key]) V.daily[key] = { n: [], r: [], doneN: [], doneR: [] };
+    const d = V.daily[key];
+    ['n', 'r', 'doneN', 'doneR'].forEach((k) => { if (!Array.isArray(d[k])) d[k] = []; });
+    d.n = d.n.filter((w) => vbMap.has(w));
+    d.r = d.r.filter((w) => vbMap.has(w));
+    if (!d.n.length && !d.r.length && !d.doneN.length && !d.doneR.length) fillPlan(d);
+    return d;
+  }
+
+  function queueWords() {
+    const d = todayPlan();
+    const out = [];
+    d.r.forEach((w) => { if (d.doneR.indexOf(w) < 0) out.push(w); });
+    d.n.forEach((w) => { if (d.doneN.indexOf(w) < 0) out.push(w); });
+    return out;
+  }
+
+  function planProgress() {
+    const d = todayPlan();
+    return {
+      newDone: d.doneN.length,
+      newTotal: d.n.length,
+      revDone: d.doneR.length,
+      revTotal: d.r.length,
+    };
+  }
+
+  function reviewWord(w, quality) {
     const now = Date.now();
-    const due = [];
-    const fresh = [];
-    WB.words.forEach((x) => {
-      const s = WBSTATS.s[x.w];
-      if (!s || !s.l) { fresh.push(x); return; }
-      if (s.d <= now) due.push(x);
-    });
-    const dueList = shuffle(due).slice(0, 12);
-    const list = dueList.concat(shuffle(fresh).slice(0, 20 - dueList.length));
-    if (!list.length) { toast('今天的词都背完了，明天再来 🎉'); return; }
-    vocabSession = { list: list, idx: 0 };
+    let s = V.words[w];
+    if (!s) s = V.words[w] = { seen: 0, correct: 0, wrong: 0, level: 0, due: now, last: 0, first: todayKey() };
+    s.seen = (s.seen || 0) + 1;
+    s.last = now;
+    if (!s.first) s.first = todayKey();
+
+    if (quality === 2) {
+      s.correct = (s.correct || 0) + 1;
+      s.level = clamp((s.level || 0) + 1, 1, 7);
+      s.due = now + LEVEL_DAYS[s.level] * 86400000;
+      bump('correct');
+    } else if (quality === 1) {
+      s.level = clamp(s.level || 0, 1, 7);
+      s.due = now + Math.max(1, Math.floor(LEVEL_DAYS[s.level] / 2)) * 86400000;
+    } else {
+      s.wrong = (s.wrong || 0) + 1;
+      s.level = 0;
+      s.due = now + 10 * 60000;
+      bump('wrong');
+    }
+    bump('words');
+    const d = todayPlan();
+    if (quality === 0) {
+      // 忘记的词排到队尾，本次学习中再过一遍
+      const list = d.n.indexOf(w) >= 0 ? d.n : d.r;
+      const at = list.indexOf(w);
+      if (at >= 0) { list.splice(at, 1); list.push(w); }
+    } else {
+      if (d.n.indexOf(w) >= 0 && d.doneN.indexOf(w) < 0) d.doneN.push(w);
+      if (d.r.indexOf(w) >= 0 && d.doneR.indexOf(w) < 0) d.doneR.push(w);
+    }
+    saveVocab();
+  }
+
+  function addMoreWords(n) {
+    const d = todayPlan();
+    const take = WB.words.filter((x) => !V.words[x.w] && d.n.indexOf(x.w) < 0).slice(0, n).map((x) => x.w);
+    d.n = d.n.concat(take);
+    saveVocab(true);
+    if (!take.length) toast('词库里的新词都学完了 🎉');
+  }
+
+  /* ---------- 形近词 ---------- */
+  function lev(a, b, limit) {
+    if (Math.abs(a.length - b.length) > limit) return limit + 1;
+    const prev = new Array(b.length + 1).fill(0).map((_, i) => i);
+    for (let i = 1; i <= a.length; i++) {
+      let cur = [i];
+      let best = i;
+      for (let j = 1; j <= b.length; j++) {
+        const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+        const v = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost);
+        cur[j] = v;
+        if (v < best) best = v;
+      }
+      if (best > limit) return limit + 1;
+      prev.splice(0, prev.length, ...cur);
+    }
+    return prev[b.length];
+  }
+
+  const confuseCache = new Map();
+  function confusables(word) {
+    if (confuseCache.has(word)) return confuseCache.get(word);
+    const w = word.toLowerCase();
+    const out = [];
+    for (const x of WB.words) {
+      if (x.w === word) continue;
+      if (Math.abs(x.w.length - w.length) > 2) continue;
+      if (x.w[0] !== w[0]) continue;
+      if (lev(x.w, w, 2) <= 2) out.push(x.w);
+      if (out.length >= 6) break;
+    }
+    confuseCache.set(word, out);
+    return out;
+  }
+
+  /* ---------- 测试 ---------- */
+  function pickDistractors(correct, key, n) {
+    const seen = new Set([correct]);
+    const out = [];
+    const pool = shuffle(WB.words);
+    for (const x of pool) {
+      if (out.length >= n) break;
+      const t = x[key];
+      if (!t || seen.has(t)) continue;
+      seen.add(t);
+      out.push(t);
+    }
+    return out;
+  }
+
+  function makeQuestion(w, mode) {
+    const x = vbMap.get(w);
+    if (!x) return null;
+    const m = mode === 'mixed'
+      ? (Math.random() < 0.45 ? 'meaning' : Math.random() < 0.75 ? 'reverse' : 'spelling')
+      : mode;
+    if (m === 'meaning') {
+      const opts = shuffle([x.zh].concat(pickDistractors(x.zh, 'zh', 3)));
+      return { w: w, mode: 'meaning', kind: '看词选义', prompt: x.w, hint: x.us ? '/' + x.us + '/' : '', options: opts, answer: opts.indexOf(x.zh), correctText: x.zh, ref: x };
+    }
+    if (m === 'reverse') {
+      const opts = shuffle([x.w].concat(pickDistractors(x.w, 'w', 3)));
+      return { w: w, mode: 'reverse', kind: '看义选词', prompt: x.zh, hint: '选出对应的英文单词', options: opts, answer: opts.indexOf(x.w), correctText: x.w, ref: x };
+    }
+    return { w: w, mode: 'spelling', kind: '拼写', prompt: x.zh, hint: '首字母 ' + x.w[0].toUpperCase() + ' · 共 ' + x.w.replace(/[^a-z]/gi, '').length + ' 个字母', options: [], answer: -1, correctText: x.w, ref: x };
+  }
+
+  function startWordQuiz(scope) {
+    if (!WB) return;
+    let pool = [];
+    if (scope === 'wrong') {
+      pool = Object.keys(V.wrong).filter((w) => !V.wrong[w].mastered && vbMap.has(w));
+    } else if (scope === 'today') {
+      pool = queueWords().concat(todayPlan().doneN, todayPlan().doneR);
+    } else {
+      pool = WB.words.map((x) => x.w);
+    }
+    pool = Array.from(new Set(pool)).filter((w) => vbMap.has(w));
+    if (!pool.length) { toast(scope === 'wrong' ? '错题本是空的' : '先去学几个词吧'); return; }
+    const n = Math.min(10, pool.length);
+    const list = shuffle(pool).slice(0, n).map((w) => makeQuestion(w, 'mixed')).filter(Boolean);
+    if (!list.length) { toast('出题失败，请重试'); return; }
+    quizRun = { list: list, idx: 0, score: 0, scope: scope, answers: [] };
+    vTab = 'quiz';
+    saveVocab(true);
     render();
     window.scrollTo({ top: 0 });
   }
 
-  function answerWord(known) {
-    if (!vocabSession) return;
-    const x = vocabSession.list[vocabSession.idx];
-    const st = WBSTATS.s[x.w] || (WBSTATS.s[x.w] = { l: 0, d: 0, n: 0 });
-    st.n = (st.n || 0) + 1;
-    if (known) {
-      st.l = Math.min(6, (st.l || 0) + 1);
-      st.d = Date.now() + W_INTERVAL[st.l] * 86400000;
-    } else {
-      st.l = 1;
-      st.d = Date.now() + 10 * 60000;
+  function answerQuiz(optIndex) {
+    if (!quizRun) return;
+    const q = quizRun.list[quizRun.idx];
+    if (q.answered) return;
+    q.answered = true;
+    q.your = optIndex >= 0 ? q.options[optIndex] : '';
+    q.ok = optIndex >= 0 && optIndex === q.answer;
+    if (q.ok) { quizRun.score++; bump('correct'); } else {
+      bump('wrong');
+      V.wrong[q.w] = { prompt: q.prompt, correct: q.correctText, your: q.your, at: Date.now(), mastered: false };
     }
-    saveWordStats();
-    vocabSession.idx++;
-    if (vocabSession.idx >= vocabSession.list.length) {
-      vocabSession = null;
-      toast('这一组背完了 👍 待会再来复习');
+    bump('quiz');
+    const s = V.words[q.w];
+    if (s) { s.seen = (s.seen || 0) + 1; if (q.ok) s.correct = (s.correct || 0) + 1; else s.wrong = (s.wrong || 0) + 1; }
+    saveVocab(true);
+    render();
+  }
+
+  function answerSpelling() {
+    if (!quizRun) return;
+    const q = quizRun.list[quizRun.idx];
+    if (q.answered) return;
+    const box = document.getElementById('spellInput');
+    const val = box ? box.value : '';
+    q.your = val.trim();
+    q.ok = q.your.toLowerCase() === String(q.correctText).toLowerCase();
+    q.answered = true;
+    if (q.ok) { quizRun.score++; bump('correct'); } else {
+      bump('wrong');
+      V.wrong[q.w] = { prompt: q.prompt, correct: q.correctText, your: q.your, at: Date.now(), mastered: false };
+    }
+    bump('quiz');
+    const s = V.words[q.w];
+    if (s) { s.seen = (s.seen || 0) + 1; if (q.ok) s.correct = (s.correct || 0) + 1; else s.wrong = (s.wrong || 0) + 1; }
+    saveVocab(true);
+    render();
+  }
+
+  function nextQuiz() {
+    if (!quizRun) return;
+    quizRun.idx++;
+    if (quizRun.idx >= quizRun.list.length) {
+      render();
+      window.scrollTo({ top: 0 });
+      return;
     }
     render();
   }
 
-  function rootMeta(k) {
-    return (WB.roots || []).find((x) => x.k === k) || null;
+  /* ---------- 翻译 ---------- */
+  function transPool() {
+    return WB.words.filter((x) => x.ex && x.exZh && x.ex.length > 12);
+  }
+  function startTrans() {
+    const pool = transPool();
+    if (!pool.length) return;
+    transRun = { list: shuffle(pool).slice(0, 5), idx: 0, draft: '', revealed: false, ok: null };
+    vTab = 'trans';
+    render();
+    window.scrollTo({ top: 0 });
+  }
+  function normalizeEn(s) {
+    return String(s || '').toLowerCase().replace(/[^a-z0-9' ]/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+  function similarity(a, b) {
+    const x = normalizeEn(a);
+    const y = normalizeEn(b);
+    if (!x || !y) return 0;
+    const d = lev(x, y, Math.max(x.length, y.length));
+    return Math.max(0, Math.round((1 - d / Math.max(x.length, y.length)) * 100));
+  }
+  function submitTrans() {
+    if (!transRun) return;
+    const box = document.getElementById('transInput');
+    transRun.draft = box ? box.value : '';
+    transRun.revealed = true;
+    const x = transRun.list[transRun.idx];
+    transRun.sim = similarity(transRun.draft, x.ex);
+    saveVocab();
+    render();
+  }
+  function gradeTrans(ok) {
+    if (!transRun) return;
+    const x = transRun.list[transRun.idx];
+    transRun.ok = ok;
+    if (ok) bump('correct'); else bump('wrong');
+    bump('trans');
+    V.trans[x.w] = { seen: ((V.trans[x.w] || {}).seen || 0) + 1, ok: ok, last: Date.now() };
+    saveVocab(true);
+    transRun.idx++;
+    transRun.draft = '';
+    transRun.revealed = false;
+    transRun.sim = 0;
+    if (transRun.idx >= transRun.list.length) transRun = null;
+    render();
+  }
+
+  /* ---------- 渲染 ---------- */
+  function subTabs() {
+    const items = [
+      ['today', '今日'],
+      ['list', '词表'],
+      ['quiz', '测试'],
+      ['trans', '翻译'],
+      ['wrong', '错题'],
+      ['stats', '数据'],
+    ];
+    return '<div class="seg" style="margin-bottom:16px;overflow:auto;max-width:100%">' +
+      items.map((i) => '<button class="seg-btn' + (vTab === i[0] ? ' on' : '') + '" data-act="vtab" data-arg="' + i[0] + '">' + i[1] + '</button>').join('') +
+      '</div>';
+  }
+
+  function wordHint(x) {
+    const parts = [];
+    if (x.r) {
+      const r = (WB.roots || []).find((z) => z.k === x.r);
+      if (r) parts.push('词根 ' + r.k + ' = ' + r.zh);
+    }
+    if (x.pre) {
+      const p = (WB.prefixes || []).find((z) => z.k === x.pre);
+      if (p) parts.push('前缀 ' + p.k + '- = ' + p.zh);
+    }
+    if (x.suf) {
+      const s = (WB.suffixes || []).find((z) => z.k === x.suf);
+      if (s) parts.push('后缀 -' + s.k + ' = ' + s.zh);
+    }
+    return parts;
+  }
+
+  function viewToday() {
+    const p = planProgress();
+    const queue = queueWords();
+    const x = queue.length ? vbMap.get(queue[0]) : null;
+    const done = p.newDone + p.revDone;
+    const target = p.newTotal + p.revTotal;
+
+    if (!x) {
+      return '<div class="card"><div class="empty"><span class="empty-ico">🎉</span>' +
+        '今天的计划完成了：新词 ' + p.newDone + '/' + p.newTotal + ' · 复习 ' + p.revDone + '/' + p.revTotal +
+        '<div style="margin-top:14px" class="btn-row center">' +
+        '<button class="btn primary" data-act="vocab-more">再学 10 个新词</button>' +
+        '<button class="btn" data-act="quiz-start" data-arg="today">测一测今天的词</button>' +
+        '</div></div></div>' +
+        (wrongToday() ? '' : '');
+    }
+
+    const conf = confusables(x.w).slice(0, 4);
+    const hint = wordHint(x);
+    return '<div class="card vcard">' +
+      '<div class="row"><span class="badge brand">' + (p.newDone + p.revDone + 1) + ' / ' + target + '</span>' +
+        '<span class="badge">' + (queue.length && todayPlan().r.indexOf(queue[0]) >= 0 ? '复习' : '新词') + '</span>' +
+        '<span class="spacer"></span><span class="tiny muted">今日 ' + done + '/' + target + '</span></div>' +
+      '<div class="vocab-word">' + esc(x.w) + '</div>' +
+      '<div class="row-wrap" style="gap:8px;margin-top:6px">' +
+        (x.us ? '<button class="ipa-btn" data-act="vocab-speak" data-arg="us" data-word="' + esc(x.w) + '">🇺🇸 ' + esc(x.us) + ' 🔊</button>' : '') +
+        (x.uk ? '<button class="ipa-btn" data-act="vocab-speak" data-arg="uk" data-word="' + esc(x.w) + '">🇬🇧 ' + esc(x.uk) + ' 🔊</button>' : '') +
+      '</div>' +
+      '<div class="vocab-zh">' + (x.p ? '<span class="badge">' + esc(x.p) + '</span> ' : '') + esc(x.zh) + '</div>' +
+      (hint.length ? '<div class="vocab-root">🏷 ' + esc(hint.join(' · ')) + '</div>' : '') +
+      (x.ph ? '<div class="vocab-ph">📎 ' + esc(x.ph) + '</div>' : '') +
+      (x.ex ? '<div class="vocab-ex">' + esc(x.ex) + (x.exZh ? '<br><span class="muted">' + esc(x.exZh) + '</span>' : '') + '</div>' : '') +
+      (conf.length ? '<div class="confuse"><span class="tiny muted">形近词：</span>' +
+        conf.map((c) => '<button class="chip" data-act="vocab-look" data-arg="' + esc(c) + '">' + esc(c) + '</button>').join('') + '</div>' : '') +
+      '<div class="row" style="gap:8px;margin-top:18px">' +
+        '<button class="btn lg" style="flex:1" data-act="vocab-answer" data-arg="0">忘记</button>' +
+        '<button class="btn lg" style="flex:1" data-act="vocab-answer" data-arg="1">模糊</button>' +
+        '<button class="btn primary lg" style="flex:1.2" data-act="vocab-answer" data-arg="2">认识</button>' +
+      '</div>' +
+      '<div class="tiny muted center" style="margin-top:8px">认识 → 1/2/4/7/15/30/60 天；模糊 → 间隔减半；忘记 → 10 分钟后再来</div>' +
+    '</div>';
+  }
+
+  function wrongToday() {
+    return Object.keys(V.wrong).some((w) => V.wrong[w].at >= new Date().setHours(0, 0, 0, 0) && !V.wrong[w].mastered);
+  }
+
+  function viewList() {
+    if (!WB) return '';
+    const q = vQuery.trim().toLowerCase();
+    const filtered = WB.words.filter((x) => {
+      if (vRoot && x.r !== vRoot) return false;
+      if (!q) return true;
+      return x.w.indexOf(q) >= 0 || x.zh.indexOf(q) >= 0;
+    });
+    const rows = filtered.slice(0, vLimit).map((x) => {
+      const s = V.words[x.w];
+      const lv = s ? (s.level || 0) : 0;
+      const tag = !s ? '<span class="badge">未学</span>' : lv >= 5 ? '<span class="badge ok">已掌握</span>' : '<span class="badge warn">L' + lv + '</span>';
+      return '<div class="vrow" data-act="vocab-look" data-arg="' + esc(x.w) + '">' +
+        '<div class="vrow-main"><b>' + esc(x.w) + '</b>' +
+          (x.us ? ' <span class="ipa-sm">/' + esc(x.us) + '/</span>' : '') +
+          '<div class="tiny muted">' + (x.p ? esc(x.p) + '. ' : '') + esc(truncate(x.zh, 44)) + '</div>' +
+        '</div>' + tag +
+        '<button class="icon-btn" data-act="vocab-speak" data-arg="us" data-word="' + esc(x.w) + '" title="朗读">🔊</button>' +
+      '</div>';
+    }).join('');
+    const rootCounts = {};
+    WB.words.forEach((x) => { if (x.r) rootCounts[x.r] = (rootCounts[x.r] || 0) + 1; });
+    const chips = '<div class="chip-row" style="margin-bottom:12px">' +
+      '<button class="chip' + (vRoot === '' ? ' on' : '') + '" data-act="vocab-root" data-arg="">全部</button>' +
+      Object.keys(rootCounts).sort((a, b) => rootCounts[b] - rootCounts[a]).slice(0, 14).map((k) => {
+        const r = (WB.roots || []).find((z) => z.k === k);
+        return '<button class="chip' + (vRoot === k ? ' on' : '') + '" data-act="vocab-root" data-arg="' + esc(k) + '">' +
+          esc(k) + (r ? ' ' + esc(r.zh) : '') + ' <b>' + rootCounts[k] + '</b></button>';
+      }).join('') + '</div>';
+
+    return '<div class="card">' +
+      '<div class="card-head"><h2>词表</h2><span class="en">All words</span><span class="spacer"></span>' +
+        '<span class="tiny muted">' + filtered.length + ' / ' + (WB.count || WB.words.length) + '</span></div>' +
+      '<input class="input" placeholder="搜单词或中文释义…" data-input="vocab-search" value="' + esc(vQuery) + '">' +
+      '<div style="margin-top:12px">' + chips + '</div>' +
+      '<div class="vlist">' + (rows || '<div class="empty">没有匹配的词</div>') + '</div>' +
+      (filtered.length > vLimit ? '<div class="center" style="margin-top:12px"><button class="btn sm" data-act="vocab-more-list">加载更多（还有 ' + (filtered.length - vLimit) + '）</button></div>' : '') +
+    '</div>';
+  }
+
+  function viewQuiz() {
+    if (!quizRun) {
+      return '<div class="card"><div class="card-head"><h2>测试</h2><span class="en">Quiz</span></div>' +
+        '<div class="tiny muted" style="margin-bottom:14px">选择题（看词选义 / 看义选词）+ 拼写，共 10 题，答错自动进错题本。</div>' +
+        '<div class="btn-row">' +
+          '<button class="btn primary" data-act="quiz-start" data-arg="today">测今天的词</button>' +
+          '<button class="btn" data-act="quiz-start" data-arg="all">随机 10 题</button>' +
+          '<button class="btn" data-act="quiz-start" data-arg="wrong">只测错题</button>' +
+        '</div></div>';
+    }
+    const q = quizRun.list[quizRun.idx];
+    if (!q) {
+      const total = quizRun.list.length;
+      const score = quizRun.score;
+      const pctv = Math.round((score / total) * 100);
+      return '<div class="card result-hero">' +
+        '<div class="result-ring" style="--p:' + pctv + '"><div class="inner"><div class="pct">' + pctv + '%</div><div class="lbl">正确率</div></div></div>' +
+        '<div class="result-grid">' +
+          '<div class="stat"><div class="stat-val">' + score + '<small>/' + total + '</small></div><div class="stat-lbl">答对</div></div>' +
+          '<div class="stat"><div class="stat-val">' + (total - score) + '</div><div class="stat-lbl">答错</div></div>' +
+        '</div></div>' +
+        '<div class="card"><div class="card-head"><h2>本次错题</h2></div>' +
+          (quizRun.list.filter((x) => !x.ok).map((x) => '<div class="review-row bad"><span class="k">✕</span><div><div>' + esc(x.prompt) + '</div>' +
+            '<div class="tiny" style="color:var(--ok)">正确：' + esc(x.correctText) + '</div></div></div>').join('') || '<div class="empty">全对 🎉</div>') +
+        '</div>' +
+        '<div class="btn-row"><button class="btn primary" data-act="quiz-restart">再来一组</button>' +
+        '<button class="btn" data-act="vtab" data-arg="wrong">去错题本</button></div>';
+    }
+
+    let body;
+    if (q.mode === 'spelling') {
+      body = '<div class="q-stem" style="margin-top:10px">' + esc(q.prompt) + '</div>' +
+        '<div class="tiny muted" style="margin-top:6px">' + esc(q.hint) + '</div>' +
+        (q.answered
+          ? '<div class="q-explain ' + (q.ok ? 'good' : 'bad') + '"><div class="hd">' + (q.ok ? '✓ 正确' : '✕ 拼错了') + '</div>' +
+            '<div>正确答案：<b>' + esc(q.correctText) + '</b>' + (q.your ? '<br>你写的：' + esc(q.your) : '') + '</div>' +
+            (q.ref && q.ref.ex ? '<div class="q-source">📎 ' + esc(q.ref.ex) + '</div>' : '') + '</div>'
+          : '<div class="row" style="margin-top:16px;gap:8px"><input class="input" id="spellInput" placeholder="输入英文单词…" autocomplete="off" autocapitalize="off">' +
+            '<button class="btn primary" data-act="quiz-spell">提交</button></div>');
+    } else {
+      body = '<div class="q-stem" style="margin-top:10px">' + esc(q.prompt) + '</div>' +
+        (q.hint ? '<div class="tiny muted" style="margin-top:4px">' + esc(q.hint) + '</div>' : '') +
+        '<div class="q-options">' + q.options.map((o, i) => {
+          let cls = 'opt';
+          if (q.answered) {
+            if (i === q.answer) cls += ' ok';
+            else if (q.your === o) cls += ' bad';
+            else cls += ' dim';
+          }
+          return '<button class="' + cls + '" data-act="quiz-opt" data-arg="' + i + '"' + (q.answered ? ' disabled' : '') + '>' +
+            '<span class="opt-key">' + 'ABCD'[i] + '</span><span class="opt-text">' + esc(o) + '</span></button>';
+        }).join('') + '</div>' +
+        (q.answered ? '<div class="q-explain ' + (q.ok ? 'good' : 'bad') + '"><div class="hd">' + (q.ok ? '✓ 答对了' : '✕ 答错了') + '</div>' +
+          '<div>' + esc(q.ref.zh) + '</div>' + (q.ref.ex ? '<div class="q-source">📎 ' + esc(q.ref.ex) + '</div>' : '') + '</div>' : '');
+    }
+
+    return '<div class="card">' +
+      '<div class="row"><span class="badge brand">第 ' + (quizRun.idx + 1) + ' / ' + quizRun.list.length + ' 题</span>' +
+        '<span class="badge">' + esc(q.kind) + '</span><span class="spacer"></span>' +
+        '<button class="btn ghost sm" data-act="quiz-quit">退出</button></div>' +
+      body +
+      (q.answered ? '<div style="margin-top:16px"><button class="btn primary block" data-act="quiz-next">' +
+        (quizRun.idx === quizRun.list.length - 1 ? '看结果' : '下一题') + '</button></div>' : '') +
+    '</div>';
+  }
+
+  function viewWrong() {
+    const list = Object.keys(V.wrong).filter((w) => !V.wrong[w].mastered);
+    return '<div class="card">' +
+      '<div class="card-head"><h2>错题本</h2><span class="en">Mistakes</span><span class="spacer"></span>' +
+        '<span class="tiny muted">' + list.length + ' 个</span></div>' +
+      '<div class="btn-row" style="margin-bottom:12px">' +
+        '<button class="btn primary sm" data-act="quiz-start" data-arg="wrong"' + (list.length ? '' : ' disabled') + '>重做错题</button>' +
+      '</div>' +
+      (list.length ? list.map((w) => {
+        const r = V.wrong[w];
+        const x = vbMap.get(w);
+        return '<div class="review-row bad" style="margin-bottom:8px"><span class="k">✕</span><div style="flex:1">' +
+          '<div><b>' + esc(w) + '</b>' + (x ? ' · ' + esc(x.zh) : '') + '</div>' +
+          '<div class="tiny" style="margin-top:2px">你答：' + esc(r.your || '（空）') + ' → 正确：' + esc(r.correct) + '</div>' +
+          '</div><button class="btn ghost sm" data-act="wrong-remove" data-arg="' + esc(w) + '">移除</button></div>';
+      }).join('') : '<div class="empty"><span class="empty-ico">🎯</span>还没有错题，去测试里练几题吧</div>') +
+    '</div>';
+  }
+
+  function viewTrans() {
+    if (!transRun) {
+      const pool = transPool().length;
+      return '<div class="card"><div class="card-head"><h2>翻译训练</h2><span class="en">Translate</span></div>' +
+        '<div class="tiny muted" style="margin-bottom:14px">给中文例句，写英文；提交后显示原句和相似度。共 5 句，来自词库例句（' + pool + ' 句可选）。</div>' +
+        '<button class="btn primary" data-act="trans-start">开始翻译</button></div>';
+    }
+    const x = transRun.list[transRun.idx];
+    const pctv = transRun.revealed ? similarity(transRun.draft, x.ex) : 0;
+    return '<div class="card">' +
+      '<div class="row"><span class="badge brand">第 ' + (transRun.idx + 1) + ' / ' + transRun.list.length + ' 句</span>' +
+        '<span class="spacer"></span><button class="btn ghost sm" data-act="trans-quit">退出</button></div>' +
+      '<div class="q-stem" style="margin-top:12px">' + esc(x.exZh) + '</div>' +
+      '<div class="tiny muted" style="margin-top:4px">提示：' + esc(x.w) + ' · ' + esc(x.zh) + '</div>' +
+      (transRun.revealed
+        ? '<div class="q-explain good"><div class="hd">参考译文（相似度 ' + pctv + '%）</div>' +
+          '<div>' + esc(x.ex) + '</div>' + (transRun.draft ? '<div class="q-source">你的译文：' + esc(transRun.draft) + '</div>' : '') + '</div>' +
+          '<div class="btn-row" style="margin-top:14px">' +
+            '<button class="btn" style="flex:1" data-act="trans-grade" data-arg="0">差很多</button>' +
+            '<button class="btn primary" style="flex:1" data-act="trans-grade" data-arg="1">基本正确</button>' +
+          '</div>'
+        : '<textarea class="textarea" id="transInput" style="margin-top:12px;min-height:110px" placeholder="写下你的英文翻译…">' + esc(transRun.draft) + '</textarea>' +
+          '<div class="row" style="margin-top:12px"><button class="btn primary" data-act="trans-submit">提交对照</button>' +
+          '<button class="btn ghost sm" data-act="trans-quit">退出</button></div>') +
+    '</div>';
+  }
+
+  function viewWordStats() {
+    const t = V.stats.totals;
+    const total = (t.correct || 0) + (t.wrong || 0);
+    const acc = total ? Math.round((t.correct / total) * 100) : 0;
+    const days = [];
+    for (let i = 6; i >= 0; i--) {
+      const k = dayOffsetKey(-i);
+      const s = V.stats.byDate[k] || {};
+      days.push({ k: k, n: (s.words || 0) + (s.quiz || 0) + (s.trans || 0) });
+    }
+    const maxN = Math.max(1, ...days.map((d) => d.n));
+    const bars = days.map((d) => '<div class="vbar"><i style="height:' + Math.round(d.n / maxN * 100) + '%"></i><span>' + d.k.slice(5) + '</span></div>').join('');
+
+    return '<div class="card"><div class="card-head"><h2>学习数据</h2><span class="en">Stats</span></div>' +
+      '<div class="result-grid" style="margin-bottom:6px">' +
+        '<div class="stat"><div class="stat-val">' + streakDays() + '</div><div class="stat-lbl">连续天数</div></div>' +
+        '<div class="stat"><div class="stat-val">' + learnedCount() + '</div><div class="stat-lbl">学过的词</div></div>' +
+        '<div class="stat"><div class="stat-val">' + masteredCount() + '</div><div class="stat-lbl">已掌握</div></div>' +
+        '<div class="stat"><div class="stat-val">' + acc + '<small>%</small></div><div class="stat-lbl">累计正确率</div></div>' +
+      '</div>' +
+      '<div class="vchart">' + bars + '</div>' +
+      '<div class="divider"></div>' +
+      '<div class="row-wrap" style="gap:14px">' +
+        '<div class="field" style="width:150px"><label class="label">每日新词</label><select class="select" data-input="vDailyNew">' +
+          [5, 10, 15, 20, 30, 40].map((n) => '<option value="' + n + '"' + (V.settings.dailyNew === n ? ' selected' : '') + '>' + n + ' 个</option>').join('') +
+        '</select></div>' +
+        '<div class="field" style="width:150px"><label class="label">每日复习上限</label><select class="select" data-input="vDailyReview">' +
+          [10, 20, 30, 50, 80].map((n) => '<option value="' + n + '"' + (V.settings.dailyReview === n ? ' selected' : '') + '>' + n + ' 个</option>').join('') +
+        '</select></div>' +
+        '<span class="spacer"></span>' +
+        '<button class="btn sm" data-act="v-export">导出进度</button>' +
+        '<button class="btn sm danger" data-act="v-reset">重置进度</button>' +
+      '</div>' +
+      '<div class="tiny muted" style="margin-top:10px">进度只存在这台设备的浏览器里；换设备请先导出。</div>' +
+    '</div>';
   }
 
   function viewVocab() {
@@ -3386,104 +3968,73 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       if (p) p.then(() => { if (ui.view === 'vocab') render(); });
       return '<div class="card"><div class="empty"><span class="empty-ico">' + (wordsState === 'error' ? '⚠️' : '📥') + '</span>' +
         (wordsState === 'error'
-          ? '词库加载失败：请确认已经上传 banks/words.json，或检查网络。<br><br><button class="btn sm" data-act="vocab-retry">重试</button>'
+          ? '词库加载失败：请确认已上传 banks/words.json。<br><br><button class="btn sm" data-act="vocab-retry">重试</button>'
           : '正在加载词库…（首次约 1 MB）') + '</div></div>';
     }
 
-    const total = WB.count || WB.words.length;
     const learned = learnedCount();
-    const due = dueCount();
-
-    let study = '';
-    if (vocabSession) {
-      const x = vocabSession.list[vocabSession.idx];
-      const st = WBSTATS.s[x.w] || { l: 0, n: 0 };
-      const rm = x.r ? rootMeta(x.r) : null;
-      const pm = x.pre ? (WB.prefixes || []).find((p) => p.k === x.pre) : null;
-      const sm = x.suf ? (WB.suffixes || []).find((s) => s.k === x.suf) : null;
-      const hint = [];
-      if (rm) hint.push('词根 ' + rm.k + ' = ' + rm.zh);
-      if (pm) hint.push('前缀 ' + pm.k + '- = ' + pm.zh);
-      if (sm) hint.push('后缀 -' + sm.k + ' = ' + sm.zh);
-      study = '<div class="card vcard">' +
-        '<div class="row"><span class="badge brand">第 ' + (vocabSession.idx + 1) + ' / ' + vocabSession.list.length + ' 个</span>' +
-          '<span class="spacer"></span>' +
-          '<button class="btn ghost sm" data-act="vocab-quit">结束</button></div>' +
-        '<div class="vocab-word">' + esc(x.w) + '</div>' +
-        '<div class="row-wrap" style="gap:8px;margin-top:6px">' +
-          (x.us ? '<button class="ipa-btn" data-act="vocab-speak" data-arg="us" data-word="' + esc(x.w) + '">🇺🇸 ' + esc(x.us) + ' 🔊</button>' : '') +
-          (x.uk ? '<button class="ipa-btn" data-act="vocab-speak" data-arg="uk" data-word="' + esc(x.w) + '">🇬🇧 ' + esc(x.uk) + ' 🔊</button>' : '') +
+    const total = WB.count || WB.words.length;
+    const head = '<div class="card hero" style="margin-bottom:16px">' +
+      '<div class="hero-left">' +
+        '<div class="ring" style="--p:' + Math.round(learned / Math.max(1, total) * 100) + '">' +
+          '<div class="ring-inner"><div class="ring-val">' + Math.round(learned / Math.max(1, total) * 100) + '%</div><div class="ring-lbl">Learned</div></div>' +
         '</div>' +
-        '<div class="vocab-zh">' + (x.p ? '<span class="badge">' + esc(x.p) + '</span> ' : '') + esc(x.zh) + '</div>' +
-        (hint.length ? '<div class="vocab-root">🏷 ' + esc(hint.join(' · ')) + '</div>' : '') +
-        (x.ph ? '<div class="vocab-ph">📎 ' + esc(x.ph) + '</div>' : '') +
-        (x.ex ? '<div class="vocab-ex">' + esc(x.ex) + (x.exZh ? '<br><span class="muted">' + esc(x.exZh) + '</span>' : '') + '</div>' : '') +
-        '<div class="row" style="gap:10px;margin-top:18px">' +
-          '<button class="btn lg" style="flex:1" data-act="vocab-answer" data-arg="0">不认识</button>' +
-          '<button class="btn primary lg" style="flex:1" data-act="vocab-answer" data-arg="1">认识</button>' +
-        '</div>' +
-        '<div class="tiny muted center" style="margin-top:8px">认识 → 隔 1/2/4/7/15/30 天再出现；不认识 → 10 分钟后重来（当前等级 ' + (st.l || 0) + '）</div>' +
-      '</div>';
-    }
-
-    const rootCounts = {};
-    WB.words.forEach((x) => { if (x.r) rootCounts[x.r] = (rootCounts[x.r] || 0) + 1; });
-    const rootChips = '<div class="chip-row">' +
-      '<button class="chip' + (vocabRoot === '' ? ' on' : '') + '" data-act="vocab-root" data-arg="">全部</button>' +
-      Object.keys(rootCounts).sort((a, b) => rootCounts[b] - rootCounts[a]).slice(0, 18).map((k) => {
-        const m = rootMeta(k);
-        return '<button class="chip' + (vocabRoot === k ? ' on' : '') + '" data-act="vocab-root" data-arg="' + esc(k) + '">' +
-          esc(k) + (m ? ' ' + esc(m.zh) : '') + ' <b>' + rootCounts[k] + '</b></button>';
-      }).join('') + '</div>';
-
-    const q = vocabQuery.trim().toLowerCase();
-    const filtered = WB.words.filter((x) => {
-      if (vocabRoot && x.r !== vocabRoot) return false;
-      if (!q) return true;
-      return x.w.indexOf(q) >= 0 || x.zh.indexOf(q) >= 0;
-    });
-    const rows = filtered.slice(0, vocabLimit).map((x) => {
-      const lv = wordLevel(x.w);
-      const tag = lv === 0 ? '<span class="badge">未学</span>' : lv >= 4 ? '<span class="badge ok">已掌握</span>' : '<span class="badge warn">L' + lv + '</span>';
-      return '<div class="vrow">' +
-        '<div class="vrow-main"><b>' + esc(x.w) + '</b>' +
-          (x.us ? ' <span class="ipa-sm">/' + esc(x.us) + '/</span>' : '') +
-          '<div class="tiny muted">' + (x.p ? esc(x.p) + '. ' : '') + esc(truncate(x.zh, 40)) + '</div>' +
-        '</div>' + tag +
-        '<button class="icon-btn" data-act="vocab-speak" data-arg="us" data-word="' + esc(x.w) + '" title="朗读">🔊</button>' +
-      '</div>';
-    }).join('');
-
-    return '<div class="stack">' +
-      '<div class="card hero">' +
-        '<div class="hero-left">' +
-          '<div class="ring" style="--p:' + Math.round(learned / Math.max(1, total) * 100) + '">' +
-            '<div class="ring-inner"><div class="ring-val">' + Math.round(learned / Math.max(1, total) * 100) + '%</div><div class="ring-lbl">Learned</div></div>' +
-          '</div>' +
-          '<div><div class="hero-title">雅思词汇 · 3574 词</div>' +
-            '<div class="hero-sub">新东方《雅思词汇 词根+联想记忆法》· 音标 / 发音 / 例句</div>' +
-            '<div class="row-wrap" style="margin-top:9px;gap:6px">' +
-              '<span class="chip">📖 已学 <b>' + learned + '</b></span>' +
-              '<span class="chip">⏰ 待复习 <b>' + due + '</b></span>' +
-              '<span class="chip">🗂 总词数 <b>' + total + '</b></span>' +
-            '</div>' +
+        '<div><div class="hero-title">雅思词汇 · ' + total + ' 词</div>' +
+          '<div class="hero-sub">每日计划 + 间隔复习 · 形近词 · 选择/拼写测试 · 错题本 · 翻译</div>' +
+          '<div class="row-wrap" style="margin-top:9px;gap:6px">' +
+            '<span class="chip">🔥 连续 <b>' + streakDays() + '</b> 天</span>' +
+            '<span class="chip">📖 已学 <b>' + learned + '</b></span>' +
+            '<span class="chip">⏰ 待复习 <b>' + dueCount() + '</b></span>' +
+            '<span class="chip">🎯 已掌握 <b>' + masteredCount() + '</b></span>' +
           '</div>' +
         '</div>' +
-        '<div class="row-wrap"><button class="btn primary lg" data-act="vocab-start">' + (vocabSession ? '换一组' : '开始背单词') + '</button></div>' +
-      '</div>' +
-
-      (study || '<div class="card"><div class="empty"><span class="empty-ico">🧠</span>点「开始背单词」：优先复习到期的词，再补新词，一次 20 个。</div></div>') +
-
-      '<div class="card"><div class="card-head"><h2>词根速查</h2><span class="en">Roots</span><span class="spacer"></span>' +
-        '<span class="tiny muted">点一个词根，下面只看这一族</span></div>' + rootChips + '</div>' +
-
-      '<div class="card"><div class="card-head"><h2>词表</h2><span class="en">All words</span><span class="spacer"></span>' +
-        '<span class="tiny muted">' + filtered.length + ' 个</span></div>' +
-        '<input class="input" placeholder="搜单词或中文释义…" data-input="vocab-search" value="' + esc(vocabQuery) + '">' +
-        '<div class="vlist" style="margin-top:12px">' + (rows || '<div class="empty">没有匹配的词</div>') + '</div>' +
-        (filtered.length > vocabLimit ? '<div class="center" style="margin-top:12px"><button class="btn sm" data-act="vocab-more">加载更多（还有 ' + (filtered.length - vocabLimit) + '）</button></div>' : '') +
       '</div>' +
     '</div>';
+
+    let body = '';
+    if (vTab === 'today') body = viewToday();
+    else if (vTab === 'list') body = viewList();
+    else if (vTab === 'quiz') body = viewQuiz();
+    else if (vTab === 'wrong') body = viewWrong();
+    else if (vTab === 'trans') body = viewTrans();
+    else body = viewWordStats();
+
+    return '<div class="stack">' + head + subTabs() + body + '</div>';
+  }
+
+  /* 词条详情弹窗 */
+  function openWordModal(w) {
+    const x = vbMap.get(w);
+    if (!x) return;
+    const hint = wordHint(x);
+    const s = V.words[w];
+    const conf = confusables(w).slice(0, 6);
+    $('#modal').hidden = false;
+    $('#modal').innerHTML = '<div class="modal-card">' +
+      '<div class="modal-head"><h3>' + esc(x.w) + '</h3><span class="spacer"></span>' +
+        '<button class="icon-btn" data-act="close-modal">✕</button></div>' +
+      '<div class="row-wrap" style="gap:8px">' +
+        (x.us ? '<button class="ipa-btn" data-act="vocab-speak" data-arg="us" data-word="' + esc(x.w) + '">🇺🇸 ' + esc(x.us) + ' 🔊</button>' : '') +
+        (x.uk ? '<button class="ipa-btn" data-act="vocab-speak" data-arg="uk" data-word="' + esc(x.w) + '">🇬🇧 ' + esc(x.uk) + ' 🔊</button>' : '') +
+      '</div>' +
+      '<div class="vocab-zh">' + (x.p ? '<span class="badge">' + esc(x.p) + '</span> ' : '') + esc(x.zh) + '</div>' +
+      (hint.length ? '<div class="vocab-root">🏷 ' + esc(hint.join(' · ')) + '</div>' : '') +
+      (x.ph ? '<div class="vocab-ph">📎 ' + esc(x.ph) + '</div>' : '') +
+      (x.ex ? '<div class="vocab-ex">' + esc(x.ex) + (x.exZh ? '<br><span class="muted">' + esc(x.exZh) + '</span>' : '') + '</div>' : '') +
+      (conf.length ? '<div class="confuse"><span class="tiny muted">形近词：</span>' + conf.map((c) => '<span class="chip">' + esc(c) + '</span>').join('') + '</div>' : '') +
+      '<div class="tiny muted" style="margin-top:12px">状态：' + (!s ? '未学' : 'L' + s.level + ' · 出现 ' + s.seen + ' 次 · 下次 ' + (s.due ? new Date(s.due).toLocaleDateString() : '—')) + '</div>' +
+    '</div>';
+  }
+
+  function applyVocabSearch(v) {
+    vQuery = v;
+    vLimit = 60;
+    clearTimeout(vSearchTimer);
+    vSearchTimer = setTimeout(() => {
+      render();
+      const el = document.querySelector('[data-input="vocab-search"]');
+      if (el) { el.focus(); try { el.setSelectionRange(v.length, v.length); } catch (e) { /* ignore */ } }
+    }, 220);
   }
 
   /* ============================ 事件 ============================ */
@@ -3503,28 +4054,89 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
         wordsState = 'idle';
         render();
         break;
-      case 'vocab-start':
-        startVocab();
+      case 'vtab':
+        vTab = arg;
+        render();
+        window.scrollTo({ top: 0 });
         break;
-      case 'vocab-answer':
-        answerWord(arg === '1');
+      case 'vocab-answer': {
+        const q = queueWords()[0];
+        if (!q) return;
+        reviewWord(q, Number(arg));
+        render();
         break;
+      }
       case 'vocab-speak':
         speak(el.dataset.word, arg);
         break;
+      case 'vocab-look':
+        openWordModal(arg);
+        break;
       case 'vocab-root':
-        vocabRoot = arg || '';
-        vocabQuery = '';
-        vocabLimit = 60;
+        vRoot = arg || '';
+        vQuery = '';
+        vLimit = 60;
         render();
         break;
       case 'vocab-more':
-        vocabLimit += 60;
+        addMoreWords(10);
         render();
         break;
-      case 'vocab-quit':
-        vocabSession = null;
+      case 'vocab-more-list':
+        vLimit += 60;
         render();
+        break;
+      case 'quiz-start':
+        startWordQuiz(arg || 'today');
+        break;
+      case 'quiz-opt':
+        answerQuiz(Number(arg));
+        break;
+      case 'quiz-spell':
+        answerSpelling();
+        break;
+      case 'quiz-next':
+        nextQuiz();
+        break;
+      case 'quiz-quit':
+        quizRun = null;
+        vTab = 'quiz';
+        render();
+        break;
+      case 'quiz-restart':
+        quizRun = null;
+        render();
+        break;
+      case 'wrong-remove': {
+        if (V.wrong[arg]) { delete V.wrong[arg]; saveVocab(true); render(); }
+        break;
+      }
+      case 'trans-start':
+        startTrans();
+        break;
+      case 'trans-submit':
+        submitTrans();
+        break;
+      case 'trans-grade':
+        gradeTrans(arg === '1');
+        break;
+      case 'trans-quit':
+        transRun = null;
+        vTab = 'trans';
+        render();
+        break;
+      case 'v-export': {
+        download('ielts-vocab-progress-' + todayKey() + '.json', JSON.stringify({ app: 'quizforge', kind: 'vocab', v: V }, null, 2), 'application/json');
+        toast('进度已导出');
+        break;
+      }
+      case 'v-reset':
+        if (confirm('重置单词学习进度？（不影响错题本以外的课程数据）')) {
+          V = defaultV();
+          saveVocab(true);
+          render();
+          toast('已重置');
+        }
         break;
       case 'course':
         S.course = arg;
@@ -3753,6 +4365,8 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
     else if (key === 'genType') { ui.genType = v; }
     else if (key === 'genDiff') { ui.genDiff = v; }
     else if (key === 'search') { applySearch(v); }
+    else if (key === 'vDailyNew') { V.settings.dailyNew = Number(v); delete V.daily[todayKey()]; saveVocab(true); render(); }
+    else if (key === 'vDailyReview') { V.settings.dailyReview = Number(v); delete V.daily[todayKey()]; saveVocab(true); render(); }
     else if (key === 'material') {
       S.material = v;
       save();
@@ -3772,19 +4386,6 @@ canvas#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
       S.material = el.value;
       save();
     }
-  }
-
-  let vocabSearchTimer = 0;
-
-  function applyVocabSearch(v) {
-    vocabQuery = v;
-    vocabLimit = 60;
-    clearTimeout(vocabSearchTimer);
-    vocabSearchTimer = setTimeout(() => {
-      render();
-      const el = document.querySelector('[data-input="vocab-search"]');
-      if (el) { el.focus(); try { el.setSelectionRange(v.length, v.length); } catch (e) { /* ignore */ } }
-    }, 220);
   }
 
   function applySearch(v) {
